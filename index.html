@@ -5,7 +5,7 @@ FILE_META_START
   last_updated  : 2026-05-08
   meta_upgraded : 2026-05-08   ← line numbers, color values & new entries verified against source
   fonts         : Playfair Display (headings, serif), Source Sans 3 (body, sans)
-  next_slide_id : slide9   ← always increment this when adding a new section
+  next_slide_id : slide12  ← always increment this when adding a new section
 
   COLOR_VARS (:root block at line 135; ⚠ hero-bg & hero-bar are hardcoded in #home, NOT in :root):
     --brown-deep   #3b1a06   footer bg, accent-block bg, dark hover bg, policy-quote bg
@@ -25,14 +25,17 @@ FILE_META_START
     [hardcoded]  #3d1f0d   hero top/bottom bars & nav background (--hero-bar, not in :root)
 
   LAYOUT_SECTIONS (id → actual line — verified 2026-05-08):
-    #home         hero fullscreen                        ~line 588
-    #slide2       Who are Engineers?                     ~line 607
-    #slide3       The Washington Accord                  ~line 633
-    #slide4       Three International Accords            ~line 682
-    #slide5       Diploma vs BSc + conclusion            ~line 769
-    #slide6       Polytechnic origin & purpose           ~line 831
-    #slide7       BSc engineering admission struggle     ~line 866
-    #slide8       HSC student struggles                  ~line 963
+    #home         hero fullscreen                        ~line 1164
+    #slide2       Who are Engineers?                     ~line 1200
+    #slide3       The Washington Accord                  ~line 1226
+    #slide4       Three International Accords            ~line 1275
+    #slide5       Diploma vs BSc + conclusion            ~line 1362
+    #slide6       Polytechnic origin & purpose           ~line 1426
+    #slide7       BSc engineering admission struggle     ~line 1461
+    #slide8       HSC student struggles                  ~line 1579
+    #slide9       BSc 4-Year Journey                     ~line 1666
+    #slide10      Diploma vs HSC vs BSc Syllabus Comparison ~line 1727
+    #slide11      College Merit Ladder & Polytechnic        ~line 1838
 
   CSS_BLOCKS (style tag → actual line — verified 2026-05-08):
     reset + *          ~line 133
@@ -59,7 +62,7 @@ FILE_META_START
     responsive @640px  ~line 544–557   (hamburger visible; nav links hidden)
 
   KEY_CLASSES:
-    .section-wrap        max-width:860px centered container (980px @900px+, 1080px @1280px+)
+    .section-wrap        max-width:860px centered container (1180px @900px+, 1520px @1280px+)
     .section-label       small uppercase pill label above each h2
     .prose               body text block (15.5px, line-height 1.6)
     .callout             left-bordered (#brown-warm) card for key points
@@ -83,7 +86,7 @@ FILE_META_START
     .intent-grid         2-col grid (@640px collapses to 1-col) for intent-card pairs
     .intent-card         card with colored top border; modifiers: .intent-no (red), .intent-yes (green)
     .footer-tagline      muted uppercase tagline below footer copyright
-    .nav-hamburger       3-bar toggle button (visible only @≤640px); .open → X animation
+    .nav-hamburger       3-bar toggle button (visible @≤1099px — raised from 640px when nav links exceeded 10); .open → X animation
     .nav-mobile          slide-down mobile menu; .open → visible; links auto-close on tap
 
   NAV_LINKS (desktop + mobile — keep both in sync):
@@ -95,6 +98,9 @@ FILE_META_START
     #slide6    পলিটেকনিক         / Section 05 — পলিটেকনিক কেন তৈরি হয়েছিল?
     #slide7    BSc যাত্রা         / Section 06 — BSc ইঞ্জিনিয়ার হতে কী লাগে?
     #slide8    HSC সংগ্রাম        / Section 07 — HSC শিক্ষার্থীদের সংগ্রাম
+    #slide9    BSc ৪ বছর         / Section 08 — একজন BSc ইঞ্জিনিয়ারের চার বছর
+    #slide10   সিলেবাস তুলনা    / Section 09 — তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ
+    #slide11   কলেজ মেরিট       / Section 10 — ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে
 
   SOURCES_BLOCK_PATTERN:
     Wrap multiple source buttons in:
@@ -103,8 +109,8 @@ FILE_META_START
     </div>
 
   DESKTOP BREAKPOINTS:
-    @900px+  2-col .point-grid, wider .section-wrap (980px), .accord-tier larger padding/fonts
-    @1280px+ .accord-stack → row, 3-up cards; section-wrap 1080px; hero-logo 250×220px
+    @900px+  2-col .point-grid, wider .section-wrap (1180px), .accord-tier larger padding/fonts
+    @1280px+ .accord-stack → row, 3-up cards; section-wrap 1520px; hero-logo 250×220px
 
   QUICK_EDIT_GUIDE:
     - Add a new section  → copy section#slideN pattern; increment next_slide_id above;
@@ -511,9 +517,13 @@ h2 .bn{
   border-radius:0 12px 12px 0;
   padding:16px 22px;margin:16px 0;
 }
-.callout strong{
+.callout > strong{
   display:block;font-size:10.5px;letter-spacing:.13em;
   text-transform:uppercase;color:var(--brown-warm);font-weight:700;margin-bottom:6px;
+}
+.callout p strong{
+  display:inline;font-size:inherit;letter-spacing:inherit;
+  text-transform:none;color:var(--text-dark);font-weight:700;
 }
 .callout p{font-size:15px;color:var(--text-body);margin:0;line-height:1.58}
 
@@ -572,7 +582,7 @@ h2 .bn{
   background:#fff;border:1px solid var(--cream-dark);border-radius:var(--radius);
   padding:16px 18px;
   transition:background .22s,border-color .22s,box-shadow .22s,transform .18s;
-  cursor:default;box-shadow:var(--shadow-sm);
+  cursor:pointer;box-shadow:var(--shadow-sm);
 }
 .point-block:hover{
   background:#1a0d04;border-color:#1a0d04;
@@ -656,8 +666,32 @@ h2 .bn{
 .source-btn-inline svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:middle}
 .accord-source{display:none}
 
-/* Download button grid */
-.dl-grid{display:flex;flex-direction:column;gap:8px;margin-top:22px}
+/* Download button grid & cards */
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}
+.dl-btn{
+  display:flex;align-items:center;gap:8px;padding:10px 12px;
+  font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  color:var(--brown-mid);background:#fff;
+  border:1px solid var(--cream-dark);border-radius:9px;
+  text-decoration:none;cursor:pointer;box-shadow:var(--shadow-sm);
+  transition:background .22s,border-color .22s,color .22s,transform .18s,box-shadow .22s;
+}
+.dl-btn:hover{
+  background:#1a0d04;border-color:#1a0d04;color:#f5f0e8;
+  transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,13,4,0.22);
+}
+.dl-btn svg{width:13px;height:13px;stroke:var(--brown-warm);fill:none;stroke-width:2;flex-shrink:0;transition:stroke .22s}
+.dl-btn:hover svg{stroke:rgba(245,240,232,0.7)}
+.dl-btn-name{flex:1;font-weight:700;color:var(--text-dark);transition:color .22s}
+.dl-btn:hover .dl-btn-name{color:#f5f0e8}
+.dl-btn-badge{
+  font-size:8.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:2px 7px;border-radius:20px;flex-shrink:0;
+  background:rgba(192,144,90,0.09);color:var(--brown-warm);
+  border:1px solid rgba(192,144,90,0.2);
+  transition:background .22s,color .22s,border-color .22s;
+}
+.dl-btn:hover .dl-btn-badge{background:rgba(255,255,255,0.1);border-color:rgba(192,144,90,0.3);color:var(--brown-warm)}
 
 /* Accord summary table */
 .accord-summary{
@@ -772,15 +806,16 @@ footer strong{
 
 /* === DESKTOP === */
 @media(min-width:900px){
-  nav{padding:0 72px;gap:2px;
-    padding-left:max(72px,env(safe-area-inset-left));
-    padding-right:max(72px,env(safe-area-inset-right));
+  nav{padding:0 48px;gap:2px;
+    padding-left:max(48px,env(safe-area-inset-left));
+    padding-right:max(48px,env(safe-area-inset-right));
   }
   nav a{font-size:12.5px;padding:6px 13px}
-  .section-wrap{max-width:980px;padding:56px 72px}
+  .section-wrap{max-width:1180px;padding:56px 52px}
   #slide3{background:rgba(241,236,226,0.65)}
   #slide5{background:rgba(241,236,226,0.65)}
   #slide7{background:rgba(246,242,236,0.5)}
+  #slide8{background:rgba(241,234,224,0.6)}
   .point-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .point-grid .point-block:last-child:nth-child(odd){
     grid-column:1/-1;
@@ -797,11 +832,11 @@ footer strong{
   .accord-summary th,.accord-summary td{padding:11px 18px}
   .timeline{padding-left:42px}
   #home{padding:80px 60px 64px}
-  .dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .dl-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
   .hero-stats{max-width:480px}
 }
 @media(min-width:1280px){
-  .section-wrap{max-width:1080px;padding:56px 90px}
+  .section-wrap{max-width:1520px;padding:56px 64px}
   .accord-stack{flex-direction:row;align-items:stretch}
   .accord-tier{flex:1;grid-template-columns:1fr;grid-template-rows:auto 1fr auto;gap:10px 0}
   .accord-num{font-size:38px;margin-bottom:4px}
@@ -809,6 +844,12 @@ footer strong{
   .accord-badge{grid-column:1;grid-row:3;align-self:end;margin-top:14px;display:inline-block}
   .accord-tier::before{top:0;left:0;right:0;bottom:auto;width:100%;height:4px;border-radius:12px 12px 0 0}
   .hero-logo{width:250px;height:220px}
+  /* slide8 → 3-col grid to fill the wider container */
+  #slide8 .point-grid{grid-template-columns:1fr 1fr 1fr}
+  #slide8 .point-grid .point-block:last-child:nth-child(odd){
+    grid-column:auto;max-width:100%;justify-self:auto;width:auto;
+  }
+  .dl-grid{grid-template-columns:repeat(4,1fr);gap:8px}
 }
 
 /* === TABLET (640–900px) === */
@@ -818,16 +859,20 @@ footer strong{
   .hero-stats{max-width:420px}
 }
 
+/* === HIDE DESKTOP NAV LINKS BEFORE 1100px (too many links to fit) === */
+@media(max-width:1099px){
+  nav a{display:none}
+  .nav-hamburger{display:flex}
+  .nav-brand{margin-right:0}
+  .theme-toggle{margin-left:auto;margin-right:10px}
+}
+
 /* === MOBILE === */
 @media(max-width:640px){
   nav{padding:0 16px;gap:2px;
     padding-left:max(16px,env(safe-area-inset-left));
     padding-right:max(16px,env(safe-area-inset-right));
   }
-  nav a{display:none}
-  .nav-hamburger{display:flex}
-  .nav-brand{margin-right:0}
-  .theme-toggle{margin-left:10px;margin-right:auto}
   .section-wrap{padding:36px 18px}
   .accent-block{padding:22px 20px}
   .compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);
@@ -922,6 +967,7 @@ footer strong{
 [data-theme="dark"] #slide3,
 [data-theme="dark"] #slide5{background:rgba(20,10,4,0.8)}
 [data-theme="dark"] #slide7{background:rgba(18,9,3,0.6)}
+[data-theme="dark"] #slide8{background:rgba(22,11,4,0.65)}
 
 /* Dark: section label */
 [data-theme="dark"] .section-label{
@@ -1075,6 +1121,10 @@ footer strong{
 /* Dark: prose links */
 [data-theme="dark"] .prose a{color:var(--brown-warm)}
 
+[data-theme="dark"] .dl-btn{background:#1a0d04;border-color:#2a1808;color:var(--brown-warm)}
+[data-theme="dark"] .dl-btn:hover{background:#0a0401;border-color:#0a0401}
+[data-theme="dark"] .dl-btn-name{color:var(--text-dark)}
+
 /* Smooth theme transition */
 body,nav,.section-wrap,section,.point-block,.accord-tier,.callout,.accent-block,
 .compare td,.compare th,.accord-summary td,.intent-card,.source-btn,.tag,.divider,
@@ -1096,6 +1146,9 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   <a href="#slide6">পলিটেকনিক</a>
   <a href="#slide7">BSc যাত্রা</a>
   <a href="#slide8">HSC সংগ্রাম</a>
+  <a href="#slide9">BSc ৪ বছর</a>
+  <a href="#slide10">সিলেবাস তুলনা</a>
+  <a href="#slide11">কলেজ মেরিট</a>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
     <!-- moon icon (shown in light mode) -->
     <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1116,6 +1169,9 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   <a href="#slide6" class="nav-mobile-link">Section 05 — পলিটেকনিক কেন তৈরি হয়েছিল?</a>
   <a href="#slide7" class="nav-mobile-link">Section 06 — BSc ইঞ্জিনিয়ার হতে কী লাগে?</a>
   <a href="#slide8" class="nav-mobile-link">Section 07 — HSC শিক্ষার্থীদের সংগ্রাম</a>
+  <a href="#slide9" class="nav-mobile-link">Section 08 — একজন BSc ইঞ্জিনিয়ারের চার বছর</a>
+  <a href="#slide10" class="nav-mobile-link">Section 09 — তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ</a>
+  <a href="#slide11" class="nav-mobile-link">Section 10 — ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে</a>
 </div>
 
 <!-- HERO -->
@@ -1497,14 +1553,35 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
       </div>
     </div>
 
-    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-      <a class="source-btn" href="buet_circular.pdf" download="buet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>BUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="cuet_circular.pdf" download="cuet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="kuet_circular.pdf" download="kuet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>KUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="ruet_circular.pdf" download="ruet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>RUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="mist_circular.pdf" download="mist_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>MIST ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="butex_circular.pdf" download="butex_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>BUTEX ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="sust_circular.pdf" download="sust_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>SUST ভর্তি বিজ্ঞপ্তি</a>
+    <div class="dl-grid">
+      <a class="dl-btn" href="buet_circular.pdf" download="buet_circular.pdf">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="dl-btn-name">BUET</span><span class="dl-btn-badge">PDF</span>
+      </a>
+      <a class="dl-btn" href="cuet_circular.pdf" download="cuet_circular.pdf">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="dl-btn-name">CUET</span><span class="dl-btn-badge">PDF</span>
+      </a>
+      <a class="dl-btn" href="kuet_circular.pdf" download="kuet_circular.pdf">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="dl-btn-name">KUET</span><span class="dl-btn-badge">PDF</span>
+      </a>
+      <a class="dl-btn" href="ruet_circular.pdf" download="ruet_circular.pdf">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="dl-btn-name">RUET</span><span class="dl-btn-badge">PDF</span>
+      </a>
+      <a class="dl-btn" href="mist_circular.pdf" download="mist_circular.pdf">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="dl-btn-name">MIST</span><span class="dl-btn-badge">PDF</span>
+      </a>
+      <a class="dl-btn" href="butex_circular.pdf" download="butex_circular.pdf">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="dl-btn-name">BUTEX</span><span class="dl-btn-badge">PDF</span>
+      </a>
+      <a class="dl-btn" href="sust_circular.pdf" download="sust_circular.pdf">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="dl-btn-name">SUST</span><span class="dl-btn-badge">PDF</span>
+      </a>
     </div>
 
   </div>
@@ -1592,6 +1669,259 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
         <p>যখন কেউ বলেন "ডিপ্লোমাধারীরাও ইঞ্জিনিয়ার" — তখন অজান্তেই তারা এই সংগ্রামকে অস্বীকার করেন। যে শিক্ষার্থী বছরের পর বছর ঘুম, বিনোদন ও কৈশোর বিসর্জন দিয়ে একটি আসন অর্জন করেছেন — তার ডিগ্রিকে এমন একটি সার্টিফিকেটের সমতুল্য বলা যা সম্পূর্ণ ভিন্ন প্রক্রিয়ায় অর্জিত হয়েছে, সেটা তার প্রতি গভীর অবিচার।</p>
         <p>ওয়াশিংটন অ্যাকর্ড এই পার্থক্যটা স্বীকার করে। আন্তর্জাতিক মানদণ্ড এই পার্থক্যটা স্বীকার করে। <strong>"ইঞ্জিনিয়ার"</strong> পদবিটা এই সংগ্রামের স্বীকৃতি — এবং সেই স্বীকৃতি রক্ষা করাটা ন্যায়বিচারের দাবি।</p>
       </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BSC 4-YEAR JOURNEY -->
+<section id="slide9">
+  <div class="section-wrap">
+    <p class="section-label">Section 08</p>
+    <h2>একজন BSc ইঞ্জিনিয়ারের চার বছর<span class="bn">The Four-Year Journey of a BSc Engineer</span></h2>
+
+    <div class="prose">
+      <p>ভর্তি পরীক্ষার কঠিন বাধা পেরিয়ে কেউ যখন ইঞ্জিনিয়ারিং বিশ্ববিদ্যালয়ে ভর্তি হন, তখন আসল যুদ্ধ শুরু হয়। চার বছরের BSc প্রোগ্রামে একজন শিক্ষার্থীকে যা পেরোতে হয় — তা শুধু কঠিন নয়, এটি তার চিন্তা করার পদ্ধতি, সমস্যা সমাধানের দক্ষতা এবং প্রকৌশলীর মানসিকতা তৈরি করার একটি সম্পূর্ণ প্রক্রিয়া।</p>
+    </div>
+
+    <div class="callout">
+      <strong>ক্রেডিট ঘণ্টার ভার</strong>
+      <p>BUET-এ একজন শিক্ষার্থীকে স্নাতক ডিগ্রি পেতে <strong>ন্যূনতম ১৫৭ ক্রেডিট ঘণ্টা</strong> সম্পন্ন করতে হয়। CSE বিভাগে এর মধ্যে <strong>১২৬ ক্রেডিট ঘণ্টা থিওরি কোর্স</strong> এবং <strong>৩৪.৫ ক্রেডিট ঘণ্টা ল্যাব ও সেশনাল কোর্স</strong> অন্তর্ভুক্ত। আর্কিটেকচার বিভাগে এই সংখ্যা আরও বেশি — <strong>১৯০ ক্রেডিট ঘণ্টা</strong>। প্রতি টার্মে একজন শিক্ষার্থীকে গড়ে ১৫ থেকে ২৪ ক্রেডিট ঘণ্টার কোর্স নিতে হয় — অর্থাৎ একসাথে ৬ থেকে ৮টি বিষয় চলে।</p>
+      <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">
+        <a class="source-btn" href="https://cse.buet.ac.bd/home/ug" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET CSE Undergraduate Curriculum</a>
+        <a class="source-btn" href="https://eee.buet.ac.bd/academics/undergraduate" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET EEE Undergraduate Program</a>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>শুধু ক্লাস করলেই হয় না। প্রতিটি থিওরি কোর্সে মূল্যায়ন হয় <strong>Continuous Assessment</strong> এবং <strong>Term Final পরীক্ষা</strong>-র মাধ্যমে। মোট নম্বরের <strong>৩০% আসে Continuous Assessment থেকে</strong> — যার মধ্যে রয়েছে ক্লাস উপস্থিতি, কুইজ, অ্যাসাইনমেন্ট ও ভাইভা। বাকি <strong>৭০% আসে Term Final পরীক্ষা থেকে</strong>। Term Final পরীক্ষায় <strong>Internal ও External দুজন পরীক্ষক</strong> থাকেন — পরীক্ষার সময় তিন ঘণ্টা।</p>
+    </div>
+
+    <div class="callout">
+      <strong>ল্যাব ও সেশনালের বাড়তি চাপ</strong>
+      <p>ল্যাব ও সেশনাল কোর্সে মূল্যায়ন হয় <strong>Lab Report, Viva-voce এবং পর্যবেক্ষণ</strong>-এর ভিত্তিতে। প্রতিটি ল্যাব ক্লাসের পরে রিপোর্ট লিখতে হয়, পরের সপ্তাহে ভাইভা দিতে হয় — এবং এর পাশাপাশি থিওরি কোর্সের কুইজ ও অ্যাসাইনমেন্টও চলতে থাকে। অর্থাৎ একজন ইঞ্জিনিয়ারিং শিক্ষার্থীর কাছে <strong>পড়াশোনার কোনো "বিরতি" নেই</strong> — পুরো ৪ বছরই প্রতিটি সপ্তাহ চাপের।</p>
+    </div>
+
+    <div class="accent-block">
+      <h3>Pre-requisite সিস্টেম — এক কোর্স ফেলে গেলে সবকিছু আটকে যায়</h3>
+      <div class="prose">
+        <p>BUET-এ <strong>Pre-requisite কোর্স সিস্টেম</strong> চালু আছে — কিছু কোর্স আগে পাস না করলে পরের কোর্সে ভর্তিই হওয়া যায় না। অর্থাৎ কোনো একটি কোর্সে ব্যর্থ হলে শুধু সেই কোর্সটি নয় — পরবর্তী টার্মের একাধিক কোর্স পিছিয়ে যেতে পারে। চার বছরের প্রোগ্রাম তখন পাঁচ বা ছয় বছরে পরিণত হয়। স্নাতক ডিগ্রি পেতে <strong>ন্যূনতম CGPA ২.২০</strong> বজায় রাখতে হয় — এর নিচে গেলে ডিগ্রি মেলে না।</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>চার বছরের শেষে রয়েছে <strong>Thesis বা Capstone Project</strong> — যেখানে একটি বাস্তব সমস্যার প্রকৌশল সমাধান তৈরি করতে হয়, গবেষণাপত্র লিখতে হয় এবং বিশেষজ্ঞ প্যানেলের সামনে উপস্থাপন করতে হয়। এই পুরো যাত্রায় একজন শিক্ষার্থী যা অর্জন করেন — গাণিতিক বিশ্লেষণ, পরীক্ষামূলক দক্ষতা, গবেষণার মানসিকতা এবং জটিল সমস্যা সমাধানের সক্ষমতা — এটাই তাকে আন্তর্জাতিকভাবে <strong>"Engineer"</strong> পরিচয় দেওয়ার ভিত্তি তৈরি করে।</p>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">১৫৭+ ক্রেডিট</span>
+      <span class="tag" id="tag-ca">Continuous Assessment</span>
+      <span class="tag" id="tag-tf">Term Final Exam</span>
+      <span class="tag" id="tag-lr">Lab Report</span>
+      <span class="tag" id="tag-viva">Viva</span>
+      <span class="tag" id="tag-pre">Pre-requisite</span>
+      <span class="tag" id="tag-thesis">Thesis</span>
+      <span class="tag">CGPA</span>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://cse.buet.ac.bd/home/ug" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET CSE Undergraduate Program</a>
+      <a class="source-btn" href="https://eee.buet.ac.bd/academics/undergraduate" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET EEE Undergraduate Program</a>
+      <a class="source-btn" href="https://ce.buet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET Civil Engineering Curriculum</a>
+      <a class="source-btn" href="https://mist.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>MIST Undergraduate Syllabus</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- THREE SYLLABUSES COMPARISON -->
+<section id="slide10">
+  <div class="section-wrap">
+    <p class="section-label">Section 09</p>
+    <h2>তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ<span class="bn">Diploma vs HSC vs BSc Engineering — A Syllabus Comparison</span></h2>
+
+    <div class="prose">
+      <p>ডিপ্লোমাধারীদের পক্ষ থেকে প্রায়ই দাবি করা হয় — "আমরাও ৪ বছর পড়েছি, আমরাও ইঞ্জিনিয়ার।" এই দাবির মূল সমস্যা হলো, ৪ বছর পড়া আর ৪ বছরে কী পড়া হয়েছে — এই দুটো প্রশ্ন সম্পূর্ণ আলাদা। তিনটি শিক্ষাক্রমের সিলেবাস পাশাপাশি রাখলে পার্থক্যটা দিনের আলোর মতো স্পষ্ট হয়ে যায়।</p>
+    </div>
+
+    <div class="callout">
+      <strong>ডিপ্লোমায় প্রবেশের যোগ্যতা — শুধু SSC পাস</strong>
+      <p>ডিপ্লোমায় ভর্তির জন্য শুধু SSC পাস থাকলেই চলে — ন্যূনতম GPA মাত্র ৩.০০, গণিতে GPA ২.০০ হলেই আবেদন করা যায়। অর্থাৎ একজন ডিপ্লোমা শিক্ষার্থী HSC-র একটি দিনও পড়েননি — উচ্চতর গণিত, উচ্চতর পদার্থবিজ্ঞান, উচ্চতর রসায়নের একটি অধ্যায়ও স্পর্শ করেননি। অথচ BSc ইঞ্জিনিয়ারিংয়ে ভর্তির জন্য HSC-তে <strong>পদার্থ, রসায়ন ও গণিতে আলাদাভাবে GPA ৫.০০</strong> লাগে। একটি শিক্ষাক্রম শুরু হয় যেখানে HSC শেষ হয় — আর অন্যটি শুরু হয় HSC <strong>এড়িয়ে গিয়ে</strong>। <a class="source-btn-inline" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা ২০২৫-২৬</a></p>
+    </div>
+
+    <div class="accent-block">
+      <h3>গণিতের তুলনা — এখানেই সবচেয়ে বড় ফাঁক</h3>
+      <div class="prose">
+        <p>ডিপ্লোমার গণিত কোর্সের নাম — <strong>"Basic Mathematics"</strong>। এতে পড়ানো হয় লগারিদম, ম্যাট্রিক্স, ত্রিকোণমিতি, সরলরেখা, প্রাথমিক অবকল ক্যালকুলাস এবং পরিসংখ্যান। এগুলো বাংলাদেশের <strong>SSC সিলেবাসের বর্ধিত সংস্করণ</strong> মাত্র।</p>
+        <p>এদিকে HSC উচ্চতর গণিতে পড়ানো হয় — জটিল সংখ্যা, কনিক (উপবৃত্ত, পরাবৃত্ত, অধিবৃত্ত), ভেক্টর, সমাকল ক্যালকুলাস, বিন্যাস-সমাবেশ, সম্ভাবনা তত্ত্ব এবং ম্যাট্রিক্স-নির্ণায়ক। এগুলো ডিপ্লোমার গণিতের চেয়ে সম্পূর্ণ ভিন্ন এবং গভীর স্তরের।</p>
+        <p>আর BUET BSc-তে গণিতে রয়েছে — <strong>১২৬ ক্রেডিট ঘণ্টার থিওরি কোর্স</strong> এবং বিশ্ববিদ্যালয় পর্যায়ের গাণিতিক বিশ্লেষণ — মাল্টিভেরিয়েবল ক্যালকুলাস, ডিফারেন্সিয়াল ইকুয়েশন, লিনিয়ার অ্যালজেব্রা, নিউমেরিক্যাল অ্যানালাইসিস, কমপ্লেক্স অ্যানালাইসিস। এগুলো HSC গণিতকেও বহু স্তর পেছনে ফেলে দেয়।</p>
+        <p><strong>সংক্ষেপে —</strong><br>
+        ডিপ্লোমার গণিত = SSC-এর বর্ধিত সংস্করণ<br>
+        HSC-র গণিত = পূর্ণাঙ্গ উচ্চমাধ্যমিক বিশ্লেষণ<br>
+        BSc-র গণিত = সম্পূর্ণ ভিন্ন মহাবিশ্ব</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>পদার্থবিজ্ঞান ও রসায়নের ক্ষেত্রেও একই চিত্র। ডিপ্লোমায় পড়ানো হয় <strong>"Applied Physics"</strong> ও <strong>"Applied Chemistry"</strong> — যেগুলো হাতে-কলমে প্রয়োগমুখী, কিন্তু তাত্ত্বিক গভীরতায় HSC-র ধারেকাছেও নয়। HSC পদার্থবিজ্ঞানে রয়েছে তরঙ্গ, তড়িৎচুম্বকত্ব, আধুনিক পদার্থবিজ্ঞান, তেজস্ক্রিয়তা — এবং BSc-তে এর পরে শুরু হয় কোয়ান্টাম মেকানিক্স, থার্মোডায়নামিক্স, ইলেক্ট্রোম্যাগনেটিক থিওরি। ডিপ্লোমার পদার্থবিজ্ঞান এবং BSc-র পদার্থবিজ্ঞান — একই নামের দুটো সম্পূর্ণ ভিন্ন বিষয়।</p>
+    </div>
+
+    <div class="callout">
+      <strong>তিনটি সিলেবাসের পাশাপাশি তুলনা</strong>
+      <table class="compare" style="margin-top:10px">
+        <thead>
+          <tr>
+            <th>বিষয়</th>
+            <th>ডিপ্লোমা (BTEB)</th>
+            <th>HSC (বিজ্ঞান)</th>
+            <th style="color:#1a6b3a">BSc Engineering</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>প্রবেশ যোগ্যতা</td>
+            <td>SSC পাস, GPA ৩.০০</td>
+            <td>SSC পাস</td>
+            <td>HSC, GPA ৫.০০ + ভর্তি পরীক্ষা</td>
+          </tr>
+          <tr>
+            <td>গণিত</td>
+            <td>Basic Math — লগ, ত্রিকোণমিতি, প্রাথমিক ক্যালকুলাস</td>
+            <td>উচ্চতর গণিত — কনিক, ভেক্টর, সমাকল</td>
+            <td>ক্যালকুলাস, ডিফারেন্সিয়াল ইকুয়েশন, লিনিয়ার অ্যালজেব্রা, নিউমেরিক্যাল মেথড</td>
+          </tr>
+          <tr>
+            <td>পদার্থবিজ্ঞান</td>
+            <td>Applied Physics — প্রাথমিক প্রয়োগ</td>
+            <td>তরঙ্গ, তড়িৎ, আধুনিক পদার্থ</td>
+            <td>ইলেক্ট্রোম্যাগনেটিক থিওরি, কোয়ান্টাম মেকানিক্স</td>
+          </tr>
+          <tr>
+            <td>রসায়ন</td>
+            <td>Applied Chemistry — মৌলিক প্রয়োগ</td>
+            <td>জৈব-অজৈব-ভৌত রসায়ন</td>
+            <td>উন্নত জৈব রসায়ন, তড়িৎরসায়ন, থার্মোকেমিস্ট্রি</td>
+          </tr>
+          <tr>
+            <td>মোট ক্রেডিট</td>
+            <td>~১৪০ (প্রায়োগিক কেন্দ্রিক)</td>
+            <td>প্রযোজ্য নয়</td>
+            <td>১৫৭+ (বিশ্লেষণ ও গবেষণা কেন্দ্রিক)</td>
+          </tr>
+          <tr>
+            <td>থিসিস/গবেষণা</td>
+            <td><span class="badge-no">✗ নেই</span></td>
+            <td><span class="badge-no">✗ নেই</span></td>
+            <td><span class="badge-yes">✓ বাধ্যতামূলক</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="accent-block">
+      <h3>সবচেয়ে বড় সত্যটা —</h3>
+      <div class="prose">
+        <p>ডিপ্লোমা শিক্ষার্থীরা HSC-র পরীক্ষার হলে <strong>কখনো বসেননি</strong>। যে সিলেবাস একজন BSc ইঞ্জিনিয়ারের ভর্তি পরীক্ষার প্রশ্নপত্র তৈরি করে — সেই HSC সিলেবাস ডিপ্লোমা শিক্ষার্থীদের কাছে পরিচিতই নয়। তার মানে এই নয় যে ডিপ্লোমা শিক্ষার্থীরা কম মেধাবী — তারা ভিন্ন একটি পথে হেঁটেছেন, ভিন্ন একটি দক্ষতা অর্জন করেছেন। কিন্তু সেই পথটি <strong>"ইঞ্জিনিয়ার" তৈরির পথ নয়</strong> — এটা স্বয়ং সিলেবাসই বলে দিচ্ছে।</p>
+        <p>ডিপ্লোমার সিলেবাসকে ছোট করা হচ্ছে না। কারিগরি দক্ষতার জন্য এই সিলেবাস উপযুক্ত — এবং সেটাই এর উদ্দেশ্য ছিল। কিন্তু "আমিও ইঞ্জিনিয়ার" বলার আগে অন্তত একবার সিলেবাস দুটো পাশাপাশি রেখে দেখুন।</p>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://bteb.gov.bd/site/page/6723ed9b-94d5-41a9-80cf-54a3594a171e" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB সিলেবাস ও কোর্স স্ট্রাকচার ২০২২</a>
+      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা</a>
+      <a class="source-btn" href="https://cse.buet.ac.bd/home/ug" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET CSE Undergraduate Curriculum</a>
+      <a class="source-btn" href="https://eee.buet.ac.bd/academics/undergraduate" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET EEE Undergraduate Curriculum</a>
+      <a class="source-btn" href="https://www.nctb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (HSC সিলেবাস)</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COLLEGE MERIT LADDER -->
+<section id="slide11">
+  <div class="section-wrap">
+    <p class="section-label">Section 10</p>
+    <h2>ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে<span class="bn">The College Merit Ladder — And Where Polytechnic Fits</span></h2>
+
+    <div class="prose">
+      <p>একজন শিক্ষার্থী SSC পাসের পর দুটো পথে যেতে পারেন। এক — ভালো ফলাফল থাকলে দেশের সেরা কলেজগুলোয় ভর্তি হয়ে HSC করা। দুই — ফলাফল যথেষ্ট ভালো না হলে পলিটেকনিকে ভর্তি হওয়া। এটা কোনো ব্যক্তিগত আক্রমণ নয় — এটা বাংলাদেশের শিক্ষাব্যবস্থার বাস্তব চিত্র, এবং এই চিত্র সংখ্যায় প্রমাণিত।</p>
+    </div>
+
+    <div class="callout">
+      <strong>সেরা কলেজগুলোতে বিজ্ঞান বিভাগে ভর্তির ন্যূনতম যোগ্যতা</strong>
+      <p>নটর ডেম কলেজে বিজ্ঞান বিভাগে ভর্তির জন্য SSC-তে উচ্চতর গণিতসহ <strong>ন্যূনতম GPA ৫.০০</strong> থাকতে হবে। হলি ক্রস কলেজেও বিজ্ঞান বিভাগে ভর্তির জন্য <strong>GPA ৫.০০ সাথে উচ্চতর গণিত ও জীববিজ্ঞান</strong> বাধ্যতামূলক। ঢাকা কলেজ, আদমজী ক্যান্টনমেন্ট কলেজ, রাজউক উত্তরা মডেল কলেজের মতো শীর্ষ প্রতিষ্ঠানগুলোয়ও বিজ্ঞান বিভাগে <strong>GPA ৫.০০ এবং সংশ্লিষ্ট বিষয়ে উচ্চ নম্বর</strong> ছাড়া আবেদনের সুযোগই নেই।</p>
+      <p>এই তালিকায় আরও আছে — ঢাকা রেসিডেন্সিয়াল মডেল কলেজ, রাজশাহী কলেজ, চট্টগ্রাম সরকারি কলেজ, বিভিন্ন ক্যান্টনমেন্ট কলেজ। প্রতিটি প্রতিষ্ঠানেই বিজ্ঞান বিভাগে আসন সীমিত, প্রতিযোগিতা তীব্র, এবং GPA ৫.০০ ছাড়া দরজা বন্ধ।</p>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+        <a class="source-btn" href="https://ndc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>নটর ডেম কলেজ ভর্তি বিজ্ঞপ্তি</a>
+        <a class="source-btn" href="https://hcc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>হলি ক্রস কলেজ ভর্তি বিজ্ঞপ্তি</a>
+        <a class="source-btn" href="https://xiclassadmission.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>একাদশ শ্রেণি কেন্দ্রীয় ভর্তি সিস্টেম</a>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>এখন প্রশ্ন হলো — যাদের SSC-তে GPA ৫.০০ নেই, তারা কোথায় যান? তারা অপেক্ষাকৃত কম প্রতিযোগিতামূলক কলেজে ভর্তির চেষ্টা করেন — অথবা পলিটেকনিকে ভর্তি হন। পলিটেকনিকে ভর্তির জন্য SSC-তে শুধু <strong>ন্যূনতম GPA ৩.০০</strong> এবং গণিতে <strong>GPA ২.০০</strong> থাকলেই চলে। অর্থাৎ নটর ডেমে যে GPA দিয়ে আবেদনই করা যায় না, সেই GPA দিয়ে পলিটেকনিকে ভর্তি হওয়া যায়।</p>
+    </div>
+
+    <div class="accent-block">
+      <h3>সংখ্যায় পার্থক্যটা দেখুন</h3>
+      <div class="prose">
+        <table class="compare" style="margin-top:4px">
+          <thead>
+            <tr>
+              <th></th>
+              <th style="color:#1a6b3a">সেরা কলেজে বিজ্ঞান (HSC)</th>
+              <th style="color:#c0392b">পলিটেকনিক (ডিপ্লোমা)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ন্যূনতম SSC GPA</td>
+              <td><span class="badge-yes">✓ ৫.০০</span></td>
+              <td><span class="badge-no">✗ ৩.০০</span></td>
+            </tr>
+            <tr>
+              <td>গণিতে ন্যূনতম GPA</td>
+              <td><span class="badge-yes">✓ ৫.০০</span></td>
+              <td><span class="badge-no">✗ ২.০০</span></td>
+            </tr>
+            <tr>
+              <td>ভর্তি পরীক্ষা</td>
+              <td>লিখিত পরীক্ষা ও ভাইভা</td>
+              <td>নেই — শুধু SSC ফলাফলের ভিত্তিতে</td>
+            </tr>
+            <tr>
+              <td>পরবর্তী ধাপ</td>
+              <td>HSC → ইঞ্জিনিয়ারিং ভর্তি পরীক্ষা</td>
+              <td>সরাসরি ডিপ্লোমা</td>
+            </tr>
+            <tr>
+              <td>HSC সিলেবাস পড়তে হয়?</td>
+              <td><span class="badge-yes">✓ হ্যাঁ — পুরো দুই বছর</span></td>
+              <td><span class="badge-no">✗ না — একদিনও না</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:14px">এই তুলনা করা হচ্ছে কাউকে ছোট করতে নয়। কিন্তু যখন কেউ বলেন — "আমিও ইঞ্জিনিয়ার" — তখন এই সংখ্যাগুলো মাথায় রাখা জরুরি।</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>পলিটেকনিক শিক্ষার্থীরা কঠোর পরিশ্রম করেন, দক্ষতা অর্জন করেন, এবং দেশের অর্থনীতিতে গুরুত্বপূর্ণ ভূমিকা রাখেন — এটা সত্য। কিন্তু যে শিক্ষার্থী নটর ডেম বা আদমজী ক্যান্টনমেন্টে পড়ার যোগ্যতা রেখে সেখানে পড়েছেন, তারপর BUET-এর ভর্তি পরীক্ষায় হাজারো প্রতিযোগীকে হারিয়ে ইঞ্জিনিয়ারিংয়ে সুযোগ পেয়েছেন এবং চার বছরের কঠিন প্রোগ্রাম সম্পন্ন করেছেন — তাঁর পরিচয়কে <strong>"আমিও একই"</strong> বলে দাবি করা কি ন্যায্য?</p>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://ndc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>নটর ডেম কলেজ ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://hcc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>হলি ক্রস কলেজ ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://xiclassadmission.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>একাদশ শ্রেণি কেন্দ্রীয় ভর্তি সিস্টেম</a>
+      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা</a>
+      <a class="source-btn" href="https://www.adamjeecantonment.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Adamjee Cantonment College</a>
+      <a class="source-btn" href="https://rajukcollege.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>RAJUK Uttara Model College</a>
     </div>
 
   </div>
@@ -1782,6 +2112,17 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
       ['#slide3 .point-block:nth-child(1) .point-title', 'Substantial Equivalence',        'উল্লেখযোগ্য সমতুল্যতা'],
       ['#slide3 .point-block:nth-child(2) .point-title', 'Outcome-Based Education (OBE)',  'ফলাফলভিত্তিক শিক্ষা (OBE)'],
       ['#slide3 .point-block:nth-child(3) .point-title', 'Professional Competence',        'পেশাদার দক্ষতা'],
+      /* slide9 nav */
+      ['.nav-mobile a[href="#slide9"]', 'Section 08 — একজন BSc ইঞ্জিনিয়ারের চার বছর', 'অধ্যায় ০৮ — একজন BSc ইঞ্জিনিয়ারের চার বছর'],
+      /* slide9 section label */
+      ['#slide9 .section-label', 'Section 08', 'অধ্যায় ০৮'],
+      /* slide9 English tags (by id for precision) */
+      ['#tag-ca',     'Continuous Assessment', 'ধারাবাহিক মূল্যায়ন'],
+      ['#tag-tf',     'Term Final Exam',        'টার্ম ফাইনাল পরীক্ষা'],
+      ['#tag-lr',     'Lab Report',             'ল্যাব রিপোর্ট'],
+      ['#tag-viva',   'Viva',                   'মৌখিক পরীক্ষা'],
+      ['#tag-pre',    'Pre-requisite',           'পূর্বশর্ত কোর্স'],
+      ['#tag-thesis', 'Thesis',                  'থিসিস'],
     ];
 
     /* --- innerHTML swaps (for content with <strong>, links, etc.) --- */
@@ -1808,6 +2149,9 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
       ['#slide8 h2',
         'HSC শিক্ষার্থীদের সংগ্রাম<span class="bn">The Unseen Sacrifice Behind an Engineering Seat</span>',
         'HSC শিক্ষার্থীদের সংগ্রাম<span class="bn">ইঞ্জিনিয়ারিং আসনের পেছনের অদৃশ্য ত্যাগ</span>'],
+      ['#slide9 h2',
+        'একজন BSc ইঞ্জিনিয়ারের চার বছর<span class="bn">The Four-Year Journey of a BSc Engineer</span>',
+        'একজন BSc ইঞ্জিনিয়ারের চার বছর<span class="bn">একজন BSc ইঞ্জিনিয়ারের চার বছরের যাত্রা</span>'],
 
       /* slide2 — main English prose */
       ['#slide2 .prose p',
