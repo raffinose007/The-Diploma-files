@@ -866,11 +866,11 @@ footer strong{
 .theme-toggle{
   display:flex;align-items:center;justify-content:center;
   width:34px;height:34px;border-radius:50%;flex-shrink:0;
-  background:rgba(192,144,90,0.12);border:1px solid rgba(192,144,90,0.22);
+  background:rgba(192,144,90,0.18);border:1.5px solid rgba(192,144,90,0.45);
   cursor:pointer;transition:background .22s,border-color .22s,transform .22s;
-  margin-left:6px;
+  margin-left:10px;
 }
-.theme-toggle:hover{background:rgba(192,144,90,0.24);border-color:rgba(192,144,90,0.44);transform:rotate(20deg)}
+.theme-toggle:hover{background:rgba(192,144,90,0.32);border-color:rgba(192,144,90,0.7);transform:rotate(20deg)}
 .theme-toggle svg{width:16px;height:16px;stroke:var(--brown-warm);fill:none;stroke-width:2;flex-shrink:0;transition:opacity .2s}
 .theme-toggle .icon-moon{display:block}
 .theme-toggle .icon-sun{display:none}
@@ -1004,6 +1004,73 @@ footer strong{
 [data-theme="dark"] .back-top:hover{background:#2a1505}
 
 /* Dark: progress bar stays the same warm gold */
+
+/* ============================================
+   DIBBA TRANSLATE WIDGET
+   ============================================ */
+.dibba-widget{
+  position:fixed;bottom:28px;left:26px;z-index:91;
+  display:flex;flex-direction:column;align-items:flex-start;gap:7px;
+}
+.dibba-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;
+  font-family:'Playfair Display',serif;
+  font-size:13.5px;font-weight:700;
+  color:#f5f0e8;
+  background:var(--brown-deep);
+  border:1.5px solid rgba(192,144,90,0.45);
+  border-radius:10px;
+  cursor:pointer;
+  box-shadow:0 4px 18px rgba(59,26,6,0.38);
+  transition:background .22s,border-color .22s,transform .2s,box-shadow .2s;
+  white-space:nowrap;
+  position:relative;
+  overflow:hidden;
+}
+.dibba-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,144,90,0.12) 0%,transparent 60%);
+  pointer-events:none;
+}
+.dibba-btn:hover{
+  background:#5a2d0c;border-color:var(--brown-warm);
+  transform:translateY(-2px);box-shadow:0 8px 26px rgba(59,26,6,0.45);
+}
+.dibba-btn svg{
+  width:16px;height:16px;stroke:var(--brown-warm);fill:none;stroke-width:2;flex-shrink:0;
+  transition:transform .3s;
+}
+.dibba-btn:hover svg{transform:rotate(-10deg) scale(1.1)}
+.dibba-btn.bn-active{
+  background:linear-gradient(135deg,#1a6b3a 0%,#145530 100%);
+  border-color:rgba(74,173,122,0.5);
+}
+.dibba-btn.bn-active svg{stroke:#4aad7a}
+.dibba-punchline{
+  font-size:11px;font-style:italic;
+  color:rgba(59,26,6,0.52);
+  padding:0 4px;
+  line-height:1.4;
+  max-width:220px;
+  transition:opacity .3s;
+  font-family:'Playfair Display',serif;
+}
+.dibba-punchline.hidden{opacity:0;pointer-events:none}
+@media(max-width:640px){
+  .dibba-widget{bottom:20px;left:14px}
+  .dibba-btn{font-size:12px;padding:8px 13px}
+  .dibba-punchline{font-size:10.5px;max-width:180px}
+}
+[data-theme="dark"] .dibba-btn{background:#1a0d04;border-color:rgba(192,144,90,0.3)}
+[data-theme="dark"] .dibba-btn:hover{background:#2a1505}
+[data-theme="dark"] .dibba-punchline{color:rgba(192,144,90,0.38)}
+
+/* Dark: logo — invert to dark, tint warm gold to match site palette */
+[data-theme="dark"] .hero-logo{
+  mix-blend-mode:normal;
+  filter:invert(1) sepia(1) saturate(2.5) hue-rotate(5deg) brightness(1.1) drop-shadow(0 4px 18px rgba(192,144,90,.45));
+}
 
 /* Dark: prose links */
 [data-theme="dark"] .prose a{color:var(--brown-warm)}
@@ -1547,6 +1614,14 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </footer>
 
+<!-- DIBBA TRANSLATE WIDGET -->
+<div class="dibba-widget" id="dibbaWidget">
+  <button class="dibba-btn" id="dibbaBtn" aria-label="বাংলায় অনুবাদ করুন">
+    <svg viewBox="0 0 24 24"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+    আপনি ডিব্বা হলে ক্লিক করুন
+  </button>
+</div>
+
 <button class="back-top" id="backTop" aria-label="Back to top">
   <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
@@ -1672,6 +1747,152 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   updateProgress();
   updateBackTop();
   updateActiveNav();
+
+  /* ============================================
+     DIBBA TRANSLATION ENGINE
+     ============================================ */
+  (function(){
+    var isBn = false;
+
+    /* --- plain textContent swaps --- */
+    var textSwaps = [
+      /* Nav desktop */
+      ['nav a[href="#home"]',    'Home',            'হোম'],
+      ['nav a[href="#slide2"]',  'Engineers',       'ইঞ্জিনিয়ার'],
+      ['nav a[href="#slide3"]',  'Washington Accord','ওয়াশিংটন অ্যাকর্ড'],
+      ['nav a[href="#slide5"]',  'Diploma vs BSc',  'ডিপ্লোমা বনাম BSc'],
+      /* Nav mobile */
+      ['.nav-mobile a[href="#home"]',   '🏠 Home',                       '🏠 হোম'],
+      ['.nav-mobile a[href="#slide2"]', 'Section 01 — Engineers',        'অধ্যায় ০১ — ইঞ্জিনিয়ার'],
+      ['.nav-mobile a[href="#slide3"]', 'Section 02 — Washington Accord','অধ্যায় ০২ — ওয়াশিংটন অ্যাকর্ড'],
+      ['.nav-mobile a[href="#slide5"]', 'Section 04 — Diploma vs BSc',   'অধ্যায় ০৪ — ডিপ্লোমা বনাম BSc'],
+      /* Hero */
+      ['.hero-scroll span', 'Scroll to explore', 'নিচে স্ক্রোল করুন'],
+      /* Section labels */
+      ['#slide2 .section-label', 'Section 01', 'অধ্যায় ০১'],
+      ['#slide3 .section-label', 'Section 02', 'অধ্যায় ০২'],
+      ['#slide4 .section-label', 'Section 03', 'অধ্যায় ০৩'],
+      ['#slide5 .section-label', 'Section 04', 'অধ্যায় ০৪'],
+      ['#slide6 .section-label', 'Section 05', 'অধ্যায় ০৫'],
+      ['#slide7 .section-label', 'Section 06', 'অধ্যায় ০৬'],
+      ['#slide8 .section-label', 'Section 07', 'অধ্যায় ০৭'],
+      /* slide2 callout label */
+      ['#slide2 .callout strong', 'Accredited Education', 'স্বীকৃত শিক্ষা'],
+      /* slide3 point titles */
+      ['#slide3 .point-block:nth-child(1) .point-title', 'Substantial Equivalence',        'উল্লেখযোগ্য সমতুল্যতা'],
+      ['#slide3 .point-block:nth-child(2) .point-title', 'Outcome-Based Education (OBE)',  'ফলাফলভিত্তিক শিক্ষা (OBE)'],
+      ['#slide3 .point-block:nth-child(3) .point-title', 'Professional Competence',        'পেশাদার দক্ষতা'],
+    ];
+
+    /* --- innerHTML swaps (for content with <strong>, links, etc.) --- */
+    var htmlSwaps = [
+      /* h2 headings — swap English↔Bengali text & subtitle */
+      ['#slide2 h2',
+        'Who are Engineers?<span class="bn">প্রকৌশলী আসলে কারা?</span>',
+        'প্রকৌশলী আসলে কারা?<span class="bn">Who are Engineers?</span>'],
+      ['#slide3 h2',
+        'The Washington Accord<span class="bn">ওয়াশিংটন অ্যাকর্ড কী?</span>',
+        'ওয়াশিংটন অ্যাকর্ড কী?<span class="bn">The Washington Accord</span>'],
+      ['#slide4 h2',
+        'তিনটি আন্তর্জাতিক অ্যাকর্ড<span class="bn">The Three-Tier Framework</span>',
+        'তিনটি আন্তর্জাতিক অ্যাকর্ড<span class="bn">ত্রি-স্তর কাঠামো</span>'],
+      ['#slide5 h2',
+        'Diploma vs BSc Engineering<span class="bn">ডিপ্লোমা বনাম বিএসসি ইঞ্জিনিয়ারিং</span>',
+        'ডিপ্লোমা বনাম বিএসসি ইঞ্জিনিয়ারিং<span class="bn">Diploma vs BSc Engineering</span>'],
+      ['#slide6 h2',
+        'পলিটেকনিক কেন তৈরি হয়েছিল?<span class="bn">The Origin &amp; Purpose of Polytechnic Education</span>',
+        'পলিটেকনিক কেন তৈরি হয়েছিল?<span class="bn">পলিটেকনিক শিক্ষার উৎপত্তি ও উদ্দেশ্য</span>'],
+      ['#slide7 h2',
+        'BSc ইঞ্জিনিয়ার হতে কী লাগে?<span class="bn">The Road to a BSc Engineering Degree in Bangladesh</span>',
+        'BSc ইঞ্জিনিয়ার হতে কী লাগে?<span class="bn">বাংলাদেশে BSc ইঞ্জিনিয়ারিং ডিগ্রির পথ</span>'],
+      ['#slide8 h2',
+        'HSC শিক্ষার্থীদের সংগ্রাম<span class="bn">The Unseen Sacrifice Behind an Engineering Seat</span>',
+        'HSC শিক্ষার্থীদের সংগ্রাম<span class="bn">ইঞ্জিনিয়ারিং আসনের পেছনের অদৃশ্য ত্যাগ</span>'],
+
+      /* slide2 — main English prose */
+      ['#slide2 .prose p',
+        'According to the Washington Accord, engineers are individuals holding <strong>accredited undergraduate engineering degrees</strong> that meet substantial academic equivalence standards set by international signatories. These graduates are recognized as having the necessary academic foundation to begin practicing engineering, enhancing global mobility and employment opportunities across member countries.',
+        'ওয়াশিংটন অ্যাকর্ড অনুযায়ী, ইঞ্জিনিয়ার হলেন তারা যারা আন্তর্জাতিক স্বাক্ষরকারীদের নির্ধারিত একাডেমিক সমতুল্যতার মানদণ্ড পূরণ করে <strong>অ্যাক্রেডিটেড আন্ডারগ্র্যাজুয়েট ইঞ্জিনিয়ারিং ডিগ্রি</strong> অর্জন করেছেন। এই স্নাতকরা প্রকৌশল অনুশীলন শুরু করার প্রয়োজনীয় একাডেমিক ভিত্তি রাখেন বলে আন্তর্জাতিকভাবে স্বীকৃত।'],
+
+      /* slide2 — callout prose (contains inline links, so use innerHTML) */
+      ['#slide2 .callout p',
+        'Graduates must complete a <strong>4-year undergraduate engineering program</strong> accredited by a signatory body — e.g., <a class="source-btn-inline" href="https://www.baete.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BAETE Bangladesh</a> or <a class="source-btn-inline" href="https://www.abet.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>ABET USA</a>.',
+        'স্নাতকদের অবশ্যই একটি স্বাক্ষরকারী সংস্থার দ্বারা অ্যাক্রেডিটেড <strong>৪ বছরের আন্ডারগ্র্যাজুয়েট ইঞ্জিনিয়ারিং প্রোগ্রাম</strong> সম্পন্ন করতে হবে — যেমন <a class="source-btn-inline" href="https://www.baete.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BAETE বাংলাদেশ</a> অথবা <a class="source-btn-inline" href="https://www.abet.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>ABET USA</a>।'],
+
+      /* slide3 — point texts */
+      ['#slide3 .point-block:nth-child(1) .point-text',
+        'The Accord does not directly license professionals, but recognizes that degrees accredited by signatories are "substantially equivalent," allowing mutual recognition of academic qualifications across member nations.',
+        'অ্যাকর্ড সরাসরি পেশাদারদের লাইসেন্স দেয় না, কিন্তু স্বীকার করে যে স্বাক্ষরকারীদের দ্বারা অ্যাক্রেডিটেড ডিগ্রিগুলো "উল্লেখযোগ্যভাবে সমতুল্য" — যা সদস্য দেশগুলোতে একাডেমিক যোগ্যতার পারস্পরিক স্বীকৃতি নিশ্চিত করে।'],
+      ['#slide3 .point-block:nth-child(2) .point-text',
+        'Accredited programs focus on preparing graduates to solve complex, real-world engineering problems through outcomes-based education frameworks.',
+        'অ্যাক্রেডিটেড প্রোগ্রামগুলো ফলাফলভিত্তিক শিক্ষা কাঠামোর মাধ্যমে জটিল, বাস্তব ইঞ্জিনিয়ারিং সমস্যা সমাধানে সক্ষম স্নাতক তৈরিতে মনোযোগ দেয়।'],
+      ['#slide3 .point-block:nth-child(3) .point-text',
+        'Beyond academic qualifications, the Accord supports the assessment of graduates for professional registration such as Professional Engineer or Chartered Engineer status.',
+        'একাডেমিক যোগ্যতার বাইরে, অ্যাকর্ড প্রফেশনাল ইঞ্জিনিয়ার বা চার্টার্ড ইঞ্জিনিয়ার মর্যাদার জন্য পেশাদার নিবন্ধনে স্নাতকদের মূল্যায়নকে সমর্থন করে।'],
+
+      /* slide3 — main prose */
+      ['#slide3 .prose p',
+        'Full signatories as of 2024 include the USA, UK, Canada, Australia, India, and Bangladesh — ensuring graduates from these nations meet recognized global standards.',
+        '২০২৪ সালের হিসাবে পূর্ণ স্বাক্ষরকারীদের মধ্যে আছে যুক্তরাষ্ট্র, যুক্তরাজ্য, কানাডা, অস্ট্রেলিয়া, ভারত ও বাংলাদেশ — এটি নিশ্চিত করে যে এই দেশগুলোর স্নাতকরা আন্তর্জাতিকভাবে স্বীকৃত মানদণ্ড পূরণ করেন।'],
+    ];
+
+    /* --- slide2 tags (multiple .tag elements, match by text) --- */
+    var tagSwaps = [
+      ['4-year BSc',            '৪ বছরের BSc'],
+      ['Accredited Program',    'অ্যাক্রেডিটেড প্রোগ্রাম'],
+      ['International Recognition', 'আন্তর্জাতিক স্বীকৃতি'],
+      ['OBE Curriculum',        'OBE কারিকুলাম'],
+    ];
+
+    function applyTranslation(toBn) {
+      /* text swaps */
+      textSwaps.forEach(function(s) {
+        var el = document.querySelector(s[0]);
+        if (el) el.textContent = toBn ? s[2] : s[1];
+      });
+      /* html swaps */
+      htmlSwaps.forEach(function(s) {
+        var el = document.querySelector(s[0]);
+        if (!el) return;
+        var cur = el.innerHTML.trim();
+        /* normalize whitespace for comparison */
+        var enNorm = s[1].replace(/\s+/g,' ').trim();
+        var bnNorm = s[2].replace(/\s+/g,' ').trim();
+        if (toBn) {
+          el.innerHTML = s[2];
+        } else {
+          el.innerHTML = s[1];
+        }
+      });
+      /* tag swaps */
+      tagSwaps.forEach(function(s) {
+        var tags = document.querySelectorAll('#slide2 .tag');
+        tags.forEach(function(tag) {
+          if (toBn && tag.textContent.trim() === s[0]) tag.textContent = s[1];
+          if (!toBn && tag.textContent.trim() === s[1]) tag.textContent = s[0];
+        });
+      });
+    }
+
+    var btn = document.getElementById('dibbaBtn');
+    var punchline = document.getElementById('dibbaPunchline');
+    if (!btn) return;
+
+    btn.addEventListener('click', function() {
+      isBn = !isBn;
+      applyTranslation(isBn);
+      if (isBn) {
+        btn.classList.add('bn-active');
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg> ইংরেজি যে বুঝেন না ভালো করেই জানি😛';
+        punchline.classList.remove('hidden');
+      } else {
+        btn.classList.remove('bn-active');
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg> আপনি ডিব্বা হলে ক্লিক করুন';
+        punchline.classList.add('hidden');
+      }
+    });
+  })();
+
 })();
 </script>
 
