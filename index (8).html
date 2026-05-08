@@ -1,0 +1,1093 @@
+<!--
+FILE_META_START
+  project       : The Diploma Files
+  lang          : bn (Bengali) + en
+  last_updated  : 2026-05-08
+  fonts         : Playfair Display (headings, serif), Source Sans 3 (body, sans)
+  next_slide_id : slide9   ← always increment this when adding a new section
+
+  COLOR_VARS (all in :root):
+    --brown-deep   #3b1a06   footer bg, accent-block bg, dark hover bg
+    --hero-bg      #ede8df   hero section background
+    --hero-bar     #3d1f0d   hero top/bottom border bars
+    --brown-rich   #5a2d0c   (legacy, unused)
+    --brown-mid    #7a4a1a   subheadings, links, section labels
+    --brown-warm   #c0905a   accent gold — callout borders, tags
+    --brown-light  #c0a882   muted text, dividers
+    --cream        #f5f0e8   page background
+    --cream-dark   #e8e0d0   borders, table lines
+    --text-dark    #2a1505   h2 headings
+    --text-body    #4a3020   body prose
+    --text-muted   #7a5a3a   muted text
+    --tier-dublin  #c0392b   Dublin Accord tier color (technician)
+    --tier-sydney  #d68910   Sydney Accord tier color (technologist)
+    --tier-wash    #1a6b3a   Washington Accord tier color (engineer)
+
+  LAYOUT_SECTIONS (id → actual line):
+    #home         hero fullscreen                        ~line 505
+    #slide2       Who are Engineers?                     ~line 524
+    #slide3       The Washington Accord                  ~line 550
+    #slide4       Three International Accords            ~line 599
+    #slide5       Diploma vs BSc + conclusion            ~line 686
+    #slide6       Polytechnic origin & purpose           ~line 748
+    #slide7       BSc engineering admission struggle     ~line 783
+    #slide8       HSC student struggles                  ~line 895+
+
+  CSS_BLOCKS (style tag → actual line):
+    reset + body       ~line 124–127
+    nav                ~line 128–154
+    hero (#home)       ~line 156–206
+    sections/prose     ~line 208–250
+    callout            ~line 234–244
+    accent-block       ~line 251–261
+    tag-row / pills    ~line 263–270
+    compare table      ~line 272–285
+    point-blocks       ~line 286–306   (includes hover state)
+    accord tiers       ~line 307–345   (includes hover state)
+    source buttons     ~line 346–368
+    accord-summary     ~line 370–388
+    divider/footer     ~line 398–417
+    timeline           ~line 419–428
+    policy-quote       ~line 430+
+    intent-grid        ~line 435+
+    responsive @900px  ~line 448
+    responsive @1280px ~line 465
+    responsive @640px  ~line 477
+
+  KEY_CLASSES:
+    .section-wrap        max-width:860px centered container (980px @900px+, 1080px @1280px+)
+    .section-label       small uppercase pill label above each h2
+    .prose               body text block (15.5px, line-height 1.6)
+    .callout             left-bordered (#brown-warm) card for key points
+    .accent-block        dark bg (#brown-deep) block for strong emphasis; h3 in brown-warm
+    .tag-row / .tag      pill tag row for keyword chips
+    .compare             comparison table (red col 2, green col 3)
+    .badge-yes/no        inline colored labels inside .compare cells
+    .point-grid          2-col grid @900px+, 1-col mobile; use for card lists
+    .point-block         icon + title + text card → HOVER: black bg, white text (see HOVER_RULE)
+    .accord-stack        flex column (row @1280px+) container for .accord-tier cards
+    .accord-tier         accord level card → HOVER: black bg, white text (see HOVER_RULE)
+    .accord-summary      styled summary table used in slide4
+    .source-btn          block-level source/reference link button
+    .source-btn-inline   small inline pill source button for use inside .prose
+    .timeline            left-bordered vertical timeline (used in slide3)
+    .policy-quote        dark blockquote card with decorative quotation mark
+    .intent-grid         2-col grid for intent-card pairs
+    .intent-card         card with colored top border (intent-no → red, intent-yes → green)
+    .footer-tagline      muted uppercase tagline below footer copyright
+    .nav-hamburger       3-bar toggle button (visible only @≤640px); .open → X animation
+    .nav-mobile          slide-down mobile menu; .open → visible; links auto-close on tap
+
+  SOURCES_BLOCK_PATTERN:
+    Wrap multiple source buttons in:
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="URL" target="_blank"><svg .../>Label</a>
+    </div>
+
+  DESKTOP BREAKPOINTS:
+    @900px+  2-col .point-grid, wider .section-wrap, better nav padding
+    @1280px+ 3-col .accord-stack, ultra-wide .section-wrap, bigger hero logo
+
+  QUICK_EDIT_GUIDE:
+    - Add a new section  → copy section#slideN pattern; increment next_slide_id above;
+                           add nav link; update LAYOUT_SECTIONS line numbers
+    - Change brand color → update --brown-warm in :root
+    - Add nav link       → append <a href="#id"> inside <nav>
+    - Edit hero text     → h1 + .hero-sub + .hero-eyebrow inside section#home
+    - Add table row      → <tr> inside .compare tbody
+    - Add source buttons → use SOURCES_BLOCK_PATTERN above
+
+  HOVER_RULE (PERMANENT — applies to ALL card/block sections):
+    - Every card-style component (.point-block, .accord-tier, and any future card class)
+      MUST have a dark hover state: background → #1a0d04, border-color → #1a0d04,
+      all child text → white/cream variants, all transitions at .22s.
+    - Base rule must include: transition:background .22s,border-color .22s; cursor:default
+    - :hover must override: bg, border, every child text color (title, body, badges, icons,
+      source-btns). Do not forget .source-btn and svg strokes inside hovered cards.
+    - Colored badge hover: lighten the tier/accent color so it stays readable on dark bg
+      (e.g. dublin red #c0392b → hover #e87a6a).
+FILE_META_END
+-->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Diploma Files — প্রকৌশলী অধিকার আন্দোলন</title>
+<meta name="description" content="The Diploma Files examines international engineering accreditation standards — the Washington, Sydney, and Dublin Accords — and what they mean for diploma holders in Bangladesh.">
+<meta name="keywords" content="Washington Accord, BAETE, Bangladesh engineering, diploma vs BSc, engineering accreditation, IEB Bangladesh, diploma engineering, প্রকৌশলী, ডিপ্লোমা">
+<meta name="author" content="প্রকৌশলী অধিকার আন্দোলন">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Diploma Files — প্রকৌশলী অধিকার আন্দোলন">
+<meta property="og:description" content="আন্তর্জাতিক মানদণ্ড অনুযায়ী বাংলাদেশের ডিপ্লোমাধারীরা কে — টেকনিশিয়ান, নাকি ইঞ্জিনিয়ার? Washington, Sydney ও Dublin Accord এর বিশ্লেষণ।">
+<meta property="og:site_name" content="The Diploma Files">
+<meta property="og:locale" content="bn_BD">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Diploma Files">
+<meta name="twitter:description" content="Washington Accord, engineering accreditation, and what it really means for diploma holders in Bangladesh.">
+<meta name="theme-color" content="#3d1f0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --brown-deep:#3b1a06;
+  --brown-rich:#5a2d0c;
+  --brown-mid:#7a4a1a;
+  --brown-warm:#c0905a;
+  --brown-light:#c0a882;
+  --cream:#f5f0e8;
+  --cream-dark:#e8e0d0;
+  --text-dark:#2a1505;
+  --text-body:#4a3020;
+  --text-muted:#7a5a3a;
+  --tier-dublin:#c0392b;
+  --tier-sydney:#c47f17;
+  --tier-wash:#1a6b3a;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--text-body);line-height:1.55}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(61,31,13,0.97);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:0 40px;
+  display:flex;align-items:center;gap:6px;
+  height:52px;
+  border-bottom:1px solid rgba(192,144,90,0.25);
+  box-shadow:0 2px 16px rgba(0,0,0,0.2);
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;
+  color:var(--brown-warm);font-size:14.5px;font-weight:700;
+  letter-spacing:.04em;margin-right:auto;white-space:nowrap;
+  display:flex;align-items:center;gap:9px;
+}
+.nav-brand::before{
+  content:'';display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--brown-warm);box-shadow:0 0 8px rgba(192,144,90,0.6);
+}
+nav a{
+  color:rgba(245,240,232,0.65);text-decoration:none;
+  font-size:13px;letter-spacing:.04em;
+  padding:5px 13px;border-radius:20px;transition:all .2s;white-space:nowrap;
+}
+nav a:hover{color:var(--cream);background:rgba(192,144,90,0.18)}
+
+/* hamburger button */
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;padding:6px;border-radius:8px;
+  background:transparent;border:none;cursor:pointer;
+  transition:background .2s;flex-shrink:0;
+}
+.nav-hamburger:hover{background:rgba(192,144,90,0.18)}
+.nav-hamburger span{
+  display:block;width:20px;height:2px;border-radius:2px;
+  background:rgba(245,240,232,0.75);
+  transition:transform .28s ease,opacity .2s ease,width .2s ease;
+  transform-origin:center;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;width:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile dropdown menu */
+.nav-mobile{
+  position:fixed;top:52px;left:0;right:0;z-index:99;
+  background:rgba(45,20,8,0.98);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(192,144,90,0.2);
+  box-shadow:0 8px 24px rgba(0,0,0,0.35);
+  display:flex;flex-direction:column;padding:8px 0 12px;
+  max-height:0;overflow:hidden;
+  transition:max-height .32s cubic-bezier(0.4,0,0.2,1),padding .32s ease;
+  padding-top:0;padding-bottom:0;
+}
+.nav-mobile.open{max-height:480px;padding:8px 0 12px}
+.nav-mobile a{
+  color:rgba(245,240,232,0.7);text-decoration:none;
+  font-size:14px;letter-spacing:.03em;
+  padding:11px 24px;display:block;
+  transition:color .18s,background .18s;border-left:3px solid transparent;
+}
+.nav-mobile a:hover{
+  color:var(--cream);background:rgba(192,144,90,0.1);
+  border-left-color:var(--brown-warm);
+}
+
+/* ── HERO ── */
+#home{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:70px 24px 50px;
+  background:#ede8df;position:relative;overflow:hidden;
+  border-top:9px solid #3d1f0d;border-bottom:9px solid #3d1f0d;
+}
+#home::before,#home::after{
+  content:'';position:absolute;
+  background-repeat:no-repeat;background-size:contain;
+  opacity:.10;pointer-events:none;
+}
+#home::before{
+  width:160px;height:160px;bottom:28px;left:24px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M60 10c-2-2-5-2-7 0l-5 5-8-3-1-7c-.5-3-3-5-6-5H23c-3 0-5.5 2-6 5l-1 7-8 3-5-5c-2-2-5-2-7 0l-7 7c-2 2-2 5 0 7l5 5-3 8-7 1c-3 .5-5 3-5 6v10c0 3 2 5.5 5 6l7 1 3 8-5 5c-2 2-2 5 0 7l7 7c2 2 5 2 7 0l5-5 8 3 1 7c.5 3 3 5 6 5h10c3 0 5.5-2 6-5l1-7 8-3 5 5c2 2 5 2 7 0l7-7c2-2 2-5 0-7l-5-5 3-8 7-1c3-.5 5-3 5-6V33c0-3-2-5.5-5-6l-7-1-3-8 5-5c2-2 2-5 0-7z' fill='%233d1f0d'/%3E%3Ccircle cx='33' cy='38' r='14' fill='none' stroke='%233d1f0d' stroke-width='6'/%3E%3C/svg%3E");
+}
+#home::after{
+  width:120px;height:120px;bottom:20px;right:28px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cpolygon points='0,120 0,0 100,0' fill='none' stroke='%233d1f0d' stroke-width='6'/%3E%3Cline x1='0' y1='40' x2='60' y2='40' stroke='%233d1f0d' stroke-width='4'/%3E%3Cline x1='0' y1='80' x2='20' y2='80' stroke='%233d1f0d' stroke-width='4'/%3E%3C/svg%3E");
+}
+.hero-deco-gear{
+  position:absolute;top:50%;right:80px;transform:translateY(-50%);
+  width:200px;height:200px;opacity:.08;pointer-events:none;
+}
+.hero-logo{width:220px;height:193px;object-fit:contain;margin-bottom:22px;position:relative;z-index:1}
+.hero-eyebrow{
+  font-family:'Playfair Display',serif;font-size:clamp(14px,2vw,18px);
+  font-style:italic;color:#7a4a1a;font-weight:400;
+  margin-bottom:8px;position:relative;z-index:1;letter-spacing:.01em;
+}
+#home h1{
+  font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,64px);
+  font-weight:700;color:#2a1505;line-height:1.05;
+  margin-bottom:12px;position:relative;z-index:1;letter-spacing:-.01em;
+}
+#home h1 em{font-style:italic;color:#2a1505}
+.hero-sub{
+  font-size:clamp(14px,1.8vw,17px);color:#6a4a2a;
+  max-width:480px;margin:0 auto 28px;
+  font-weight:400;position:relative;z-index:1;
+}
+.hero-scroll{
+  display:flex;align-items:center;gap:7px;
+  color:rgba(58,32,10,0.4);font-size:11.5px;
+  letter-spacing:.12em;text-transform:uppercase;
+  position:relative;z-index:1;
+  animation:bounce 2.5s ease-in-out infinite;
+}
+.hero-scroll svg{stroke:currentColor;width:18px;height:18px;fill:none;stroke-width:1.5}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ── SECTIONS ── */
+.section-wrap{max-width:860px;margin:0 auto;padding:40px 48px}
+
+.section-label{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brown-warm);font-weight:700;margin-bottom:10px;
+  background:rgba(192,144,90,0.08);border:1px solid rgba(192,144,90,0.2);
+  padding:3px 13px 3px 9px;border-radius:20px;
+}
+.section-label::before{content:'';display:block;width:18px;height:2px;background:var(--brown-warm);border-radius:1px}
+
+h2{
+  font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);
+  font-weight:700;color:var(--text-dark);line-height:1.1;margin-bottom:14px;
+}
+h2 .bn{
+  display:block;font-style:italic;font-size:.55em;
+  color:var(--brown-mid);font-weight:400;margin-top:2px;
+}
+
+.prose{font-size:15.5px;line-height:1.6;color:var(--text-body)}
+.prose p{margin-bottom:10px}
+.prose p:last-child{margin-bottom:0}
+
+/* Callout */
+.callout{
+  background:#fff;border:1px solid var(--cream-dark);
+  border-left:4px solid var(--brown-warm);
+  border-radius:0 10px 10px 0;
+  padding:14px 20px;margin:14px 0;
+}
+.callout strong{
+  display:block;font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--brown-warm);font-weight:600;margin-bottom:5px;
+}
+.callout p{font-size:15px;color:var(--text-body);margin:0;line-height:1.55}
+
+/* Link */
+.prose a{color:var(--brown-mid);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(122,74,26,0.35);transition:color .2s}
+.prose a:hover{color:var(--brown-rich)}
+
+/* Accent block */
+.accent-block{
+  background:var(--brown-deep);color:var(--cream);
+  border-radius:14px;padding:26px 34px;margin:20px 0 0;
+}
+.accent-block h3{
+  font-family:'Playfair Display',serif;font-size:20px;
+  color:var(--brown-warm);margin-bottom:12px;font-weight:700;
+}
+.accent-block .prose{color:rgba(245,240,232,0.82)}
+.accent-block .prose strong{color:var(--cream);font-weight:600}
+
+/* Tags */
+.tag-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:0;margin-top:14px}
+.tag{
+  font-size:11.5px;font-weight:600;letter-spacing:.05em;
+  padding:3px 12px;border-radius:20px;
+  background:rgba(192,144,90,0.12);color:var(--brown-mid);
+  border:1px solid rgba(192,144,90,0.25);
+}
+
+/* Compare table */
+.compare{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare th{
+  text-align:left;padding:9px 14px;
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:600;color:var(--brown-mid);border-bottom:2px solid var(--cream-dark);
+}
+.compare th:nth-child(2){color:#c0392b}
+.compare th:nth-child(3){color:#27ae60}
+.compare td{padding:10px 14px;border-bottom:1px solid var(--cream-dark);color:var(--text-body);vertical-align:top}
+.compare tr:last-child td{border-bottom:none}
+.compare td:first-child{font-weight:600;color:var(--text-dark);font-size:13.5px}
+.badge-no{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:#c0392b;font-weight:600}
+.badge-yes{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:#27ae60;font-weight:600}
+
+/* ── POINT BLOCKS ── */
+.point-grid{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.point-block{
+  display:grid;grid-template-columns:38px 1fr;gap:0 14px;align-items:start;
+  background:#fff;border:1px solid var(--cream-dark);border-radius:10px;
+  padding:14px 18px;transition:background .22s,border-color .22s;cursor:default;
+}
+.point-block:hover{background:#1a0d04;border-color:#1a0d04}
+.point-block:hover .point-icon{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15)}
+.point-block:hover .point-icon svg{stroke:rgba(245,240,232,0.75)}
+.point-block:hover .point-title{color:#f5f0e8}
+.point-block:hover .point-text{color:rgba(245,240,232,0.75)}
+.point-icon{
+  width:38px;height:38px;border-radius:7px;
+  background:rgba(192,144,90,0.1);border:1px solid rgba(192,144,90,0.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.point-icon svg{width:18px;height:18px;stroke:var(--brown-warm);fill:none;stroke-width:1.8}
+.point-title{font-size:13.5px;font-weight:600;color:var(--text-dark);margin-bottom:3px;letter-spacing:.01em}
+.point-text{font-size:14.5px;line-height:1.55;color:var(--text-body)}
+
+/* ── ACCORD TIERS ── */
+.accord-stack{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.accord-tier{
+  background:#fff;border:1px solid var(--cream-dark);border-radius:10px;
+  padding:18px 22px;display:grid;grid-template-columns:auto 1fr auto;
+  gap:0 18px;align-items:start;position:relative;overflow:hidden;
+  transition:background .22s,border-color .22s;cursor:default;
+}
+.accord-tier:hover{background:#1a0d04;border-color:#1a0d04}
+.accord-tier:hover .accord-num{color:rgba(255,255,255,0.12)}
+.accord-tier:hover .accord-name{color:#f5f0e8}
+.accord-tier:hover .accord-name span{color:rgba(245,240,232,0.5)}
+.accord-tier:hover .accord-body .prose p{color:rgba(245,240,232,0.75)}
+.accord-tier:hover .accord-body .prose strong{color:#f5f0e8}
+.accord-tier:hover .accord-body .prose em{color:rgba(245,240,232,0.75)}
+.accord-tier:hover .source-btn{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.15);color:rgba(245,240,232,0.7)}
+.accord-tier:hover .source-btn svg{stroke:rgba(245,240,232,0.7)}
+.accord-tier.tier-dublin:hover .accord-badge{background:rgba(192,57,43,.25);color:#e87a6a;border-color:rgba(192,57,43,.4)}
+.accord-tier.tier-sydney:hover .accord-badge{background:rgba(196,127,23,.25);color:#e8a83a;border-color:rgba(196,127,23,.4)}
+.accord-tier.tier-wash:hover .accord-badge{background:rgba(26,107,58,.25);color:#4aad7a;border-color:rgba(26,107,58,.4)}
+.accord-tier::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:10px 0 0 10px}
+.tier-dublin::before{background:var(--tier-dublin)}
+.tier-sydney::before{background:var(--tier-sydney)}
+.tier-wash::before{background:var(--tier-wash)}
+.accord-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;line-height:1;color:var(--cream-dark);margin-top:2px;transition:color .22s}
+.accord-body{grid-column:2}
+.accord-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text-dark);margin-bottom:5px;transition:color .22s}
+.accord-name span{font-style:italic;font-size:.75em;font-weight:400;color:var(--text-muted);margin-left:7px;transition:color .22s}
+.accord-body .prose p{margin-bottom:8px;font-size:14.5px;transition:color .22s}
+.accord-body .prose p:last-child{margin-bottom:0}
+.accord-badge{
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;
+  padding:4px 12px;border-radius:20px;white-space:nowrap;align-self:start;margin-top:3px;
+  transition:background .22s,color .22s,border-color .22s;
+}
+.tier-dublin .accord-badge{background:rgba(192,57,43,.1);color:var(--tier-dublin);border:1px solid rgba(192,57,43,.25)}
+.tier-sydney .accord-badge{background:rgba(196,127,23,.1);color:var(--tier-sydney);border:1px solid rgba(196,127,23,.25)}
+.tier-wash .accord-badge{background:rgba(26,107,58,.1);color:var(--tier-wash);border:1px solid rgba(26,107,58,.25)}
+
+/* ── SOURCE BUTTONS ── */
+.source-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:10px;padding:6px 13px;
+  font-size:11.5px;font-weight:600;letter-spacing:.04em;
+  color:var(--brown-mid);background:#fff;
+  border:1px solid var(--cream-dark);border-radius:6px;
+  text-decoration:none;transition:background .18s,border-color .18s,color .18s;cursor:pointer;
+}
+.source-btn:hover{background:var(--cream-dark);border-color:var(--brown-warm);color:var(--brown-deep)}
+.source-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.accent-block .source-btn{color:rgba(245,240,232,0.75);background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.15)}
+.accent-block .source-btn:hover{background:rgba(255,255,255,0.15);border-color:rgba(192,144,90,0.6);color:var(--cream)}
+.source-btn-inline{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 9px;
+  font-size:11.5px;font-weight:600;color:var(--brown-mid);
+  background:rgba(192,144,90,0.1);border:1px solid rgba(192,144,90,0.3);
+  border-radius:20px;text-decoration:none;transition:background .18s,color .18s;vertical-align:middle;
+}
+.source-btn-inline:hover{background:rgba(192,144,90,0.22);color:var(--brown-deep)}
+.source-btn-inline svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:middle}
+.accord-source{display:none}
+
+/* Accord summary table */
+.accord-summary{
+  width:100%;border-collapse:collapse;
+  margin:12px 0 0;font-size:14.5px;
+  border-radius:10px;overflow:hidden;border:1px solid var(--cream-dark);
+}
+.accord-summary thead tr{background:var(--brown-deep)}
+.accord-summary thead th{
+  padding:10px 16px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:600;color:rgba(245,240,232,0.7);text-align:left;
+}
+.accord-summary tbody tr:nth-child(odd){background:#fff}
+.accord-summary tbody tr:nth-child(even){background:var(--cream)}
+.accord-summary td{padding:10px 16px;border-bottom:1px solid var(--cream-dark);color:var(--text-body)}
+.accord-summary tbody tr:last-child td{border-bottom:none}
+.accord-summary td:first-child{font-weight:600;color:var(--text-dark)}
+.accord-summary .pill{display:inline-block;padding:2px 11px;border-radius:20px;font-size:12.5px;font-weight:600}
+.accord-summary .pill-red{background:rgba(192,57,43,.1);color:var(--tier-dublin)}
+.accord-summary .pill-amber{background:rgba(196,127,23,.1);color:var(--tier-sydney)}
+.accord-summary .pill-green{background:rgba(26,107,58,.1);color:var(--tier-wash)}
+
+.accord-closing{
+  margin-top:12px;padding:14px 18px;
+  background:var(--cream);border:1px solid var(--cream-dark);border-radius:10px;
+  font-size:14.5px;color:var(--text-body);line-height:1.55;
+}
+.accord-closing strong{color:var(--text-dark)}
+
+/* Divider */
+.divider{border:none;height:1px;background:linear-gradient(to right,transparent,var(--cream-dark) 15%,var(--cream-dark) 85%,transparent);margin:0;opacity:.8}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--brown-deep);color:rgba(245,240,232,0.45);
+  padding:32px 40px 24px;text-align:center;font-size:13px;
+  border-top:1px solid rgba(192,144,90,0.15);
+  position:relative;overflow:hidden;
+}
+footer::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:60px;height:2px;
+  background:linear-gradient(to right,transparent,var(--brown-warm),transparent);border-radius:2px;
+}
+footer strong{
+  display:block;font-family:'Playfair Display',serif;font-size:18px;
+  color:var(--brown-warm);font-weight:700;margin-bottom:6px;letter-spacing:.02em;
+}
+.footer-tagline{font-size:11.5px;color:rgba(245,240,232,0.28);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:32px;margin:14px 0}
+.timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--brown-warm),var(--cream-dark));border-radius:2px}
+.timeline-item{position:relative;margin-bottom:16px}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-dot{position:absolute;left:-29px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--brown-warm);border:2px solid var(--cream);box-shadow:0 0 0 2px var(--brown-warm);flex-shrink:0}
+.timeline-item.highlight .timeline-dot{background:var(--brown-deep);box-shadow:0 0 0 2px var(--brown-deep)}
+.timeline-year{font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--brown-warm);text-transform:uppercase;margin-bottom:3px}
+.timeline-item.highlight .timeline-year{color:var(--brown-deep)}
+.timeline-title{font-size:14.5px;font-weight:600;color:var(--text-dark);margin-bottom:2px}
+.timeline-desc{font-size:13.5px;color:var(--text-muted);line-height:1.5}
+
+/* Policy quote */
+.policy-quote{background:var(--brown-deep);border-radius:10px;padding:20px 24px;margin:14px 0;position:relative}
+.policy-quote::before{content:'\201C';position:absolute;top:-8px;left:20px;font-family:'Playfair Display',serif;font-size:60px;line-height:1;color:rgba(192,144,90,0.3);pointer-events:none}
+.policy-quote blockquote{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:rgba(245,240,232,0.9);line-height:1.6;margin-bottom:10px;position:relative;z-index:1}
+.policy-quote blockquote strong{color:#f5f0e8;font-style:normal}
+.policy-quote cite{display:block;font-size:11.5px;font-style:normal;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brown-warm)}
+
+/* Intent cards */
+.intent-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.intent-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;padding:14px 16px;border-top:3px solid var(--brown-warm)}
+.intent-card.intent-no{border-top-color:#c0392b}
+.intent-card.intent-yes{border-top-color:#1a6b3a}
+.intent-card-label{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;color:var(--brown-warm)}
+.intent-card.intent-no .intent-card-label{color:#c0392b}
+.intent-card.intent-yes .intent-card-label{color:#1a6b3a}
+.intent-card-text{font-size:13.5px;color:var(--text-body);line-height:1.5}
+
+/* ── DESKTOP ── */
+@media(min-width:900px){
+  nav{padding:0 72px;gap:4px}
+  nav a{font-size:13px;padding:6px 15px}
+  .section-wrap{max-width:980px;padding:44px 72px}
+  #slide3{background:rgba(242,237,228,0.7)}
+  #slide5{background:rgba(242,237,228,0.7)}
+  .point-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .accent-block{padding:28px 40px}
+  .accord-tier{padding:20px 30px}
+  .accord-num{font-size:42px}
+  .accord-name{font-size:20px}
+  .compare,.accord-summary{font-size:15px}
+  .compare th,.compare td{padding:10px 18px}
+  .accord-summary th,.accord-summary td{padding:10px 18px}
+  .timeline{padding-left:40px}
+  #home{padding:70px 60px 56px}
+}
+@media(min-width:1280px){
+  .section-wrap{max-width:1080px;padding:44px 90px}
+  .accord-stack{flex-direction:row;align-items:stretch}
+  .accord-tier{flex:1;grid-template-columns:1fr;grid-template-rows:auto 1fr auto;gap:10px 0}
+  .accord-num{font-size:36px;margin-bottom:2px}
+  .accord-body{grid-column:1;grid-row:2}
+  .accord-badge{grid-column:1;grid-row:3;align-self:end;margin-top:12px;display:inline-block}
+  .accord-tier::before{top:0;left:0;right:0;bottom:auto;width:100%;height:4px;border-radius:10px 10px 0 0}
+  .hero-logo{width:250px;height:220px}
+}
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  nav{padding:0 16px;gap:2px}
+  nav a{display:none}
+  .nav-hamburger{display:flex}
+  .section-wrap{padding:32px 18px}
+  .accent-block{padding:20px 18px}
+  .compare{display:block;overflow-x:auto}
+  .accord-tier{grid-template-columns:auto 1fr;grid-template-rows:auto auto}
+  .accord-badge{grid-column:2;margin-top:10px}
+  .accord-num{font-size:24px}
+  .intent-grid{grid-template-columns:1fr}
+  .policy-quote{padding:16px 18px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">The Diploma Files</span>
+  <a href="#home">Home</a>
+  <a href="#slide2">Engineers</a>
+  <a href="#slide3">Washington Accord</a>
+  <a href="#slide4">তিনটি অ্যাকর্ড</a>
+  <a href="#slide5">Diploma vs BSc</a>
+  <a href="#slide6">পলিটেকনিক</a>
+  <a href="#slide7">BSc যাত্রা</a>
+  <a href="#slide8">HSC সংগ্রাম</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="মেনু খুলুন" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <a href="#home" class="nav-mobile-link">🏠 Home</a>
+  <a href="#slide2" class="nav-mobile-link">Section 01 — Engineers</a>
+  <a href="#slide3" class="nav-mobile-link">Section 02 — Washington Accord</a>
+  <a href="#slide4" class="nav-mobile-link">Section 03 — তিনটি অ্যাকর্ড</a>
+  <a href="#slide5" class="nav-mobile-link">Section 04 — Diploma vs BSc</a>
+  <a href="#slide6" class="nav-mobile-link">Section 05 — পলিটেকনিক কেন তৈরি হয়েছিল?</a>
+  <a href="#slide7" class="nav-mobile-link">Section 06 — BSc ইঞ্জিনিয়ার হতে কী লাগে?</a>
+  <a href="#slide8" class="nav-mobile-link">Section 07 — HSC শিক্ষার্থীদের সংগ্রাম</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <!-- ghost gear decoration (top-right, matching slide) -->
+  <svg class="hero-deco-gear" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="#3d1f0d" d="M60 10c-2-2-5-2-7 0l-5 5-8-3-1-7C38.5 2 36 0 33 0H23c-3 0-5.5 2-6 5l-1 7-8 3-5-5c-2-2-5-2-7 0L-11 17c-2 2-2 5 0 7l5 5-3 8-7 1C-19 38.5-21 41-21 44v10c0 3 2 5.5 5 6l7 1 3 8-5 5c-2 2-2 5 0 7l7 7c2 2 5 2 7 0l5-5 8 3 1 7c.5 3 3 5 6 5h10c3 0 5.5-2 6-5l1-7 8-3 5 5c2 2 5 2 7 0l7-7c2-2 2-5 0-7l-5-5 3-8 7-1c3-.5 5-3 5-6V44c0-3-2-5.5-5-6l-7-1-3-8 5-5c2-2 2-5 0-7zM28 55c-9.4 0-17-7.6-17-17s7.6-17 17-17 17 7.6 17 17-7.6 17-17 17z"/>
+  </svg>
+
+  <img class="hero-logo" src="logo.png" alt="The Diploma Files seal — BSc Engineering emblem">
+
+  <p class="hero-eyebrow">প্রকৌশলী অধিকার আন্দোলন প্রেজেন্টস:</p>
+  <h1>The Diploma Files</h1>
+  <p class="hero-sub">প্রকৌশল খাতের জায়নবাদীদের কুকর্ম</p>
+
+  <div class="hero-scroll">
+    <span>Scroll to explore</span>
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- WHO ARE ENGINEERS -->
+<section id="slide2">
+  <div class="section-wrap">
+    <p class="section-label">Section 01</p>
+    <h2>Who are Engineers?<span class="bn">প্রকৌশলী আসলে কারা?</span></h2>
+
+    <div class="prose">
+      <p>According to the Washington Accord, engineers are individuals holding <strong>accredited undergraduate engineering degrees</strong> that meet substantial academic equivalence standards set by international signatories. These graduates are recognized as having the necessary academic foundation to begin practicing engineering, enhancing global mobility and employment opportunities across member countries.</p>
+    </div>
+
+    <div class="callout">
+      <strong>Accredited Education</strong>
+      <p>Graduates must complete a <strong>4-year undergraduate engineering program</strong> accredited by a signatory body — e.g., <a class="source-btn-inline" href="https://www.baete.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BAETE Bangladesh</a> or <a class="source-btn-inline" href="https://www.abet.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>ABET USA</a>.</p>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">4-year BSc</span>
+      <span class="tag">Accredited Program</span>
+      <span class="tag">International Recognition</span>
+      <span class="tag">OBE Curriculum</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WASHINGTON ACCORD -->
+<section id="slide3">
+  <div class="section-wrap">
+    <p class="section-label">Section 02</p>
+    <h2>The Washington Accord<span class="bn">ওয়াশিংটন অ্যাকর্ড কী?</span></h2>
+
+    <div class="point-grid">
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/></svg>
+        </div>
+        <div>
+          <div class="point-title">Substantial Equivalence</div>
+          <div class="point-text">The Accord does not directly license professionals, but recognizes that degrees accredited by signatories are "substantially equivalent," allowing mutual recognition of academic qualifications across member nations.</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div>
+          <div class="point-title">Outcome-Based Education (OBE)</div>
+          <div class="point-text">Accredited programs focus on preparing graduates to solve complex, real-world engineering problems through outcomes-based education frameworks.</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <div>
+          <div class="point-title">Professional Competence</div>
+          <div class="point-text">Beyond academic qualifications, the Accord supports the assessment of graduates for professional registration such as Professional Engineer or Chartered Engineer status.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="prose">
+      <p>Full signatories as of 2024 include the USA, UK, Canada, Australia, India, and Bangladesh — ensuring graduates from these nations meet recognized global standards.</p>
+      <a class="source-btn" href="https://www.iebbd.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>IEB — The Institution of Engineers, Bangladesh</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- THREE INTERNATIONAL ACCORDS -->
+<section id="slide4">
+  <div class="section-wrap">
+    <p class="section-label">Section 03</p>
+    <h2>তিনটি আন্তর্জাতিক অ্যাকর্ড<span class="bn">The Three-Tier Framework</span></h2>
+
+    <div class="prose" style="margin-bottom:8px">
+      <p>আন্তর্জাতিক অ্যাকর্ডগুলো মূলত তিনটি স্তরে ইঞ্জিনিয়ারিং যোগ্যতাকে ভাগ করে —</p>
+    </div>
+
+    <div class="accord-stack">
+
+      <div class="accord-tier tier-dublin">
+        <div class="accord-num">১</div>
+        <div class="accord-body">
+          <div class="accord-name">ডাবলিন অ্যাকর্ড <span>Dublin Accord</span></div>
+          <div class="prose">
+            <p>ডাবলিন অ্যাকর্ড অনুযায়ী, একজন ইঞ্জিনিয়ারিং টেকনিশিয়ান হলেন তিনি যিনি <strong>২ বছরের ডিপ্লোমা বা অ্যাসোসিয়েট ডিগ্রি</strong> প্রোগ্রাম সম্পন্ন করেছেন। এই অ্যাকর্ড মূলত সেই যোগ্যতাগুলো স্বীকার করে যেগুলো একজনকে ইঞ্জিনিয়ারিং টেকনিশিয়ান হিসেবে কাজ করার ভিত্তি দেয়।</p>
+            <p>অর্থাৎ, বাংলাদেশের ডিপ্লোমাধারীরা যদি এই অ্যাকর্ডের আওতায় আসতেনও, তাহলেও তারা <strong>টেকনিশিয়ান</strong> — ইঞ্জিনিয়ার নন।</p>
+            <a class="source-btn" href="https://www.internationalengineeringalliance.org/accords/dublin" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Dublin Accord — International Engineering Alliance</a>
+          </div>
+        </div>
+        <span class="accord-badge">ইঞ্জিনিয়ারিং টেকনিশিয়ান</span>
+      </div>
+
+      <div class="accord-tier tier-sydney">
+        <div class="accord-num">২</div>
+        <div class="accord-body">
+          <div class="accord-name">সিডনি অ্যাকর্ড <span>Sydney Accord</span></div>
+          <div class="prose">
+            <p>সিডনি অ্যাকর্ড ওয়াশিংটন অ্যাকর্ডের পরিপূরক হিসেবে কাজ করে এবং ইঞ্জিনিয়ারিং টেকনোলজি প্রোগ্রামগুলোকে স্বীকৃতি দেয়। এই অ্যাকর্ডের আওতায় একজন ইঞ্জিনিয়ারিং টেকনোলজিস্ট হলেন তিনি যিনি <strong>৩ বছরের অ্যাডভান্সড ডিপ্লোমা বা টেকনোলজি ডিগ্রি</strong> সম্পন্ন করেছেন।</p>
+            <p>এই স্তরেও কিন্তু তারা <strong>টেকনোলজিস্ট</strong> — পূর্ণ ইঞ্জিনিয়ার নন।</p>
+            <a class="source-btn" href="https://www.internationalengineeringalliance.org/accords/sydney" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Sydney Accord — International Engineering Alliance</a>
+          </div>
+        </div>
+        <span class="accord-badge">ইঞ্জিনিয়ারিং টেকনোলজিস্ট</span>
+      </div>
+
+      <div class="accord-tier tier-wash">
+        <div class="accord-num">৩</div>
+        <div class="accord-body">
+          <div class="accord-name">ওয়াশিংটন অ্যাকর্ড <span>Washington Accord</span></div>
+          <div class="prose">
+            <p>ওয়াশিংটন অ্যাকর্ড হলো <strong>চার্টার্ড ইঞ্জিনিয়ার</strong> স্তরের শিক্ষার জন্য — অর্থাৎ পূর্ণ আন্ডারগ্র্যাজুয়েট ইঞ্জিনিয়ারিং ডিগ্রিধারীদের জন্য। শুধুমাত্র এই স্তরের স্বীকৃতিপ্রাপ্তরাই আন্তর্জাতিকভাবে "ইঞ্জিনিয়ার" পদবি বহন করতে পারেন।</p>
+          </div>
+        </div>
+        <span class="accord-badge">প্রফেশনাল ইঞ্জিনিয়ার</span>
+      </div>
+
+    </div>
+
+    <table class="accord-summary">
+      <thead>
+        <tr>
+          <th>অ্যাকর্ড</th>
+          <th>প্রয়োজনীয় যোগ্যতা</th>
+          <th>পরিচয়</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ডাবলিন</td>
+          <td>২ বছরের ডিপ্লোমা</td>
+          <td><span class="pill pill-red">টেকনিশিয়ান</span></td>
+        </tr>
+        <tr>
+          <td>সিডনি</td>
+          <td>৩ বছরের টেকনোলজি ডিগ্রি</td>
+          <td><span class="pill pill-amber">টেকনোলজিস্ট</span></td>
+        </tr>
+        <tr>
+          <td>ওয়াশিংটন</td>
+          <td>৪ বছরের BSc ইঞ্জিনিয়ারিং</td>
+          <td><span class="pill pill-green">ইঞ্জিনিয়ার</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="accord-closing">
+      তিনটি অ্যাকর্ড মিলে ইঞ্জিনিয়ারিং পেশার তিনটি আলাদা স্তর তৈরি করে — প্রতিটি স্তরে শিক্ষার মান, দায়িত্ব এবং কর্তৃত্ব আলাদা। তাই যেকোনো আন্তর্জাতিক মানদণ্ড অনুযায়ীই বাংলাদেশের ডিপ্লোমাধারীরা সর্বোচ্চ <strong>টেকনিশিয়ান বা টেকনোলজিস্ট</strong> — "ইঞ্জিনিয়ার" পদবি কেবল ওয়াশিংটন অ্যাকর্ডভুক্ত BSc ডিগ্রিধারীদের জন্য।
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DIPLOMA vs BSC -->
+<section id="slide5">
+  <div class="section-wrap">
+    <p class="section-label">Section 04</p>
+    <h2>Diploma vs BSc Engineering<span class="bn">ডিপ্লোমা বনাম বিএসসি ইঞ্জিনিয়ারিং</span></h2>
+
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>বিষয়</th>
+          <th>❌ ডিপ্লোমা</th>
+          <th>✅ BSc Engineering</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ধরন</td>
+          <td><span class="badge-no">টেকনিক্যাল সার্টিফিকেট</span></td>
+          <td><span class="badge-yes">আন্ডারগ্র্যাজুয়েট ডিগ্রি</span></td>
+        </tr>
+        <tr>
+          <td>BAETE অ্যাক্রেডিটেশন</td>
+          <td><span class="badge-no">নেই</span></td>
+          <td><span class="badge-yes">আছে</span></td>
+        </tr>
+        <tr>
+          <td>Washington Accord</td>
+          <td><span class="badge-no">প্রযোজ্য নয়</span></td>
+          <td><span class="badge-yes">স্বীকৃত</span></td>
+        </tr>
+        <tr>
+          <td>উদ্দেশ্য</td>
+          <td>দক্ষ টেকনিশিয়ান তৈরি</td>
+          <td>জটিল সমস্যা সমাধানকারী প্রকৌশলী</td>
+        </tr>
+        <tr>
+          <td>আন্তর্জাতিক পরিচয়</td>
+          <td>টেকনোলজিস্ট / টেকনিশিয়ান</td>
+          <td>ইঞ্জিনিয়ার</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="accent-block">
+      <h3 style="text-decoration:underline;text-underline-offset:5px">আপনি ডিপ্লোমাধারী হলে এদিকে আসেন,</h3>
+      <div class="prose">
+        <p>ওয়াশিংটন অ্যাকর্ড অনুযায়ী, শুধুমাত্র <strong>৪ বছরের অ্যাক্রেডিটেড আন্ডারগ্র্যাজুয়েট ইঞ্জিনিয়ারিং ডিগ্রিধারীরাই</strong> ইঞ্জিনিয়ার হিসেবে স্বীকৃত।</p>
+        <p>বাংলাদেশে ডিপ্লোমা ইঞ্জিনিয়ারিং সাধারণত <strong>৪ বছরের হলেও</strong> এটা একটি টেকনিক্যাল/ভোকেশনাল সার্টিফিকেট প্রোগ্রাম — আন্ডারগ্র্যাজুয়েট ডিগ্রি নয়। তাই BAETE এটাকে অ্যাক্রেডিট করে না, এবং ওয়াশিংটন অ্যাকর্ডের আওতায় পড়ে না।</p>
+        <p>সহজ করে বললে —</p>
+        <p>ডিপ্লোমা পড়ানো হয় <strong>দক্ষ টেকনিশিয়ান</strong> তৈরির জন্য, যারা ইঞ্জিনিয়ারদের নির্দেশনায় কাজ করে। আর বিএসিস ইঞ্জিনিয়ারিং পড়ানো হয় জটিল সমস্যা বিশ্লেষণ ও সমাধান করার জন্য — যেটা ওয়াশিংটন অ্যাকর্ডের মূল শর্ত।</p>
+        <p>তাই আন্তর্জাতিক মানদণ্ড অনুযায়ী ডিপ্লোমাধারীরা <strong>টেকনিশিয়ান বা টেকনোলজিস্ট</strong>, ইঞ্জিনিয়ার নন।</p>
+
+        <p style="border-top:1px solid rgba(255,255,255,0.12);padding-top:18px;margin-top:6px">
+          এবার যারা বলেন "আমাদের ডিপ্লোমা ৪ বছরের, তাই আমরাও ইঞ্জিনিয়ার" — তাদের জন্য একটু ভেবে দেখুন: <strong>ডাবলিন অ্যাকর্ড</strong> মাত্র ২ বছরের ডিপ্লোমাধারীকেও স্বীকৃতি দেয় — কিন্তু <em>টেকনিশিয়ান</em> হিসেবে, ইঞ্জিনিয়ার হিসেবে নয়। <strong>সিডনি অ্যাকর্ড</strong> ৩ বছরের টেকনোলজি ডিগ্রিধারীকে স্বীকৃতি দেয় — কিন্তু <em>টেকনোলজিস্ট</em> হিসেবে। অর্থাৎ তিনটি আন্তর্জাতিক অ্যাকর্ডের যেকোনো কাঠামোতেই বাংলাদেশের ডিপ্লোমাধারীরা সর্বোচ্চ <strong>টেকনিশিয়ান</strong> — "ইঞ্জিনিয়ার" নন।
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- POLYTECHNIC ORIGIN & PURPOSE -->
+<section id="slide6">
+  <div class="section-wrap">
+    <p class="section-label">Section 05</p>
+    <h2>পলিটেকনিক কেন তৈরি হয়েছিল?<span class="bn">The Origin &amp; Purpose of Polytechnic Education</span></h2>
+
+    <div class="prose">
+      <p>বাংলাদেশে পলিটেকনিক শিক্ষার সূচনা হয়েছিল একটি সুনির্দিষ্ট লক্ষ্যকে সামনে রেখে — শিল্পকারখানা, নির্মাণ খাত ও বিদেশের শ্রমবাজারের জন্য <strong>দক্ষ মধ্যমসারির জনশক্তি</strong> তৈরি করা। এই উদ্দেশ্য কোনো অনুমান নয় — এটা সরকারের নিজস্ব দলিলে স্পষ্টভাবে লেখা আছে।</p>
+      <p>১৯৫৫ সালে Ford Foundation-এর অর্থায়নে ঢাকা পলিটেকনিক প্রতিষ্ঠিত হয় একটি <strong>কারিগরি প্রশিক্ষণ কেন্দ্র</strong> হিসেবে। ১৯৬০ সালে কারিগরি শিক্ষা অধিদপ্তর এবং ১৯৬৭ সালে BTEB প্রতিষ্ঠার উদ্দেশ্য ছিল একটাই — শিল্পখাতের চাহিদা অনুযায়ী <strong>দক্ষ জনশক্তি</strong> গড়ে তোলা।</p>
+    </div>
+
+    <div class="callout">
+      <strong>জাতীয় শিক্ষানীতি ২০১০ কী বলে?</strong>
+      <p>সরকারের জাতীয় শিক্ষানীতি ২০১০ এবং জাতীয় দক্ষতা উন্নয়ন নীতি ২০১১ — উভয় দলিলেই কারিগরি শিক্ষার উদ্দেশ্য হিসেবে বলা হয়েছে <strong>"জাতীয় ও আন্তর্জাতিক শ্রমবাজারের চাহিদা পূরণের জন্য দক্ষ জনশক্তি তৈরি"</strong>। কোথাও লেখা নেই যে পলিটেকনিক ইঞ্জিনিয়ার তৈরি করে।</p>
+    </div>
+
+    <div class="accent-block">
+      <h3>সরকার কি কখনো বলেছে পলিটেকনিক "ইঞ্জিনিয়ার" তৈরির জন্য?</h3>
+      <div class="prose">
+        <p>না। সরকারি ভাষায় পলিটেকনিকের উদ্দেশ্য ছিল — <em>"শিল্পকারখানার জন্য দক্ষ মধ্যমসারির টেকনিশিয়ান তৈরি করা।"</em> সরকার যখন পলিটেকনিক তৈরি করেছিল, তখন তাদের লক্ষ্য ছিল স্পষ্ট। সেই লক্ষ্যটা ছিল <strong>দক্ষ টেকনিশিয়ান</strong> তৈরি — ইঞ্জিনিয়ার নয়।</p>
+        <p>দশকের পর দশক পরে এসে সেই পরিচয়কে "ইঞ্জিনিয়ার" বলে দাবি করা — এটা সেই মূল উদ্দেশ্যেরও বিরুদ্ধে, এবং আন্তর্জাতিক মানদণ্ডেরও বিরুদ্ধে।</p>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>বাংলাদেশ কারিগরি শিক্ষা বোর্ড (BTEB)</a>
+      <a class="source-btn" href="https://reliefweb.int/report/bangladesh/national-education-policy-2010-enbn" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় শিক্ষানীতি ২০১০ — শিক্ষা মন্ত্রণালয়</a>
+      <a class="source-btn" href="https://www.ilo.org/sites/default/files/wcmsp5/groups/public/@asia/@ro-bangkok/@ilo-dhaka/documents/publication/wcms_113958.pdf" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় দক্ষতা উন্নয়ন নীতি ২০১১ — ILO</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BSC ENGINEERING ADMISSION STRUGGLE -->
+<section id="slide7">
+  <div class="section-wrap">
+    <p class="section-label">Section 06</p>
+    <h2>BSc ইঞ্জিনিয়ার হতে কী লাগে?<span class="bn">The Road to a BSc Engineering Degree in Bangladesh</span></h2>
+
+    <div class="prose">
+      <p>বাংলাদেশে একজন BSc ইঞ্জিনিয়ার হওয়ার পথ শুরু হয় HSC পাসের পর — কিন্তু HSC পাস করলেই ইঞ্জিনিয়ারিং বিশ্ববিদ্যালয়ে ভর্তির সুযোগ মেলে না। ভর্তি পরীক্ষার টেবিলে বসার যোগ্যতাটুকু অর্জন করতেই একজন শিক্ষার্থীকে যা পেরোতে হয়, সেটা দেশের অন্যতম কঠিন একাডেমিক চ্যালেঞ্জ।</p>
+    </div>
+
+    <!-- University seat stats as point-blocks -->
+    <div class="point-grid" style="margin-top:18px">
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div>
+          <div class="point-title">BUET — সর্বোচ্চ প্রতিযোগিতামূলক</div>
+          <div class="point-text">আবেদনের ন্যূনতম যোগ্যতা: SSC-তে GPA ৪.০০ এবং HSC-তে পূর্ণ GPA ৫.০০ — পদার্থ, রসায়ন ও উচ্চতর গণিতে আলাদাভাবে। প্রতি বছর ~২৪,০০০ আবেদনকারীর মধ্যে পরীক্ষায় বসেন মাত্র ১০,০০০ জন। চূড়ান্তভাবে ভর্তির সুযোগ পান <strong>~১,২১৫ জন</strong>।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div class="point-title">CUET · KUET · RUET — এখন তিনটি আলাদা পরীক্ষা</div>
+          <div class="point-text">CUET (৯২০ আসন), KUET (১,০৬৫ আসন) ও RUET (১,২৩৫ আসন) — তিনটি বিশ্ববিদ্যালয় এখন আলাদাভাবে ভর্তি পরীক্ষা নেয়। অর্থাৎ প্রতিটি বিশ্ববিদ্যালয়ে আলাদাভাবে আবেদন করতে হয়, আলাদাভাবে পরীক্ষা দিতে হয় — এবং প্রতিটি পরীক্ষায় হাজারো প্রতিযোগীর সাথে লড়াই করতে হয়।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <div class="point-title">MIST ও BUTEX — সামরিক ও বিশেষায়িত প্রতিষ্ঠান</div>
+          <div class="point-text">MIST-এ মোট আসন <strong>৫৭০টি</strong>, BUTEX-এ <strong>৬০০টি</strong>। MIST-এ ভর্তির জন্য আলাদা প্রবেশিকা পরীক্ষায় উত্তীর্ণ হতে হয়, BUTEX-এ টেক্সটাইল-বিশেষায়িত পরীক্ষা। উভয় ক্ষেত্রেই প্রতিটি আসনের বিপরীতে গড়ে ১৫–২০ জন প্রতিযোগী।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="point-title">SUST — সিলেটের একমাত্র বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়</div>
+          <div class="point-text">শাহজালাল বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (SUST) বাংলাদেশের অন্যতম মর্যাদাপূর্ণ প্রকৌশল বিশ্ববিদ্যালয়। এখানে ইঞ্জিনিয়ারিং বিভাগগুলোয় আসন সংখ্যা অত্যন্ত সীমিত এবং ভর্তি পরীক্ষা অত্যন্ত প্রতিযোগিতামূলক — প্রতিটি আসনের জন্য গড়ে ১৫ জনেরও বেশি প্রার্থী প্রতিদ্বন্দ্বিতা করেন। SUST-এর স্নাতকরা <strong>BAETE-অ্যাক্রেডিটেড</strong> ডিগ্রিধারী হিসেবে ওয়াশিংটন অ্যাকর্ডের আওতায় আন্তর্জাতিকভাবে স্বীকৃত।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="point-title">দুই বছরের আলাদা প্রস্তুতি</div>
+          <div class="point-text">বেশিরভাগ সফল শিক্ষার্থী HSC-র পাশাপাশি <strong>দুই বছর ধরে</strong> আলাদাভাবে ভর্তি প্রস্তুতি নেন। পরীক্ষায় কোনো MCQ নেই — <strong>সম্পূর্ণ লিখিত প্রশ্নে</strong> বিশ্লেষণী দক্ষতা যাচাই করা হয়।</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" style="margin-top:20px">
+      <strong>পরীক্ষার বিষয় ও কঠিন অধ্যায়গুলো</strong>
+      <p>ভর্তি পরীক্ষা হয় তিনটি মূল বিষয়ে — <strong>উচ্চতর গণিত, পদার্থবিজ্ঞান ও রসায়ন</strong>।</p>
+      <p style="margin-top:8px"><strong>গণিত —</strong> ক্যালকুলাস (অবকল ও সমাকল), কনিক, জটিল সংখ্যা, ভেক্টর, ম্যাট্রিক্স ও নির্ণায়ক, সম্ভাবনা, বিন্যাস-সমাবেশ।</p>
+      <p><strong>পদার্থবিজ্ঞান —</strong> নিউটনীয় বলবিদ্যা, তাপগতিবিদ্যা, তরঙ্গ ও শব্দ, স্থির ও চল তড়িৎ, চুম্বকত্ব, আলোকবিজ্ঞান, আধুনিক পদার্থবিজ্ঞান ও তেজস্ক্রিয়তা।</p>
+      <p><strong>রসায়ন —</strong> জৈব রসায়ন, অজৈব রসায়ন (পর্যায় সারণি, সমন্বয় যৌগ), ভৌত রসায়ন (তাপগতিবিদ্যা, তড়িৎ রসায়ন), স্টয়কিওমেট্রি।</p>
+      <p style="margin-top:8px">রেফারেন্স হিসেবে পড়তে হয় <em>Halliday-Resnick</em> (পদার্থ), <em>Hall &amp; Knight</em> (বীজগণিত), <em>Thomas &amp; Finney</em> (ক্যালকুলাস) এবং <em>OP Tandon</em> (রসায়ন)-এর মতো আন্তর্জাতিক গ্রন্থ।</p>
+    </div>
+
+    <div class="accent-block">
+      <h3>এই পরিশ্রম কেন গুরুত্বপূর্ণ?</h3>
+      <div class="prose">
+        <p>হাজারো শিক্ষার্থী বছরের পর বছর পরিশ্রম করেন শুধু <strong>ভর্তি পরীক্ষায় বসার যোগ্যতাটুকু পেতে</strong>। তারপর সেই পরীক্ষায় উত্তীর্ণ হয়ে ৪ বছরের কঠিন BSc প্রোগ্রাম সম্পন্ন করেন — যেখানে গাণিতিক বিশ্লেষণ, জটিল সমস্যা সমাধান ও গবেষণা দক্ষতা তৈরি হয়।</p>
+        <p>ঠিক এই কারণেই ওয়াশিংটন অ্যাকর্ড কেবল এই ডিগ্রিধারীদেরকেই <strong>"ইঞ্জিনিয়ার"</strong> হিসেবে স্বীকৃতি দেয়। এই স্বীকৃতি তাদের পরিশ্রম ও যোগ্যতার প্রতিফলন — এবং এই পার্থক্যটা অস্বীকার করা তাদের প্রতি অবিচার।</p>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://www.buet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://admissioncuet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>CUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://admission.kuet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>KUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://admission.ruet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>RUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://www.mist.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>MIST ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://www.butex.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUTEX ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://admission.sust.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>SUST ভর্তি বিজ্ঞপ্তি</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- HSC STUDENT STRUGGLES -->
+<section id="slide8">
+  <div class="section-wrap">
+    <p class="section-label">Section 07</p>
+    <h2>HSC শিক্ষার্থীদের সংগ্রাম<span class="bn">The Unseen Sacrifice Behind an Engineering Seat</span></h2>
+
+    <div class="prose">
+      <p>ইঞ্জিনিয়ারিং বিশ্ববিদ্যালয়ে একটি আসন শুধু মেধার পুরস্কার নয় — এটা বছরের পর বছরের অদৃশ্য ত্যাগের ফল। যে শিক্ষার্থী আজ BUET বা CUET-এ পড়ছেন, তার পেছনে আছে ঘুম, বিনোদন, সামাজিক জীবন এবং কখনো কখনো মানসিক স্বাস্থ্য বিসর্জন দেওয়ার এক নীরব ইতিহাস।</p>
+    </div>
+
+    <div class="point-grid" style="margin-top:18px">
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="point-title">দিনে ১৪–১৬ ঘণ্টা পড়াশোনা</div>
+          <div class="point-text">ভর্তি পরীক্ষার প্রস্তুতিকালে অধিকাংশ শিক্ষার্থী প্রতিদিন ১৪ থেকে ১৬ ঘণ্টা পড়াশোনা করেন। সকালে কোচিং, বিকেলে ব্যাচ ক্লাস, রাতে নিজে পড়া — সাপ্তাহিক ছুটি বলে কিছু থাকে না। উৎসব, বিয়ে, পারিবারিক অনুষ্ঠান — সব কিছু পেছনে পড়ে যায়।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div class="point-title">কোচিং সেন্টারের অর্থনীতি ও পরিবারের চাপ</div>
+          <div class="point-text">ঢাকার নামকরা কোচিং সেন্টারগুলোতে বার্ষিক ফি ৩০,০০০ থেকে ৮০,০০০ টাকা পর্যন্ত। মফস্বল থেকে আসা শিক্ষার্থীদের ঢাকায় থাকা-খাওয়ার খরচ আলাদা। অনেক পরিবার সন্তানের পড়ার খরচ জোগাতে জমি বিক্রি করেন বা ঋণ নেন — কারণ ইঞ্জিনিয়ারিং পড়ানো মানে পুরো পরিবারের স্বপ্নের বিনিয়োগ।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <div class="point-title">গ্যাপ ইয়ার ও বারবার পরীক্ষার চক্র</div>
+          <div class="point-text">প্রথমবার চান্স না পেলে অনেকে এক বা দুই বছর গ্যাপ নিয়ে আবার চেষ্টা করেন। এই সময়টা মানসিকভাবে অত্যন্ত কঠিন — বন্ধুরা বিশ্ববিদ্যালয়ে ভর্তি হয়, আর নিজে আরেকটি বছর শুধু একটি পরীক্ষার জন্য অপেক্ষা করেন। এই চাপ অনেক শিক্ষার্থীর মানসিক স্বাস্থ্যে গভীর ছাপ ফেলে।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div>
+          <div class="point-title">HSC-র বাইরেও বিশাল সিলেবাস</div>
+          <div class="point-text">ভর্তি পরীক্ষার প্রশ্ন শুধু HSC পাঠ্যক্রমে সীমাবদ্ধ নয়। Halliday-Resnick, Thomas &amp; Finney, OP Tandon-এর মতো আন্তর্জাতিক বই রপ্ত করতে হয়। অর্থাৎ একজন শিক্ষার্থী একই সাথে HSC পরীক্ষার প্রস্তুতি এবং বিশ্ববিদ্যালয়ের প্রথম বর্ষের সমতুল্য পদার্থ ও গণিত শিখছেন।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="point-title">সামাজিক বিচ্ছিন্নতা ও হারানো কৈশোর</div>
+          <div class="point-text">বন্ধুদের সাথে আড্ডা, খেলাধুলা, সোশ্যাল মিডিয়া — সব কিছু থেকে সচেতনভাবে দূরে থাকতে হয়। অনেক শিক্ষার্থী জানান, ভর্তি পরীক্ষার দুই বছর তাদের জীবন থেকে "হারিয়ে যাওয়া সময়" হিসেবে মনে হয়। এই ত্যাগ কোনো দলিলে লেখা থাকে না — কিন্তু প্রতিটি ইঞ্জিনিয়ারিং সিটের পেছনে এই গল্পটা আছে।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div class="point-title">চান্স পেয়েও শেষ নয় — ৪ বছরের কঠিন BSc</div>
+          <div class="point-text">ভর্তি পরীক্ষায় উত্তীর্ণ হওয়া শুধু শুরু। এরপর ৪ বছরের অত্যন্ত কঠিন BSc প্রোগ্রাম — যেখানে প্রতিটি সেমিস্টারে ডিফারেনশিয়াল ইকুয়েশন, থার্মোডায়নামিক্স, সার্কিট থিওরি, স্ট্রাকচারাল অ্যানালাইসিস পড়তে হয়। ড্রপআউট রেট উল্লেখযোগ্য। যারা শেষ করেন, তাদের ডিগ্রিটা কেবল সার্টিফিকেট নয় — এটা বছরের পর বছরের প্রমাণিত দক্ষতার নথি।</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="accent-block">
+      <h3>এই সংগ্রামটা কেন মনে রাখা দরকার?</h3>
+      <div class="prose">
+        <p>যখন কেউ বলেন "ডিপ্লোমাধারীরাও ইঞ্জিনিয়ার" — তখন অজান্তেই তারা এই সংগ্রামকে অস্বীকার করেন। যে শিক্ষার্থী বছরের পর বছর ঘুম, বিনোদন ও কৈশোর বিসর্জন দিয়ে একটি আসন অর্জন করেছেন — তার ডিগ্রিকে এমন একটি সার্টিফিকেটের সমতুল্য বলা যা সম্পূর্ণ ভিন্ন প্রক্রিয়ায় অর্জিত হয়েছে, সেটা তার প্রতি গভীর অবিচার।</p>
+        <p>ওয়াশিংটন অ্যাকর্ড এই পার্থক্যটা স্বীকার করে। আন্তর্জাতিক মানদণ্ড এই পার্থক্যটা স্বীকার করে। <strong>"ইঞ্জিনিয়ার"</strong> পদবিটা এই সংগ্রামের স্বীকৃতি — এবং সেই স্বীকৃতি রক্ষা করাটা ন্যায়বিচারের দাবি।</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <strong>The Diploma Files</strong>
+  © প্রকৌশলী অধিকার আন্দোলন — সত্য প্রতিষ্ঠার লক্ষ্যে
+  <div class="footer-tagline">Washington · Sydney · Dublin Accord</div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('navMobile');
+  if(!btn || !menu) return;
+
+  function closeMenu(){
+    btn.classList.remove('open');
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    menu.setAttribute('aria-hidden','true');
+  }
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var isOpen = menu.classList.contains('open');
+    if(isOpen){ closeMenu(); } else {
+      btn.classList.add('open');
+      menu.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      menu.setAttribute('aria-hidden','false');
+    }
+  });
+
+  // close when any mobile menu link is tapped
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ closeMenu(); });
+  });
+
+  // close when tapping outside
+  document.addEventListener('click', function(e){
+    if(!menu.contains(e.target) && e.target !== btn){
+      closeMenu();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
