@@ -3,56 +3,60 @@ FILE_META_START
   project       : The Diploma Files
   lang          : bn (Bengali) + en
   last_updated  : 2026-05-08
+  meta_upgraded : 2026-05-08   ← line numbers, color values & new entries verified against source
   fonts         : Playfair Display (headings, serif), Source Sans 3 (body, sans)
   next_slide_id : slide9   ← always increment this when adding a new section
 
-  COLOR_VARS (all in :root):
-    --brown-deep   #3b1a06   footer bg, accent-block bg, dark hover bg
-    --hero-bg      #ede8df   hero section background
-    --hero-bar     #3d1f0d   hero top/bottom border bars
-    --brown-rich   #5a2d0c   (legacy, unused)
-    --brown-mid    #7a4a1a   subheadings, links, section labels
-    --brown-warm   #c0905a   accent gold — callout borders, tags
-    --brown-light  #c0a882   muted text, dividers
+  COLOR_VARS (:root block at line 135; ⚠ hero-bg & hero-bar are hardcoded in #home, NOT in :root):
+    --brown-deep   #3b1a06   footer bg, accent-block bg, dark hover bg, policy-quote bg
+    --brown-rich   #5a2d0c   (legacy, unused — defined in :root but referenced nowhere)
+    --brown-mid    #7a4a1a   subheadings, links, section labels, source-btn text
+    --brown-warm   #c0905a   accent gold — section-label pill, callout border, tags, icons
+    --brown-light  #c0a882   (defined in :root; used sparingly for muted divider tints)
     --cream        #f5f0e8   page background
-    --cream-dark   #e8e0d0   borders, table lines
-    --text-dark    #2a1505   h2 headings
+    --cream-dark   #e8e0d0   card borders, table lines, divider
+    --text-dark    #2a1505   h2 headings, strong labels
     --text-body    #4a3020   body prose
-    --text-muted   #7a5a3a   muted text
-    --tier-dublin  #c0392b   Dublin Accord tier color (technician)
-    --tier-sydney  #d68910   Sydney Accord tier color (technologist)
-    --tier-wash    #1a6b3a   Washington Accord tier color (engineer)
+    --text-muted   #7a5a3a   muted prose, timeline-desc, intent-card-text
+    --tier-dublin  #c0392b   Dublin Accord left-bar & badge (technician / red)
+    --tier-sydney  #c47f17   Sydney Accord left-bar & badge (technologist / amber) ← was #d68910 in old meta
+    --tier-wash    #1a6b3a   Washington Accord left-bar & badge (engineer / green)
+    [hardcoded]  #ede8df   hero background (--hero-bg, not in :root)
+    [hardcoded]  #3d1f0d   hero top/bottom bars & nav background (--hero-bar, not in :root)
 
-  LAYOUT_SECTIONS (id → actual line):
-    #home         hero fullscreen                        ~line 505
-    #slide2       Who are Engineers?                     ~line 524
-    #slide3       The Washington Accord                  ~line 550
-    #slide4       Three International Accords            ~line 599
-    #slide5       Diploma vs BSc + conclusion            ~line 686
-    #slide6       Polytechnic origin & purpose           ~line 748
-    #slide7       BSc engineering admission struggle     ~line 783
-    #slide8       HSC student struggles                  ~line 895+
+  LAYOUT_SECTIONS (id → actual line — verified 2026-05-08):
+    #home         hero fullscreen                        ~line 588
+    #slide2       Who are Engineers?                     ~line 607
+    #slide3       The Washington Accord                  ~line 633
+    #slide4       Three International Accords            ~line 682
+    #slide5       Diploma vs BSc + conclusion            ~line 769
+    #slide6       Polytechnic origin & purpose           ~line 831
+    #slide7       BSc engineering admission struggle     ~line 866
+    #slide8       HSC student struggles                  ~line 963
 
-  CSS_BLOCKS (style tag → actual line):
-    reset + body       ~line 124–127
-    nav                ~line 128–154
-    hero (#home)       ~line 156–206
-    sections/prose     ~line 208–250
-    callout            ~line 234–244
-    accent-block       ~line 251–261
-    tag-row / pills    ~line 263–270
-    compare table      ~line 272–285
-    point-blocks       ~line 286–306   (includes hover state)
-    accord tiers       ~line 307–345   (includes hover state)
-    source buttons     ~line 346–368
-    accord-summary     ~line 370–388
-    divider/footer     ~line 398–417
-    timeline           ~line 419–428
-    policy-quote       ~line 430+
-    intent-grid        ~line 435+
-    responsive @900px  ~line 448
-    responsive @1280px ~line 465
-    responsive @640px  ~line 477
+  CSS_BLOCKS (style tag → actual line — verified 2026-05-08):
+    reset + *          ~line 133
+    :root vars         ~line 135–149
+    html / body        ~line 151–152
+    nav                ~line 154–222   (desktop links + hamburger + mobile dropdown)
+    hero (#home)       ~line 224–274   (incl. ::before/::after decorations & @keyframes bounce)
+    sections/prose     ~line 276–316   (section-wrap, section-label, h2, .bn subtitle, .prose, .prose a)
+    callout            ~line 301–312
+    prose links        ~line 314–316
+    accent-block       ~line 318–328
+    tag-row / pills    ~line 330–337
+    compare table      ~line 339–352   (incl. .badge-yes / .badge-no)
+    point-blocks       ~line 354–373   (incl. hover state & .point-icon / .point-title / .point-text)
+    accord tiers       ~line 375–412   (incl. all hover overrides & ::before colored bars)
+    source buttons     ~line 414–435   (incl. .source-btn-inline & .accord-source:display:none)
+    accord-summary     ~line 437–463   (incl. .accord-closing)
+    divider / footer   ~line 465–484
+    timeline           ~line 486–496
+    policy-quote       ~line 498–503
+    intent-grid/card   ~line 505–513
+    responsive @900px  ~line 516–532
+    responsive @1280px ~line 533–542   (accord-stack becomes row; accordion-tier reflows to col)
+    responsive @640px  ~line 544–557   (hamburger visible; nav links hidden)
 
   KEY_CLASSES:
     .section-wrap        max-width:860px centered container (980px @900px+, 1080px @1280px+)
@@ -63,39 +67,56 @@ FILE_META_START
     .tag-row / .tag      pill tag row for keyword chips
     .compare             comparison table (red col 2, green col 3)
     .badge-yes/no        inline colored labels inside .compare cells
-    .point-grid          2-col grid @900px+, 1-col mobile; use for card lists
+    .point-grid          flex-col mobile, 2-col grid @900px+; use for card lists
     .point-block         icon + title + text card → HOVER: black bg, white text (see HOVER_RULE)
-    .accord-stack        flex column (row @1280px+) container for .accord-tier cards
+    .accord-stack        flex-col (row @1280px+) container for .accord-tier cards
     .accord-tier         accord level card → HOVER: black bg, white text (see HOVER_RULE)
-    .accord-summary      styled summary table used in slide4
-    .source-btn          block-level source/reference link button
+                         modifier classes: .tier-dublin / .tier-sydney / .tier-wash
+    .accord-num          large Playfair Display ordinal inside each tier card
+    .accord-badge        colored pill badge (bottom of card); auto-repositions @1280px
+    .accord-summary      styled summary table used in slide4; use .pill-red/amber/green inside
+    .accord-closing      muted info box below accord-summary
+    .source-btn          block-level source/reference link button (incl. SVG icon)
     .source-btn-inline   small inline pill source button for use inside .prose
-    .timeline            left-bordered vertical timeline (used in slide3)
-    .policy-quote        dark blockquote card with decorative quotation mark
-    .intent-grid         2-col grid for intent-card pairs
-    .intent-card         card with colored top border (intent-no → red, intent-yes → green)
+    .timeline            left-bordered vertical timeline; use .timeline-item + .highlight modifier
+    .policy-quote        dark blockquote card with decorative quotation mark (::before)
+    .intent-grid         2-col grid (@640px collapses to 1-col) for intent-card pairs
+    .intent-card         card with colored top border; modifiers: .intent-no (red), .intent-yes (green)
     .footer-tagline      muted uppercase tagline below footer copyright
     .nav-hamburger       3-bar toggle button (visible only @≤640px); .open → X animation
     .nav-mobile          slide-down mobile menu; .open → visible; links auto-close on tap
 
+  NAV_LINKS (desktop + mobile — keep both in sync):
+    #home      Home
+    #slide2    Engineers          / Section 01 — Engineers
+    #slide3    Washington Accord  / Section 02 — Washington Accord
+    #slide4    তিনটি অ্যাকর্ড    / Section 03 — তিনটি অ্যাকর্ড
+    #slide5    Diploma vs BSc     / Section 04 — Diploma vs BSc
+    #slide6    পলিটেকনিক         / Section 05 — পলিটেকনিক কেন তৈরি হয়েছিল?
+    #slide7    BSc যাত্রা         / Section 06 — BSc ইঞ্জিনিয়ার হতে কী লাগে?
+    #slide8    HSC সংগ্রাম        / Section 07 — HSC শিক্ষার্থীদের সংগ্রাম
+
   SOURCES_BLOCK_PATTERN:
     Wrap multiple source buttons in:
     <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-      <a class="source-btn" href="URL" target="_blank"><svg .../>Label</a>
+      <a class="source-btn" href="URL" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Label</a>
     </div>
 
   DESKTOP BREAKPOINTS:
-    @900px+  2-col .point-grid, wider .section-wrap, better nav padding
-    @1280px+ 3-col .accord-stack, ultra-wide .section-wrap, bigger hero logo
+    @900px+  2-col .point-grid, wider .section-wrap (980px), .accord-tier larger padding/fonts
+    @1280px+ .accord-stack → row, 3-up cards; section-wrap 1080px; hero-logo 250×220px
 
   QUICK_EDIT_GUIDE:
     - Add a new section  → copy section#slideN pattern; increment next_slide_id above;
-                           add nav link; update LAYOUT_SECTIONS line numbers
-    - Change brand color → update --brown-warm in :root
-    - Add nav link       → append <a href="#id"> inside <nav>
-    - Edit hero text     → h1 + .hero-sub + .hero-eyebrow inside section#home
-    - Add table row      → <tr> inside .compare tbody
+                           add nav link in BOTH <nav> and .nav-mobile; update LAYOUT_SECTIONS
+    - Change brand color → update --brown-warm in :root (propagates to all accent uses)
+    - Add nav link       → append <a href="#id"> inside <nav> AND <a> inside .nav-mobile
+    - Edit hero text     → h1 + .hero-sub + .hero-eyebrow inside section#home (~line 597)
+    - Add table row      → <tr> inside .compare tbody; use .badge-yes/.badge-no in cells
     - Add source buttons → use SOURCES_BLOCK_PATTERN above
+    - Add timeline item  → <div class="timeline-item"> inside .timeline; add .highlight for emphasis
+    - Add intent cards   → <div class="intent-grid"> containing .intent-card.intent-yes/no pairs
+    - Add policy quote   → <div class="policy-quote"><blockquote>…</blockquote><cite>…</cite></div>
 
   HOVER_RULE (PERMANENT — applies to ALL card/block sections):
     - Every card-style component (.point-block, .accord-tier, and any future card class)
@@ -105,7 +126,8 @@ FILE_META_START
     - :hover must override: bg, border, every child text color (title, body, badges, icons,
       source-btns). Do not forget .source-btn and svg strokes inside hovered cards.
     - Colored badge hover: lighten the tier/accent color so it stays readable on dark bg
-      (e.g. dublin red #c0392b → hover #e87a6a).
+      (e.g. dublin red #c0392b → hover #e87a6a; sydney amber #c47f17 → hover #e8a83a;
+       wash green #1a6b3a → hover #4aad7a).
 FILE_META_END
 -->
 <!DOCTYPE html>
@@ -946,13 +968,13 @@ footer strong{
     </div>
 
     <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-      <a class="source-btn" href="https://www.buet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://admissioncuet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>CUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://admission.kuet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>KUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://admission.ruet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>RUET ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://www.mist.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>MIST ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://www.butex.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUTEX ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://admission.sust.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>SUST ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="buet_circular.pdf" download="buet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>BUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="cuet_circular.pdf" download="cuet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="kuet_circular.pdf" download="kuet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>KUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="ruet_circular.pdf" download="ruet_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>RUET ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="mist_circular.pdf" download="mist_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>MIST ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="butex_circular.pdf" download="butex_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>BUTEX ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="sust_circular.pdf" download="sust_circular.pdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>SUST ভর্তি বিজ্ঞপ্তি</a>
     </div>
 
   </div>
