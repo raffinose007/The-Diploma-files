@@ -285,6 +285,13 @@ FILE_META_END
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- ANTI-FLASH: apply theme before first paint -->
+<script>
+(function(){
+  if(localStorage.getItem('df-theme')==='dark')
+    document.documentElement.setAttribute('data-theme','dark');
+})();
+</script>
 <style>
 /* === RESET & ROOT === */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -819,6 +826,8 @@ footer strong{
   }
   nav a{display:none}
   .nav-hamburger{display:flex}
+  .nav-brand{margin-right:0}
+  .theme-toggle{margin-left:10px;margin-right:auto}
   .section-wrap{padding:36px 18px}
   .accent-block{padding:22px 20px}
   .compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);
@@ -850,6 +859,162 @@ footer strong{
   .accord-tier{padding:14px 14px}
   h2{font-size:24px}
 }
+
+/* ============================================
+   DARK MODE TOGGLE BUTTON
+   ============================================ */
+.theme-toggle{
+  display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:rgba(192,144,90,0.12);border:1px solid rgba(192,144,90,0.22);
+  cursor:pointer;transition:background .22s,border-color .22s,transform .22s;
+  margin-left:6px;
+}
+.theme-toggle:hover{background:rgba(192,144,90,0.24);border-color:rgba(192,144,90,0.44);transform:rotate(20deg)}
+.theme-toggle svg{width:16px;height:16px;stroke:var(--brown-warm);fill:none;stroke-width:2;flex-shrink:0;transition:opacity .2s}
+.theme-toggle .icon-moon{display:block}
+.theme-toggle .icon-sun{display:none}
+
+/* ============================================
+   DARK MODE — variable overrides
+   ============================================ */
+[data-theme="dark"]{
+  --cream:#0f0804;
+  --cream-dark:#1e1008;
+  --text-dark:#f0e8d8;
+  --text-body:#c8b898;
+  --text-muted:#8a6a48;
+  --brown-light:#6a4a28;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.3),0 3px 10px rgba(0,0,0,.22);
+  --shadow-card:0 2px 8px rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.28);
+}
+
+/* Dark: body & page */
+[data-theme="dark"] body{background:var(--cream);color:var(--text-body)}
+
+/* Dark: hero */
+[data-theme="dark"] #home{
+  background:linear-gradient(160deg,#1a0e07 0%,#160b05 55%,#110803 100%);
+  border-top-color:#5a2d0c;border-bottom-color:#5a2d0c;
+}
+[data-theme="dark"] #home::before,
+[data-theme="dark"] #home::after{opacity:.05}
+[data-theme="dark"] .hero-deco-gear{opacity:.04}
+[data-theme="dark"] .hero-stat-num{color:var(--text-dark)}
+[data-theme="dark"] .hero-stats{
+  background:rgba(192,144,90,0.05);
+  border-color:rgba(192,144,90,0.1);
+}
+[data-theme="dark"] .hero-stat{border-right-color:rgba(192,144,90,0.08)}
+[data-theme="dark"] .hero-stat:last-child{border-right:none}
+[data-theme="dark"] .hero-scroll{color:rgba(192,144,90,0.4)}
+[data-theme="dark"] #home h1{color:#f0e8d8}
+[data-theme="dark"] .hero-eyebrow{color:#8a6a48}
+[data-theme="dark"] .hero-sub{color:#a08060}
+
+/* Dark: nav (already dark; tweak active/hover) */
+[data-theme="dark"] nav{background:rgba(10,5,2,0.97);border-bottom-color:rgba(192,144,90,0.12)}
+[data-theme="dark"] .nav-mobile{background:rgba(8,4,1,0.98)}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+
+/* Dark: sections alternate bg */
+[data-theme="dark"] #slide3,
+[data-theme="dark"] #slide5{background:rgba(20,10,4,0.8)}
+[data-theme="dark"] #slide7{background:rgba(18,9,3,0.6)}
+
+/* Dark: section label */
+[data-theme="dark"] .section-label{
+  background:rgba(192,144,90,0.07);
+  border-color:rgba(192,144,90,0.14);
+}
+
+/* Dark: cards — point-block */
+[data-theme="dark"] .point-block{
+  background:#1a0d04;border-color:#2a1808;
+}
+[data-theme="dark"] .point-block:hover{background:#0a0401;border-color:#0a0401}
+[data-theme="dark"] .point-icon{background:rgba(192,144,90,0.07);border-color:rgba(192,144,90,0.13)}
+
+/* Dark: callout */
+[data-theme="dark"] .callout{
+  background:linear-gradient(to right,rgba(192,144,90,0.06),rgba(192,144,90,0.01));
+  border-color:rgba(192,144,90,0.14);border-left-color:var(--brown-warm);
+}
+[data-theme="dark"] .callout p{color:var(--text-body)}
+
+/* Dark: accent-block (already dark; lighten slightly) */
+[data-theme="dark"] .accent-block{background:#1e0e04;box-shadow:0 6px 28px rgba(0,0,0,.4)}
+
+/* Dark: accord tiers */
+[data-theme="dark"] .accord-tier{background:#1a0d04;border-color:#2a1808}
+[data-theme="dark"] .accord-tier:hover{background:#0a0401;border-color:#0a0401}
+[data-theme="dark"] .accord-num{color:#2e1a08}
+[data-theme="dark"] .accord-name{color:var(--text-dark)}
+[data-theme="dark"] .accord-name span{color:var(--text-muted)}
+[data-theme="dark"] .accord-body .prose p{color:var(--text-body)}
+
+/* Dark: accord badges */
+[data-theme="dark"] .tier-dublin .accord-badge{background:rgba(192,57,43,.14);color:#e87a6a;border-color:rgba(192,57,43,.28)}
+[data-theme="dark"] .tier-sydney .accord-badge{background:rgba(196,127,23,.14);color:#e8a83a;border-color:rgba(196,127,23,.28)}
+[data-theme="dark"] .tier-wash .accord-badge{background:rgba(26,107,58,.14);color:#4aad7a;border-color:rgba(26,107,58,.28)}
+
+/* Dark: accord summary table */
+[data-theme="dark"] .accord-summary{border-color:#2a1808}
+[data-theme="dark"] .accord-summary tbody tr:nth-child(odd){background:#1a0d04}
+[data-theme="dark"] .accord-summary tbody tr:nth-child(even){background:#160a03}
+[data-theme="dark"] .accord-summary td{border-bottom-color:#2a1808;color:var(--text-body)}
+[data-theme="dark"] .accord-summary td:first-child{color:var(--text-dark)}
+[data-theme="dark"] .accord-closing{background:rgba(26,13,4,0.6);border-color:#2a1808;color:var(--text-body)}
+[data-theme="dark"] .accord-closing strong{color:var(--text-dark)}
+
+/* Dark: compare table */
+[data-theme="dark"] .compare td{background:#1a0d04;border-bottom-color:#2a1808;color:var(--text-body)}
+[data-theme="dark"] .compare td:first-child{background:rgba(26,13,4,0.7);color:var(--text-dark)}
+[data-theme="dark"] .compare th{background:rgba(192,144,90,0.07);border-bottom-color:#2a1808;color:var(--text-muted)}
+
+/* Dark: source buttons */
+[data-theme="dark"] .source-btn{
+  background:#1a0d04;border-color:#2e1a08;color:var(--brown-warm);box-shadow:none;
+}
+[data-theme="dark"] .source-btn:hover{background:#2a1505;border-color:var(--brown-warm);color:#f0e8d8}
+
+/* Dark: tags */
+[data-theme="dark"] .tag{background:rgba(192,144,90,0.08);border-color:rgba(192,144,90,0.18);color:var(--brown-warm)}
+
+/* Dark: intent cards */
+[data-theme="dark"] .intent-card{background:#1a0d04;border-color:#2a1808}
+[data-theme="dark"] .intent-card-text{color:var(--text-body)}
+
+/* Dark: policy quote */
+[data-theme="dark"] .policy-quote{background:#1e0e04}
+
+/* Dark: timeline */
+[data-theme="dark"] .timeline::before{background:linear-gradient(to bottom,var(--brown-warm),#2a1808)}
+[data-theme="dark"] .timeline-title{color:var(--text-dark)}
+
+/* Dark: divider */
+[data-theme="dark"] .divider{background:linear-gradient(to right,transparent,#2a1808 15%,#2a1808 85%,transparent)}
+
+/* Dark: footer */
+[data-theme="dark"] footer{background:#07030100;background-color:#080402;border-top-color:rgba(192,144,90,0.08)}
+
+/* Dark: back-to-top */
+[data-theme="dark"] .back-top{background:#1a0d04;border-color:rgba(192,144,90,0.2)}
+[data-theme="dark"] .back-top:hover{background:#2a1505}
+
+/* Dark: progress bar stays the same warm gold */
+
+/* Dark: prose links */
+[data-theme="dark"] .prose a{color:var(--brown-warm)}
+
+/* Smooth theme transition */
+body,nav,.section-wrap,section,.point-block,.accord-tier,.callout,.accent-block,
+.compare td,.compare th,.accord-summary td,.intent-card,.source-btn,.tag,.divider,
+footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
+  transition-property:background,background-color,border-color,color,box-shadow;
+  transition-duration:.3s;transition-timing-function:ease;
+}
 </style>
 </head>
 <body>
@@ -864,6 +1029,12 @@ footer strong{
   <a href="#slide6">পলিটেকনিক</a>
   <a href="#slide7">BSc যাত্রা</a>
   <a href="#slide8">HSC সংগ্রাম</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <!-- moon icon (shown in light mode) -->
+    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <!-- sun icon (shown in dark mode) -->
+    <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
   <button class="nav-hamburger" id="hamburger" aria-label="মেনু খুলুন" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1382,6 +1553,28 @@ footer strong{
 
 <script>
 (function(){
+  /* --- theme: apply saved preference only --- */
+  if(localStorage.getItem('df-theme')==='dark'){
+    document.documentElement.setAttribute('data-theme','dark');
+  }
+
+  /* --- theme toggle button --- */
+  var themeBtn = document.getElementById('themeToggle');
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var isDark = document.documentElement.getAttribute('data-theme')==='dark';
+      if(isDark){
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('df-theme','light');
+        themeBtn.setAttribute('aria-label','Switch to dark mode');
+      } else {
+        document.documentElement.setAttribute('data-theme','dark');
+        localStorage.setItem('df-theme','dark');
+        themeBtn.setAttribute('aria-label','Switch to light mode');
+      }
+    });
+  }
+
   /* --- hamburger --- */
   var btn = document.getElementById('hamburger');
   var menu = document.getElementById('navMobile');
