@@ -2,12 +2,13 @@
 FILE_META_START
   project       : The Diploma Files
   lang          : bn (Bengali) + en
-  last_updated  : 2026-05-08
-  meta_upgraded : 2026-05-08   ← line numbers, color values & new entries verified against source
-  fonts         : Playfair Display (headings, serif), Source Sans 3 (body, sans)
-  next_slide_id : slide15  ← always increment this when adding a new section
+  last_updated  : 2026-05-09
+  meta_upgraded : 2026-05-09   ← section reorder, slide16 (DUET) added, all labels/nav renumbered §01–§16
 
-  COLOR_VARS (:root block at line 135; ⚠ hero-bg & hero-bar are hardcoded in #home, NOT in :root):
+  fonts         : Playfair Display (headings, serif), Source Sans 3 (body, sans)
+  next_slide_id : slide18  ← always increment this when adding a new section
+
+  COLOR_VARS (:root block ~line 340; ⚠ hero-bg & hero-bar are hardcoded in #home, NOT in :root):
     --brown-deep   #3b1a06   footer bg, accent-block bg, dark hover bg, policy-quote bg
     --brown-rich   #5a2d0c   (legacy, unused — defined in :root but referenced nowhere)
     --brown-mid    #7a4a1a   subheadings, links, section labels, source-btn text
@@ -19,58 +20,73 @@ FILE_META_START
     --text-body    #4a3020   body prose
     --text-muted   #7a5a3a   muted prose, timeline-desc, intent-card-text
     --tier-dublin  #c0392b   Dublin Accord left-bar & badge (technician / red)
-    --tier-sydney  #c47f17   Sydney Accord left-bar & badge (technologist / amber) ← was #d68910 in old meta
+    --tier-sydney  #c47f17   Sydney Accord left-bar & badge (technologist / amber)
     --tier-wash    #1a6b3a   Washington Accord left-bar & badge (engineer / green)
     [hardcoded]  #ede8df   hero background (--hero-bg, not in :root)
     [hardcoded]  #3d1f0d   hero top/bottom bars & nav background (--hero-bar, not in :root)
 
-  LAYOUT_SECTIONS (id → actual line — verified 2026-05-08):
-    #home         hero fullscreen                        ~line 1164
-    #slide2       Who are Engineers?                     ~line 1200
-    #slide3       The Washington Accord                  ~line 1226
-    #slide4       Three International Accords            ~line 1275
-    #slide5       Diploma vs BSc + conclusion            ~line 1362
-    #slide6       Polytechnic origin & purpose           ~line 1426
-    #slide7       BSc engineering admission struggle     ~line 1461
-    #slide8       HSC student struggles                  ~line 1579
-    #slide9       BSc 4-Year Journey                     ~line 1666
-    #slide10      Diploma vs HSC vs BSc Syllabus Comparison ~line 1727
-    #slide11      College Merit Ladder & Polytechnic        ~line 1838
-    #slide13      Coaching Teacher Misinformation + Video   ~line 1929
-    #slide14      Double Certificate Trap (BSc/Diploma govt jobs) ~line 2055
+  LAYOUT_SECTIONS (id → logical section order, last reordered 2026-05-09):
+  ┌─────────────────────────────────────────────────────────────────────────────────┐
+  │  #id       § Label    Title (Bengali)                         Narrative purpose │
+  ├─────────────────────────────────────────────────────────────────────────────────┤
+  │  #home     §00        Hero                                    Entry / hook      │
+  │  #slide6   §01        পলিটেকনিক কেন তৈরি হয়েছিল?          Origin/context    │
+  │  #slide2   §02        Engineers: প্রকৌশলী আসলে কারা?        Define the term   │
+  │  #slide3   §03        The Washington Accord                   Int'l standard    │
+  │  #slide4   §04        তিনটি আন্তর্জাতিক অ্যাকর্ড           Full 3-tier frame │
+  │  #slide5   §05        Diploma vs BSc Engineering              Direct comparison │
+  │  #slide10  §06        তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ       Syllabus deep dive│
+  │  #slide11  §07        কলেজ মেরিট লাডার ও পলিটেকনিক         Social reality    │
+  │  #slide7   §08        BSc ইঞ্জিনিয়ার হতে কী লাগে?         BSc path/cost     │
+  │  #slide8   §09        HSC শিক্ষার্থীদের সংগ্রাম            Human sacrifice   │
+  │  #slide9   §10        একজন BSc ইঞ্জিনিয়ারের চার বছর       The 4-yr journey  │
+  │  #slide12  §11        ধাপে ধাপে দখল (Timeline)              How capture began │
+  │  #slide14  §12        দুই সার্টিফিকেটের ফাঁদ               Job market trap   │
+  │  #slide16  §13        DUET — রাষ্ট্রীয় দখল                 University capture│
+  │  #slide13  §14        কোচিং শিক্ষকের ভুল তথ্য              Misinformation    │
+  │  #slide15  §15        SSC পাস করে "Engr."                    Title misuse      │
+  │  #slide17  §16        রায় — এটা দখল, আন্দোলন নয়            Final verdict     │
+  │  #faq      §17        প্রায়শই জিজ্ঞাসিত প্রশ্ন (FAQ)       Resolution/ref    │
+  └─────────────────────────────────────────────────────────────────────────────────┘
 
-  CSS_BLOCKS (style tag → actual line — verified 2026-05-08):
-    reset + *          ~line 133
-    :root vars         ~line 135–149
-    html / body        ~line 151–152
-    nav                ~line 154–222   (desktop links + hamburger + mobile dropdown)
-    hero (#home)       ~line 224–274   (incl. ::before/::after decorations & @keyframes bounce)
-    sections/prose     ~line 276–316   (section-wrap, section-label, h2, .bn subtitle, .prose, .prose a)
-    callout            ~line 301–312
-    prose links        ~line 314–316
-    accent-block       ~line 318–328
-    tag-row / pills    ~line 330–337
-    compare table      ~line 339–352   (incl. .badge-yes / .badge-no)
-    point-blocks       ~line 354–373   (incl. hover state & .point-icon / .point-title / .point-text)
-    accord tiers       ~line 375–412   (incl. all hover overrides & ::before colored bars)
-    source buttons     ~line 414–435   (incl. .source-btn-inline & .accord-source:display:none)
-    accord-summary     ~line 437–463   (incl. .accord-closing)
-    divider / footer   ~line 465–484
-    timeline           ~line 486–496
-    policy-quote       ~line 498–503
-    intent-grid/card   ~line 505–513
-    responsive @900px  ~line 516–532
-    responsive @1280px ~line 533–542   (accord-stack becomes row; accordion-tier reflows to col)
-    responsive @640px  ~line 544–557   (hamburger visible; nav links hidden)
+  NOTE: Section IDs (slide2, slide3 …) are legacy non-sequential. Do NOT renumber them —
+  they are used by JS translation swaps and external links. Only §NN labels change.
+
+  CSS_BLOCKS (style tag → approximate line in current file):
+    reset + *          ~line 336
+    :root vars         ~line 338–354
+    html / body        ~line 356–358
+    nav                ~line 360–480   (desktop scrollable strip + hamburger + mobile dropdown)
+    hero (#home)       ~line 482–550   (incl. ::before/::after decorations & @keyframes bounce)
+    sections/prose     ~line 552–600   (section-wrap, section-label, h2, .bn subtitle, .prose, .prose a)
+    callout            ~line 575–590
+    accent-block       ~line 592–615
+    tag-row / pills    ~line 617–630
+    compare table      ~line 632–660   (incl. .badge-yes / .badge-no)
+    point-blocks       ~line 662–695   (incl. hover state & .point-icon / .point-title / .point-text)
+    accord tiers       ~line 697–750   (incl. all hover overrides & ::before colored bars)
+    source buttons     ~line 752–780   (incl. .source-btn-inline & .accord-source:display:none)
+    accord-summary     ~line 782–820   (incl. .accord-closing)
+    divider / footer   ~line 822–860
+    timeline           ~line 862–880
+    policy-quote       ~line 882–895
+    intent-grid/card   ~line 897–915
+    responsive @900px  ~line 876–906
+    responsive @1280px ~line 907–930   (accord-stack becomes row; accordion-tier reflows to col)
+    responsive @640px  ~line 931–960   (hamburger visible; nav links hidden)
+    dark mode vars     ~line 1000–1210
+    dibba widget       ~line 1139–1196
+    video player       ~line 1210–1236
+    faq styles         ~line 1577–1640
 
   KEY_CLASSES:
     .section-wrap        max-width:860px centered container (1180px @900px+, 1520px @1280px+)
-    .section-label       small uppercase pill label above each h2
+    .section-label       small uppercase pill label above each h2 — format: "Section NN · Topic"
     .prose               body text block (15.5px, line-height 1.6)
     .callout             left-bordered (#brown-warm) card for key points
     .accent-block        dark bg (#brown-deep) block for strong emphasis; h3 in brown-warm
     .tag-row / .tag      pill tag row for keyword chips
-    .compare             comparison table (red col 2, green col 3)
+    .compare             comparison table (red col 2, green col 3) — wrap in .compare-wrap on mobile
     .badge-yes/no        inline colored labels inside .compare cells
     .point-grid          flex-col mobile, 2-col grid @900px+; use for card lists
     .point-block         icon + title + text card → HOVER: black bg, white text (see HOVER_RULE)
@@ -88,45 +104,36 @@ FILE_META_START
     .intent-grid         2-col grid (@640px collapses to 1-col) for intent-card pairs
     .intent-card         card with colored top border; modifiers: .intent-no (red), .intent-yes (green)
     .footer-tagline      muted uppercase tagline below footer copyright
-    .nav-hamburger       3-bar toggle button (visible @≤1099px — raised from 640px when nav links exceeded 10); .open → X animation
+    .nav-hamburger       3-bar toggle button (visible @≤640px); .open → X animation
     .nav-mobile          slide-down mobile menu; .open → visible; links auto-close on tap
+    .dibba-btn           bilingual toggle button (fixed bottom-left); .bn-active → green state
+    .faq-item            <details> accordion item; .faq-q = <summary>; .faq-a = answer body
 
-  NAV_LINKS (desktop + mobile — keep both in sync):
+  NAV_LINKS (desktop .nav-scroll + .nav-mobile — always keep both in sync):
     #home      Home
-    #slide2    Engineers          / Section 01 — Engineers
-    #slide3    Washington Accord  / Section 02 — Washington Accord
-    #slide4    তিনটি অ্যাকর্ড    / Section 03 — তিনটি অ্যাকর্ড
-    #slide5    Diploma vs BSc     / Section 04 — Diploma vs BSc
-    #slide6    পলিটেকনিক         / Section 05 — পলিটেকনিক কেন তৈরি হয়েছিল?
-    #slide7    BSc যাত্রা         / Section 06 — BSc ইঞ্জিনিয়ার হতে কী লাগে?
-    #slide8    HSC সংগ্রাম        / Section 07 — HSC শিক্ষার্থীদের সংগ্রাম
-    #slide9    BSc ৪ বছর         / Section 08 — একজন BSc ইঞ্জিনিয়ারের চার বছর
-    #slide10   সিলেবাস তুলনা    / Section 09 — তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ
-    #slide11   কলেজ মেরিট       / Section 10 — ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে
-    #slide13   ভুল তথ্য         / Section 12 — কোচিং শিক্ষকের ভুল তথ্য: Cross-Section এর সংজ্ঞা
-    #slide14   চাকরির ফাঁদ      / Section 13 — দুই সার্টিফিকেটের ফাঁদ: ডিপ্লোমা দিয়ে ঢোকা, BSc দিয়ে পদোন্নতি
+    #slide6    পলিটেকনিক              [§01]
+    #slide2    Engineers               [§02]
+    #slide3    Washington Accord       [§03]
+    #slide4    তিনটি অ্যাকর্ড         [§04]
+    #slide5    Diploma vs BSc          [§05]
+    #slide10   সিলেবাস তুলনা          [§06]
+    #slide11   কলেজ মেরিট             [§07]
+    #slide7    BSc যাত্রা              [§08]
+    #slide8    HSC সংগ্রাম             [§09]
+    #slide9    BSc ৪ বছর              [§10]
+    #slide12   আন্দোলনের ইতিহাস       [§11]
+    #slide14   চাকরির ফাঁদ            [§12]
+    #slide16   DUET দখল               [§13]
+    #slide13   ভুল তথ্য               [§14]
+    #slide15   মুখোশ উন্মোচন          [§15]
+    #faq       FAQ                     [§16]
 
-  SOURCES_BLOCK_PATTERN:
-    Wrap multiple source buttons in:
-    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-      <a class="source-btn" href="URL" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Label</a>
-    </div>
-
-  DESKTOP BREAKPOINTS:
-    @900px+  2-col .point-grid, wider .section-wrap (1180px), .accord-tier larger padding/fonts
-    @1280px+ .accord-stack → row, 3-up cards; section-wrap 1520px; hero-logo 250×220px
-
-  QUICK_EDIT_GUIDE:
-    - Add a new section  → copy section#slideN pattern; increment next_slide_id above;
-                           add nav link in BOTH <nav> and .nav-mobile; update LAYOUT_SECTIONS
-    - Change brand color → update --brown-warm in :root (propagates to all accent uses)
-    - Add nav link       → append <a href="#id"> inside <nav> AND <a> inside .nav-mobile
-    - Edit hero text     → h1 + .hero-sub + .hero-eyebrow inside section#home (~line 597)
-    - Add table row      → <tr> inside .compare tbody; use .badge-yes/.badge-no in cells
-    - Add source buttons → use SOURCES_BLOCK_PATTERN above
-    - Add timeline item  → <div class="timeline-item"> inside .timeline; add .highlight for emphasis
-    - Add intent cards   → <div class="intent-grid"> containing .intent-card.intent-yes/no pairs
-    - Add policy quote   → <div class="policy-quote"><blockquote>…</blockquote><cite>…</cite></div>
+  ALTERNATING_BG_RULE (CSS — update when adding sections):
+    Odd §NN sections get rgba(232,224,208,0.35) background.
+    Currently: #slide3(§03), #slide7(§08→odd slot), #slide11(§07→odd slot),
+               #slide15(§15), #slide16(§13→odd slot)
+    ⚠ The CSS selector list is: #slide3,#slide7,#slide11,#slide15,#slide16
+    When adding slide17+, extend this list to maintain visual rhythm.
 
   HOVER_RULE (PERMANENT — applies to ALL card/block sections):
     - Every card-style component (.point-block, .accord-tier, and any future card class)
@@ -138,6 +145,27 @@ FILE_META_START
     - Colored badge hover: lighten the tier/accent color so it stays readable on dark bg
       (e.g. dublin red #c0392b → hover #e87a6a; sydney amber #c47f17 → hover #e8a83a;
        wash green #1a6b3a → hover #4aad7a).
+
+  SOURCES_BLOCK_PATTERN:
+    Wrap multiple source buttons in:
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="URL" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Label</a>
+    </div>
+
+  QUICK_EDIT_GUIDE:
+    - Add a new section  → copy section#slideN pattern; set id="slide17" (increment next_slide_id);
+                           add §NN nav link in BOTH .nav-scroll AND .nav-mobile; update LAYOUT_SECTIONS
+    - Change brand color → update --brown-warm in :root (propagates to all accent uses)
+    - Add nav link       → append <a href="#id"> inside .nav-scroll AND <a> inside .nav-mobile
+    - Edit hero text     → h1 + .hero-sub + .hero-eyebrow inside section#home (~line 1730)
+    - Add table row      → <tr> inside .compare tbody; use .badge-yes/.badge-no in cells
+    - Add source buttons → use SOURCES_BLOCK_PATTERN above
+    - Add timeline item  → <div class="timeline-item"> inside .timeline; add .highlight for emphasis
+    - Add intent cards   → <div class="intent-grid"> containing .intent-card.intent-yes/no pairs
+    - Add policy quote   → <div class="policy-quote"><blockquote>…</blockquote><cite>…</cite></div>
+    - Section label fmt  → <p class="section-label">Short Topic</p>  ← NO section numbers visible to user
+                           (§NN numbers live only in this metadata for internal reference)
+
 FILE_META_END
 -->
 <!DOCTYPE html>
@@ -189,7 +217,7 @@ FILE_META_END
 <meta property="og:locale:alternate" content="en_US">
 <meta property="article:author" content="প্রকৌশলী অধিকার আন্দোলন">
 <meta property="article:published_time" content="2026-05-08T00:00:00+06:00">
-<meta property="article:modified_time" content="2026-05-08T12:00:00+06:00">
+<meta property="article:modified_time" content="2026-05-09T12:00:00+06:00">
 <meta property="article:section" content="Engineering Education">
 <meta property="article:tag" content="Washington Accord">
 <meta property="article:tag" content="BAETE">
@@ -232,7 +260,7 @@ FILE_META_END
   "url": "https://raffinose007.github.io/The-Diploma-files/",
   "inLanguage": ["bn", "en"],
   "datePublished": "2026-05-08",
-  "dateModified": "2026-05-08",
+  "dateModified": "2026-05-09",
   "author": {
     "@type": "Organization",
     "name": "প্রকৌশলী অধিকার আন্দোলন",
@@ -286,6 +314,30 @@ FILE_META_END
         "@type": "Answer",
         "text": "ডাবলিন অ্যাকর্ড ২ বছরের ডিপ্লোমাধারী টেকনিশিয়ানদের স্বীকৃতি দেয়, সিডনি অ্যাকর্ড ৩ বছরের টেকনোলজি ডিগ্রিধারী টেকনোলজিস্টদের, এবং ওয়াশিংটন অ্যাকর্ড ৪ বছরের BSc ইঞ্জিনিয়ারিং ডিগ্রিধারী পেশাদার ইঞ্জিনিয়ারদের।"
       }
+    },
+    {
+      "@type": "Question",
+      "name": "BAETE অ্যাক্রেডিটেশন কী এবং কেন গুরুত্বপূর্ণ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "BAETE হলো বাংলাদেশের জাতীয় ইঞ্জিনিয়ারিং অ্যাক্রেডিটেশন বোর্ড এবং ওয়াশিংটন অ্যাকর্ডের পূর্ণ সদস্য। BAETE-অ্যাক্রেডিটেড BSc প্রোগ্রামের স্নাতকরা ২৫+ সদস্য দেশে আন্তর্জাতিকভাবে স্বীকৃত। ডিপ্লোমা প্রোগ্রাম BAETE অ্যাক্রেডিটেশনের আওতায় পড়ে না।"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Engr. উপাধি ব্যবহার করতে কী লাগে?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IEB-এর সদস্যতা পেতে এবং 'Engr.' উপাধি ব্যবহার করতে BAETE-অ্যাক্রেডিটেড ৪ বছরের BSc ইঞ্জিনিয়ারিং ডিগ্রি থাকতে হবে। ডিপ্লোমাধারীদের 'Engr.' ব্যবহার করার আইনগত অনুমতি নেই।"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "সরকারি চাকরিতে BSc ও ডিপ্লোমা ইঞ্জিনিয়ারদের পার্থক্য কী?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ডিপ্লোমাধারীরা সরাসরি ১০ম গ্রেডে Sub-Assistant Engineer (SAE) পদে নিয়োগ পান এবং ৩৩% কোটায় ৯ম গ্রেডে পদোন্নতির সুযোগ পান। BSc ইঞ্জিনিয়াররা ৯ম গ্রেডে BCS পরীক্ষার মাধ্যমে নিয়োগ পান কিন্তু ১০ম গ্রেডে আবেদন করতে পারেন না। গত ১০ বছরে BCS-এ মাত্র ৪৬৮টি Assistant Engineer পদ ছিল।"
+      }
     }
   ]
 }
@@ -324,8 +376,8 @@ FILE_META_END
   --radius:12px;
   --nav-h:54px;
 }
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 14px)}
-body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--text-body);line-height:1.58;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 14px);overflow-x:hidden;max-width:100%}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--text-body);line-height:1.58;overflow-x:hidden;max-width:100%;width:100%}
 
 /* === READING PROGRESS BAR === */
 #progress-bar{
@@ -455,7 +507,7 @@ nav a.active{color:var(--brown-warm);background:rgba(192,144,90,0.14)}
 }
 .hero-deco-gear{
   position:absolute;top:50%;right:80px;transform:translateY(-50%);
-  width:200px;height:200px;opacity:.07;pointer-events:none;
+  width:200px;height:200px;opacity:.07;pointer-events:none;overflow:hidden;
 }
 .hero-logo{
   width:220px;height:193px;object-fit:contain;margin-bottom:26px;
@@ -913,7 +965,7 @@ footer strong{
   .accent-block{padding:22px 20px}
   .compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);
     box-shadow:var(--shadow-sm);margin:16px 0}
-  .compare{display:table;font-size:13px;min-width:420px;margin:0;box-shadow:none}
+  .compare{display:table;font-size:13px;min-width:360px;margin:0;box-shadow:none}
   .compare th,.compare td{padding:9px 12px}
   .accord-tier{grid-template-columns:auto 1fr;grid-template-rows:auto auto}
   .accord-badge{grid-column:1/-1;justify-self:center;margin-top:16px}
@@ -927,8 +979,17 @@ footer strong{
   .source-btn{font-size:12px}
   .video-wrap .yt-short{max-width:280px}
   .accord-summary-wrap{margin:12px 0 0;border-radius:8px}
-  .accord-summary{min-width:380px;font-size:13.5px}
+  .accord-summary{min-width:320px;font-size:13.5px}
   .hero-deco-gear{right:20px;width:140px;height:140px}
+}
+
+/* === ANDROID / MOBILE OVERFLOW CONTAINMENT === */
+@media(max-width:899px){
+  html,body{overflow-x:hidden;width:100%;position:relative}
+  section,nav,.nav-mobile,footer{max-width:100vw;overflow-x:hidden}
+  .section-wrap{box-sizing:border-box;width:100%}
+  .hero-deco-gear{right:10px;width:100px;height:100px;clip:rect(0,100px,100px,0)}
+  .dl-grid{grid-template-columns:1fr 1fr}
 }
 
 /* === VERY SMALL (≤ 380px) === */
@@ -1379,6 +1440,255 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   transition-property:background,background-color,border-color,color,box-shadow;
   transition-duration:.3s;transition-timing-function:ease;
 }
+
+/* ══════════════════════════════════════════════
+   VISUAL IMPROVEMENTS v2 — 2026-05-09
+   ══════════════════════════════════════════════ */
+
+/* --- Subtle grain texture on body --- */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:.6;
+}
+
+/* --- Alternating section backgrounds for visual rhythm --- */
+#slide3,#slide7,#slide11,#slide15,#slide16,#slide17{background:rgba(232,224,208,0.35)}
+#slide2,#slide5,#slide8,#slide12,#slide14{background:transparent}
+
+/* --- Enhanced section separator --- */
+.divider{
+  border:none;height:0;
+  background:none;margin:0;opacity:1;
+  position:relative;
+}
+.divider::before{
+  content:'';display:block;
+  height:1px;
+  background:linear-gradient(to right,transparent,rgba(192,144,90,0.22) 20%,rgba(192,144,90,0.38) 50%,rgba(192,144,90,0.22) 80%,transparent);
+}
+.divider::after{
+  content:'◆';
+  display:block;text-align:center;
+  font-size:8px;color:rgba(192,144,90,0.4);
+  margin-top:-8px;line-height:1;
+  background:var(--cream);width:20px;margin-left:auto;margin-right:auto;
+}
+
+/* --- Section number badge enhancement --- */
+.section-label{
+  position:relative;
+}
+
+/* --- Animated count-up on hero stats --- */
+.hero-stat-num{
+  display:inline-block;
+}
+
+/* --- Hero sub tagline — more impactful --- */
+.hero-sub{
+  font-size:clamp(14px,1.9vw,19px);
+  color:#4a2f14;
+  max-width:560px;
+  font-style:italic;
+}
+
+/* --- h2 bottom accent line --- */
+h2{
+  padding-bottom:14px;
+  position:relative;
+}
+h2::after{
+  content:'';display:block;
+  width:36px;height:3px;
+  background:linear-gradient(to right,var(--brown-warm),rgba(192,144,90,0.2));
+  border-radius:2px;
+  margin-top:12px;
+}
+
+/* --- Point blocks — richer cards --- */
+.point-block{
+  position:relative;overflow:hidden;
+}
+.point-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--brown-warm),transparent);
+  opacity:0;transition:opacity .22s;
+}
+.point-block:hover::before{opacity:1}
+
+/* --- Callout — stronger left bar with gradient --- */
+.callout{
+  border-left:4px solid var(--brown-warm);
+  background:linear-gradient(135deg,rgba(192,144,90,0.08) 0%,rgba(192,144,90,0.02) 60%,transparent 100%);
+  position:relative;overflow:hidden;
+}
+.callout::after{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:100px;height:100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,144,90,0.07),transparent 70%);
+  pointer-events:none;
+}
+
+/* --- Accent block — richer gradient + subtle border --- */
+.accent-block{
+  background:linear-gradient(135deg,#2a1208 0%,#3b1a06 55%,#2a1208 100%);
+  border:1px solid rgba(192,144,90,0.14);
+  position:relative;overflow:hidden;
+}
+.accent-block::before{
+  content:'';position:absolute;top:-50%;right:-20%;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,144,90,0.07),transparent 70%);
+  pointer-events:none;
+}
+
+/* --- Accord tier cards — richer hover + depth --- */
+.accord-tier{
+  box-shadow:0 2px 12px rgba(59,26,6,0.07),0 6px 28px rgba(59,26,6,0.04);
+  position:relative;overflow:hidden;
+}
+.accord-tier::after{
+  content:'';position:absolute;bottom:0;right:0;
+  width:80px;height:80px;
+  background:radial-gradient(circle at 100% 100%,rgba(192,144,90,0.06),transparent 70%);
+  pointer-events:none;
+}
+
+/* --- Source buttons — hover lift effect --- */
+.source-btn{
+  transform:translateY(0);
+  transition:background .22s,color .22s,transform .18s,box-shadow .18s;
+}
+.source-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 14px rgba(59,26,6,0.13);
+}
+
+/* --- Tags — micro-animation on hover --- */
+.tag{
+  transition:background .18s,border-color .18s,transform .15s;
+}
+.tag:hover{
+  transform:translateY(-1px);
+}
+
+/* --- Timeline dot — glow on hover --- */
+.timeline-item:hover .timeline-dot{
+  box-shadow:0 0 0 4px rgba(192,144,90,0.25),0 0 12px rgba(192,144,90,0.35);
+  transition:box-shadow .22s;
+}
+
+/* --- Table — row hover highlight --- */
+.compare tbody tr,.accord-summary tbody tr{
+  transition:background .18s;
+}
+.compare tbody tr:hover{background:rgba(192,144,90,0.06)!important}
+.accord-summary tbody tr:hover{background:rgba(192,144,90,0.06)!important}
+
+/* --- Back to top button — stronger style --- */
+.back-top{
+  background:linear-gradient(135deg,var(--brown-deep),#2a1208);
+  border:1.5px solid rgba(192,144,90,0.35);
+}
+.back-top:hover{
+  background:linear-gradient(135deg,#1a0d04,var(--brown-deep));
+  transform:translateY(-4px);
+}
+
+/* --- FAQ section --- */
+#faq{background:rgba(241,236,226,0.5)}
+.faq-list{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.faq-item{
+  border:1px solid var(--cream-dark);border-radius:var(--radius);
+  overflow:hidden;background:#fff;box-shadow:var(--shadow-sm);
+  transition:box-shadow .22s,border-color .22s;
+}
+.faq-item:hover{
+  border-color:rgba(192,144,90,0.4);
+  box-shadow:0 4px 18px rgba(59,26,6,0.09);
+}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 20px;cursor:pointer;
+  font-size:15px;font-weight:600;color:var(--text-dark);
+  user-select:none;
+  list-style:none;
+}
+.faq-q::marker,.faq-q::-webkit-details-marker{display:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-icon{
+  width:20px;height:20px;flex-shrink:0;
+  border-radius:50%;background:rgba(192,144,90,0.12);
+  border:1px solid rgba(192,144,90,0.25);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .25s;
+}
+.faq-icon svg{width:12px;height:12px;stroke:var(--brown-warm);fill:none;stroke-width:2.5;transition:transform .25s}
+details.faq-item[open] .faq-icon{background:var(--brown-warm)}
+details.faq-item[open] .faq-icon svg{stroke:#fff;transform:rotate(180deg)}
+.faq-a{
+  padding:0 20px 16px;
+  font-size:14.5px;color:var(--text-body);line-height:1.65;
+  border-top:1px solid var(--cream-dark);
+  padding-top:14px;
+}
+[data-theme="dark"] .faq-item{background:#1a0d04;border-color:rgba(192,144,90,0.12)}
+[data-theme="dark"] .faq-a{border-top-color:rgba(192,144,90,0.1)}
+
+/* --- Share strip --- */
+.share-strip{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:rgba(192,144,90,0.06);border:1px solid rgba(192,144,90,0.18);
+  border-radius:var(--radius);padding:14px 18px;margin-top:22px;
+}
+.share-label{
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brown-warm);flex-shrink:0;
+}
+.share-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;
+  text-decoration:none;cursor:pointer;border:none;
+  background:#fff;color:var(--brown-mid);border:1px solid var(--cream-dark);
+  transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:var(--shadow-sm);
+}
+.share-btn:hover{
+  transform:translateY(-2px);box-shadow:0 4px 14px rgba(59,26,6,0.12);
+  background:var(--brown-deep);color:var(--cream);border-color:var(--brown-deep);
+}
+.share-btn svg{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2}
+[data-theme="dark"] .share-btn{background:#1a0d04;border-color:rgba(192,144,90,0.2);color:var(--brown-warm)}
+
+/* --- Footer improvements --- */
+footer{
+  background:linear-gradient(160deg,#2a1208 0%,#1a0a04 55%,#0d0502 100%);
+}
+.footer-inner{position:relative;z-index:1}
+.footer-accord-badges{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0 16px;
+}
+.footer-accord-badge{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 11px;border-radius:20px;border:1px solid;
+}
+.footer-accord-badge.red{color:#e87a6a;border-color:rgba(192,57,43,0.35);background:rgba(192,57,43,0.08)}
+.footer-accord-badge.amber{color:#e8a83a;border-color:rgba(196,127,23,0.35);background:rgba(196,127,23,0.08)}
+.footer-accord-badge.green{color:#4aad7a;border-color:rgba(26,107,58,0.35);background:rgba(26,107,58,0.08)}
+
+/* --- Dark mode FAQ & tables --- */
+[data-theme="dark"] .compare tbody tr:nth-child(odd){background:rgba(26,13,4,0.6)}
+[data-theme="dark"] .accord-summary tbody tr:nth-child(odd){background:rgba(26,13,4,0.6)}
+[data-theme="dark"] .accord-summary tbody tr:nth-child(even){background:rgba(15,8,4,0.6)}
+[data-theme="dark"] h2::after{background:linear-gradient(to right,var(--brown-warm),transparent)}
+[data-theme="dark"] .divider::after{background:var(--cream)}
+
+/* --- Mobile share strip --- */
+@media(max-width:640px){
+  .share-strip{gap:8px}
+  .share-btn{font-size:11px;padding:5px 11px}
+}
 </style>
 </head>
 <body>
@@ -1387,20 +1697,23 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   <span class="nav-brand">The Diploma Files</span>
   <div class="nav-scroll" id="navScroll">
     <a href="#home">Home</a>
+    <a href="#slide6">পলিটেকনিক</a>
     <a href="#slide2">Engineers</a>
     <a href="#slide3">Washington Accord</a>
     <a href="#slide4">তিনটি অ্যাকর্ড</a>
     <a href="#slide5">Diploma vs BSc</a>
-    <a href="#slide6">পলিটেকনিক</a>
+    <a href="#slide10">সিলেবাস তুলনা</a>
+    <a href="#slide11">কলেজ মেরিট</a>
     <a href="#slide7">BSc যাত্রা</a>
     <a href="#slide8">HSC সংগ্রাম</a>
     <a href="#slide9">BSc ৪ বছর</a>
-    <a href="#slide10">সিলেবাস তুলনা</a>
-    <a href="#slide11">কলেজ মেরিট</a>
     <a href="#slide12">আন্দোলনের ইতিহাস</a>
-    <a href="#slide13">ভুল তথ্য</a>
     <a href="#slide14">চাকরির ফাঁদ</a>
+    <a href="#slide16">DUET দখল</a>
+    <a href="#slide13">ভুল তথ্য</a>
     <a href="#slide15">মুখোশ উন্মোচন</a>
+    <a href="#slide17">রায়</a>
+    <a href="#faq">FAQ</a>
   </div>
   <div class="nav-controls">
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -1417,20 +1730,23 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
 
 <div class="nav-mobile" id="navMobile" aria-hidden="true">
   <a href="#home" class="nav-mobile-link">🏠 Home</a>
-  <a href="#slide2" class="nav-mobile-link">Section 01 — Engineers</a>
-  <a href="#slide3" class="nav-mobile-link">Section 02 — Washington Accord</a>
-  <a href="#slide4" class="nav-mobile-link">Section 03 — তিনটি অ্যাকর্ড</a>
-  <a href="#slide5" class="nav-mobile-link">Section 04 — Diploma vs BSc</a>
-  <a href="#slide6" class="nav-mobile-link">Section 05 — পলিটেকনিক কেন তৈরি হয়েছিল?</a>
-  <a href="#slide7" class="nav-mobile-link">Section 06 — BSc ইঞ্জিনিয়ার হতে কী লাগে?</a>
-  <a href="#slide8" class="nav-mobile-link">Section 07 — HSC শিক্ষার্থীদের সংগ্রাম</a>
-  <a href="#slide9" class="nav-mobile-link">Section 08 — একজন BSc ইঞ্জিনিয়ারের চার বছর</a>
-  <a href="#slide10" class="nav-mobile-link">Section 09 — তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ</a>
-  <a href="#slide11" class="nav-mobile-link">Section 10 — ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে</a>
-  <a href="#slide12" class="nav-mobile-link">Section 11 — ধাপে ধাপে দখল: একটি আন্দোলনের ইতিহাস</a>
-  <a href="#slide13" class="nav-mobile-link">Section 12 — কোচিং শিক্ষকের ভুল তথ্য: Cross-Section এর সংজ্ঞা</a>
-  <a href="#slide14" class="nav-mobile-link">Section 13 — দুই সার্টিফিকেটের ফাঁদ: ডিপ্লোমা দিয়ে ঢোকা, BSc দিয়ে পদোন্নতি</a>
-  <a href="#slide15" class="nav-mobile-link">Section 14 — SSC পাস করে "Engr." — সাহস আছে বটে!</a>
+  <a href="#slide6" class="nav-mobile-link">পলিটেকনিক কেন তৈরি হয়েছিল?</a>
+  <a href="#slide2" class="nav-mobile-link">Engineers: প্রকৌশলী আসলে কারা?</a>
+  <a href="#slide3" class="nav-mobile-link">Washington Accord কী?</a>
+  <a href="#slide4" class="nav-mobile-link">তিনটি আন্তর্জাতিক অ্যাকর্ড</a>
+  <a href="#slide5" class="nav-mobile-link">Diploma vs BSc Engineering</a>
+  <a href="#slide10" class="nav-mobile-link">তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ</a>
+  <a href="#slide11" class="nav-mobile-link">কলেজ মেরিট লাডার ও পলিটেকনিক</a>
+  <a href="#slide7" class="nav-mobile-link">BSc ইঞ্জিনিয়ার হতে কী লাগে?</a>
+  <a href="#slide8" class="nav-mobile-link">HSC শিক্ষার্থীদের সংগ্রাম</a>
+  <a href="#slide9" class="nav-mobile-link">একজন BSc ইঞ্জিনিয়ারের চার বছর</a>
+  <a href="#slide12" class="nav-mobile-link">ধাপে ধাপে দখল: একটি আন্দোলনের ইতিহাস</a>
+  <a href="#slide14" class="nav-mobile-link">দুই সার্টিফিকেটের ফাঁদ</a>
+  <a href="#slide16" class="nav-mobile-link">DUET: সরকারি বিশ্ববিদ্যালয়, HSC পাসরা নিষিদ্ধ</a>
+  <a href="#slide13" class="nav-mobile-link">কোচিং শিক্ষকের ভুল তথ্য</a>
+  <a href="#slide15" class="nav-mobile-link">SSC পাস করে "Engr." — সাহস আছে বটে!</a>
+  <a href="#slide17" class="nav-mobile-link">⚖️ চূড়ান্ত রায় — এটা দখল, আন্দোলন নয়</a>
+  <a href="#faq" class="nav-mobile-link">❓ প্রায়শই জিজ্ঞাসিত প্রশ্ন (FAQ)</a>
 </div>
 
 <!-- HERO -->
@@ -1442,24 +1758,24 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
 
   <img class="hero-logo" src="logo.png" alt="The Diploma Files seal — BSc Engineering emblem">
 
-  <p class="hero-eyebrow">প্রকৌশলী অধিকার আন্দোলন প্রেজেন্টস:</p>
+  <p class="hero-eyebrow">প্রকৌশলী অধিকার আন্দোলনের বয়ান:</p>
   <h1>The Diploma Files</h1>
-  <p class="hero-sub">প্রকৌশল খাতের জায়নবাদীদের কুকর্ম</p>
+  <p class="hero-sub">বছরের পর বছর পরিশ্রম করে একটা পদ পাওয়ার স্বপ্ন — আর সেই পদটাই দখল হয়ে যাচ্ছে ভারপ্রাপ্ত দায়িত্বের নামে। এই ওয়েবসাইট সেই গল্পটা বলে।</p>
 
   <div class="hero-divider"></div>
 
   <div class="hero-stats">
     <div class="hero-stat">
-      <div class="hero-stat-num">৩</div>
-      <div class="hero-stat-label">আন্তর্জাতিক অ্যাকর্ড</div>
+      <div class="hero-stat-num" data-target="67" data-suffix="%">৬৭%</div>
+      <div class="hero-stat-label">BSc-দের পদ — দখল হয়ে যাচ্ছে</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">২৫+</div>
-      <div class="hero-stat-label">সদস্য দেশ</div>
+      <div class="hero-stat-num" data-target="468" data-suffix="">৪৬৮টি</div>
+      <div class="hero-stat-label">১০ বছরে মোট AE পদ (BCS)</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">৪</div>
-      <div class="hero-stat-label">বছরের BSc ডিগ্রি</div>
+      <div class="hero-stat-num" data-target="3" data-suffix="">৩</div>
+      <div class="hero-stat-label">আন্তর্জাতিক অ্যাকর্ড — মানদণ্ড স্পষ্ট</div>
     </div>
   </div>
 
@@ -1469,10 +1785,47 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
+
+<!-- POLYTECHNIC ORIGIN & PURPOSE -->
+<section id="slide6">
+  <div class="section-wrap">
+    <p class="section-label">পলিটেকনিক</p>
+    <h2>পলিটেকনিক কেন তৈরি হয়েছিল?<span class="bn">The Origin &amp; Purpose of Polytechnic Education</span></h2>
+
+    <div class="prose">
+      <p>বাংলাদেশে পলিটেকনিক শিক্ষার সূচনা হয়েছিল একটি সুনির্দিষ্ট লক্ষ্যকে সামনে রেখে — শিল্পকারখানা, নির্মাণ খাত ও বিদেশের শ্রমবাজারের জন্য <strong>দক্ষ মধ্যমসারির জনশক্তি</strong> তৈরি করা। এই উদ্দেশ্য কোনো অনুমান নয় — এটা সরকারের নিজস্ব দলিলে স্পষ্টভাবে লেখা আছে।</p>
+      <p>১৯৫৫ সালে Ford Foundation-এর অর্থায়নে ঢাকা পলিটেকনিক প্রতিষ্ঠিত হয় একটি <strong>কারিগরি প্রশিক্ষণ কেন্দ্র</strong> হিসেবে। ১৯৬০ সালে কারিগরি শিক্ষা অধিদপ্তর এবং ১৯৬৭ সালে BTEB প্রতিষ্ঠার উদ্দেশ্য ছিল একটাই — শিল্পখাতের চাহিদা অনুযায়ী <strong>দক্ষ জনশক্তি</strong> গড়ে তোলা।</p>
+    </div>
+
+    <div class="callout">
+      <strong>জাতীয় শিক্ষানীতি ২০১০ কী বলে?</strong>
+      <p>সরকারের জাতীয় শিক্ষানীতি ২০১০ এবং জাতীয় দক্ষতা উন্নয়ন নীতি ২০১১ — উভয় দলিলেই কারিগরি শিক্ষার উদ্দেশ্য হিসেবে বলা হয়েছে <strong>"জাতীয় ও আন্তর্জাতিক শ্রমবাজারের চাহিদা পূরণের জন্য দক্ষ জনশক্তি তৈরি"</strong>। কোথাও লেখা নেই যে পলিটেকনিক ইঞ্জিনিয়ার তৈরি করে।</p>
+    </div>
+
+    <div class="accent-block">
+      <h3>সরকার কি কখনো বলেছে পলিটেকনিক "ইঞ্জিনিয়ার" তৈরির জন্য?</h3>
+      <div class="prose">
+        <p>না। সরকারি ভাষায় পলিটেকনিকের উদ্দেশ্য ছিল — <em>"শিল্পকারখানার জন্য দক্ষ মধ্যমসারির টেকনিশিয়ান তৈরি করা।"</em> সরকার যখন পলিটেকনিক তৈরি করেছিল, তখন তাদের লক্ষ্য ছিল স্পষ্ট। সেই লক্ষ্যটা ছিল <strong>দক্ষ টেকনিশিয়ান</strong> তৈরি — ইঞ্জিনিয়ার নয়।</p>
+        <p>দশকের পর দশক পরে এসে সেই পরিচয়কে "ইঞ্জিনিয়ার" বলে দাবি করা — এটা সেই মূল উদ্দেশ্যেরও বিরুদ্ধে, এবং আন্তর্জাতিক মানদণ্ডেরও বিরুদ্ধে।</p>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>বাংলাদেশ কারিগরি শিক্ষা বোর্ড (BTEB)</a>
+      <a class="source-btn" href="https://reliefweb.int/report/bangladesh/national-education-policy-2010-enbn" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় শিক্ষানীতি ২০১০ — শিক্ষা মন্ত্রণালয়</a>
+      <a class="source-btn" href="https://www.ilo.org/sites/default/files/wcmsp5/groups/public/@asia/@ro-bangkok/@ilo-dhaka/documents/publication/wcms_113958.pdf" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় দক্ষতা উন্নয়ন নীতি ২০১১ — ILO</a>
+    </div>
+
+  </div>
+</section>
+
+
+<hr class="divider">
+
 <!-- WHO ARE ENGINEERS -->
 <section id="slide2">
   <div class="section-wrap">
-    <p class="section-label">Section 01</p>
+    <p class="section-label">প্রকৌশলী</p>
     <h2>Who are Engineers?<span class="bn">প্রকৌশলী আসলে কারা?</span></h2>
 
     <div class="prose">
@@ -1493,12 +1846,13 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
+
 <hr class="divider">
 
 <!-- WASHINGTON ACCORD -->
 <section id="slide3">
   <div class="section-wrap">
-    <p class="section-label">Section 02</p>
+    <p class="section-label">Washington Accord</p>
     <h2>The Washington Accord<span class="bn">ওয়াশিংটন অ্যাকর্ড কী?</span></h2>
 
     <div class="point-grid">
@@ -1542,12 +1896,13 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
+
 <hr class="divider">
 
 <!-- THREE INTERNATIONAL ACCORDS -->
 <section id="slide4">
   <div class="section-wrap">
-    <p class="section-label">Section 03</p>
+    <p class="section-label">তিনটি অ্যাকর্ড</p>
     <h2>তিনটি আন্তর্জাতিক অ্যাকর্ড<span class="bn">The Three-Tier Framework</span></h2>
 
     <div class="prose" style="margin-bottom:8px">
@@ -1631,12 +1986,13 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
+
 <hr class="divider">
 
 <!-- DIPLOMA vs BSC -->
 <section id="slide5">
   <div class="section-wrap">
-    <p class="section-label">Section 04</p>
+    <p class="section-label">Diploma vs BSc</p>
     <h2>Diploma vs BSc Engineering<span class="bn">ডিপ্লোমা বনাম বিএসসি ইঞ্জিনিয়ারিং</span></h2>
 
     <div class="compare-wrap">
@@ -1695,47 +2051,209 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
+
 <hr class="divider">
 
-<!-- POLYTECHNIC ORIGIN & PURPOSE -->
-<section id="slide6">
+<!-- THREE SYLLABUSES COMPARISON -->
+<section id="slide10">
   <div class="section-wrap">
-    <p class="section-label">Section 05</p>
-    <h2>পলিটেকনিক কেন তৈরি হয়েছিল?<span class="bn">The Origin &amp; Purpose of Polytechnic Education</span></h2>
+    <p class="section-label">সিলেবাস তুলনা</p>
+    <h2>তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ<span class="bn">Diploma vs HSC vs BSc Engineering — A Syllabus Comparison</span></h2>
 
     <div class="prose">
-      <p>বাংলাদেশে পলিটেকনিক শিক্ষার সূচনা হয়েছিল একটি সুনির্দিষ্ট লক্ষ্যকে সামনে রেখে — শিল্পকারখানা, নির্মাণ খাত ও বিদেশের শ্রমবাজারের জন্য <strong>দক্ষ মধ্যমসারির জনশক্তি</strong> তৈরি করা। এই উদ্দেশ্য কোনো অনুমান নয় — এটা সরকারের নিজস্ব দলিলে স্পষ্টভাবে লেখা আছে।</p>
-      <p>১৯৫৫ সালে Ford Foundation-এর অর্থায়নে ঢাকা পলিটেকনিক প্রতিষ্ঠিত হয় একটি <strong>কারিগরি প্রশিক্ষণ কেন্দ্র</strong> হিসেবে। ১৯৬০ সালে কারিগরি শিক্ষা অধিদপ্তর এবং ১৯৬৭ সালে BTEB প্রতিষ্ঠার উদ্দেশ্য ছিল একটাই — শিল্পখাতের চাহিদা অনুযায়ী <strong>দক্ষ জনশক্তি</strong> গড়ে তোলা।</p>
+      <p>ডিপ্লোমাধারীদের পক্ষ থেকে প্রায়ই দাবি করা হয় — "আমরাও ৪ বছর পড়েছি, আমরাও ইঞ্জিনিয়ার।" এই দাবির মূল সমস্যা হলো, ৪ বছর পড়া আর ৪ বছরে কী পড়া হয়েছে — এই দুটো প্রশ্ন সম্পূর্ণ আলাদা। তিনটি শিক্ষাক্রমের সিলেবাস পাশাপাশি রাখলে পার্থক্যটা দিনের আলোর মতো স্পষ্ট হয়ে যায়।</p>
     </div>
 
     <div class="callout">
-      <strong>জাতীয় শিক্ষানীতি ২০১০ কী বলে?</strong>
-      <p>সরকারের জাতীয় শিক্ষানীতি ২০১০ এবং জাতীয় দক্ষতা উন্নয়ন নীতি ২০১১ — উভয় দলিলেই কারিগরি শিক্ষার উদ্দেশ্য হিসেবে বলা হয়েছে <strong>"জাতীয় ও আন্তর্জাতিক শ্রমবাজারের চাহিদা পূরণের জন্য দক্ষ জনশক্তি তৈরি"</strong>। কোথাও লেখা নেই যে পলিটেকনিক ইঞ্জিনিয়ার তৈরি করে।</p>
+      <strong>ডিপ্লোমায় প্রবেশের যোগ্যতা — শুধু SSC পাস</strong>
+      <p>ডিপ্লোমায় ভর্তির জন্য শুধু SSC পাস থাকলেই চলে — ন্যূনতম GPA মাত্র ৩.০০, গণিতে GPA ২.০০ হলেই আবেদন করা যায়। অর্থাৎ একজন ডিপ্লোমা শিক্ষার্থী HSC-র একটি দিনও পড়েননি — উচ্চতর গণিত, উচ্চতর পদার্থবিজ্ঞান, উচ্চতর রসায়নের একটি অধ্যায়ও স্পর্শ করেননি। অথচ BSc ইঞ্জিনিয়ারিংয়ে ভর্তির জন্য HSC-তে <strong>পদার্থ, রসায়ন ও গণিতে আলাদাভাবে GPA ৫.০০</strong> লাগে। একটি শিক্ষাক্রম শুরু হয় যেখানে HSC শেষ হয় — আর অন্যটি শুরু হয় HSC <strong>এড়িয়ে গিয়ে</strong>। <a class="source-btn-inline" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা ২০২৫-২৬</a></p>
     </div>
 
     <div class="accent-block">
-      <h3>সরকার কি কখনো বলেছে পলিটেকনিক "ইঞ্জিনিয়ার" তৈরির জন্য?</h3>
+      <h3>গণিতের তুলনা — এখানেই সবচেয়ে বড় ফাঁক</h3>
       <div class="prose">
-        <p>না। সরকারি ভাষায় পলিটেকনিকের উদ্দেশ্য ছিল — <em>"শিল্পকারখানার জন্য দক্ষ মধ্যমসারির টেকনিশিয়ান তৈরি করা।"</em> সরকার যখন পলিটেকনিক তৈরি করেছিল, তখন তাদের লক্ষ্য ছিল স্পষ্ট। সেই লক্ষ্যটা ছিল <strong>দক্ষ টেকনিশিয়ান</strong> তৈরি — ইঞ্জিনিয়ার নয়।</p>
-        <p>দশকের পর দশক পরে এসে সেই পরিচয়কে "ইঞ্জিনিয়ার" বলে দাবি করা — এটা সেই মূল উদ্দেশ্যেরও বিরুদ্ধে, এবং আন্তর্জাতিক মানদণ্ডেরও বিরুদ্ধে।</p>
+        <p>ডিপ্লোমার গণিত কোর্সের নাম — <strong>"Basic Mathematics"</strong>। এতে পড়ানো হয় লগারিদম, ম্যাট্রিক্স, ত্রিকোণমিতি, সরলরেখা, প্রাথমিক অবকল ক্যালকুলাস এবং পরিসংখ্যান। এগুলো বাংলাদেশের <strong>SSC সিলেবাসের বর্ধিত সংস্করণ</strong> মাত্র।</p>
+        <p>এদিকে HSC উচ্চতর গণিতে পড়ানো হয় — জটিল সংখ্যা, কনিক (উপবৃত্ত, পরাবৃত্ত, অধিবৃত্ত), ভেক্টর, সমাকল ক্যালকুলাস, বিন্যাস-সমাবেশ, সম্ভাবনা তত্ত্ব এবং ম্যাট্রিক্স-নির্ণায়ক। এগুলো ডিপ্লোমার গণিতের চেয়ে সম্পূর্ণ ভিন্ন এবং গভীর স্তরের।</p>
+        <p>আর BUET BSc-তে গণিতে রয়েছে — <strong>১২৬ ক্রেডিট ঘণ্টার থিওরি কোর্স</strong> এবং বিশ্ববিদ্যালয় পর্যায়ের গাণিতিক বিশ্লেষণ — মাল্টিভেরিয়েবল ক্যালকুলাস, ডিফারেন্সিয়াল ইকুয়েশন, লিনিয়ার অ্যালজেব্রা, নিউমেরিক্যাল অ্যানালাইসিস, কমপ্লেক্স অ্যানালাইসিস। এগুলো HSC গণিতকেও বহু স্তর পেছনে ফেলে দেয়।</p>
+        <p><strong>সংক্ষেপে —</strong><br>
+        ডিপ্লোমার গণিত = SSC-এর বর্ধিত সংস্করণ<br>
+        HSC-র গণিত = পূর্ণাঙ্গ উচ্চমাধ্যমিক বিশ্লেষণ<br>
+        BSc-র গণিত = সম্পূর্ণ ভিন্ন মহাবিশ্ব</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>পদার্থবিজ্ঞান ও রসায়নের ক্ষেত্রেও একই চিত্র। ডিপ্লোমায় পড়ানো হয় <strong>"Applied Physics"</strong> ও <strong>"Applied Chemistry"</strong> — যেগুলো হাতে-কলমে প্রয়োগমুখী, কিন্তু তাত্ত্বিক গভীরতায় HSC-র ধারেকাছেও নয়। HSC পদার্থবিজ্ঞানে রয়েছে তরঙ্গ, তড়িৎচুম্বকত্ব, আধুনিক পদার্থবিজ্ঞান, তেজস্ক্রিয়তা — এবং BSc-তে এর পরে শুরু হয় কোয়ান্টাম মেকানিক্স, থার্মোডায়নামিক্স, ইলেক্ট্রোম্যাগনেটিক থিওরি। ডিপ্লোমার পদার্থবিজ্ঞান এবং BSc-র পদার্থবিজ্ঞান — একই নামের দুটো সম্পূর্ণ ভিন্ন বিষয়।</p>
+    </div>
+
+    <div class="callout">
+      <strong>তিনটি সিলেবাসের পাশাপাশি তুলনা</strong>
+      <table class="compare" style="margin-top:10px">
+        <thead>
+          <tr>
+            <th>বিষয়</th>
+            <th>ডিপ্লোমা (BTEB)</th>
+            <th>HSC (বিজ্ঞান)</th>
+            <th style="color:#1a6b3a">BSc Engineering</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>প্রবেশ যোগ্যতা</td>
+            <td>SSC পাস, GPA ৩.০০</td>
+            <td>SSC পাস</td>
+            <td>HSC, GPA ৫.০০ + ভর্তি পরীক্ষা</td>
+          </tr>
+          <tr>
+            <td>গণিত</td>
+            <td>Basic Math — লগ, ত্রিকোণমিতি, প্রাথমিক ক্যালকুলাস</td>
+            <td>উচ্চতর গণিত — কনিক, ভেক্টর, সমাকল</td>
+            <td>ক্যালকুলাস, ডিফারেন্সিয়াল ইকুয়েশন, লিনিয়ার অ্যালজেব্রা, নিউমেরিক্যাল মেথড</td>
+          </tr>
+          <tr>
+            <td>পদার্থবিজ্ঞান</td>
+            <td>Applied Physics — প্রাথমিক প্রয়োগ</td>
+            <td>তরঙ্গ, তড়িৎ, আধুনিক পদার্থ</td>
+            <td>ইলেক্ট্রোম্যাগনেটিক থিওরি, কোয়ান্টাম মেকানিক্স</td>
+          </tr>
+          <tr>
+            <td>রসায়ন</td>
+            <td>Applied Chemistry — মৌলিক প্রয়োগ</td>
+            <td>জৈব-অজৈব-ভৌত রসায়ন</td>
+            <td>উন্নত জৈব রসায়ন, তড়িৎরসায়ন, থার্মোকেমিস্ট্রি</td>
+          </tr>
+          <tr>
+            <td>মোট ক্রেডিট</td>
+            <td>~১৪০ (প্রায়োগিক কেন্দ্রিক)</td>
+            <td>প্রযোজ্য নয়</td>
+            <td>১৫৭+ (বিশ্লেষণ ও গবেষণা কেন্দ্রিক)</td>
+          </tr>
+          <tr>
+            <td>থিসিস/গবেষণা</td>
+            <td><span class="badge-no">✗ নেই</span></td>
+            <td><span class="badge-no">✗ নেই</span></td>
+            <td><span class="badge-yes">✓ বাধ্যতামূলক</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="accent-block">
+      <h3>সবচেয়ে বড় সত্যটা —</h3>
+      <div class="prose">
+        <p>ডিপ্লোমা শিক্ষার্থীরা HSC-র পরীক্ষার হলে <strong>কখনো বসেননি</strong>। যে সিলেবাস একজন BSc ইঞ্জিনিয়ারের ভর্তি পরীক্ষার প্রশ্নপত্র তৈরি করে — সেই HSC সিলেবাস ডিপ্লোমা শিক্ষার্থীদের কাছে পরিচিতই নয়। তার মানে এই নয় যে ডিপ্লোমা শিক্ষার্থীরা কম মেধাবী — তারা ভিন্ন একটি পথে হেঁটেছেন, ভিন্ন একটি দক্ষতা অর্জন করেছেন। কিন্তু সেই পথটি <strong>"ইঞ্জিনিয়ার" তৈরির পথ নয়</strong> — এটা স্বয়ং সিলেবাসই বলে দিচ্ছে।</p>
+        <p>ডিপ্লোমার সিলেবাসকে ছোট করা হচ্ছে না। কারিগরি দক্ষতার জন্য এই সিলেবাস উপযুক্ত — এবং সেটাই এর উদ্দেশ্য ছিল। কিন্তু "আমিও ইঞ্জিনিয়ার" বলার আগে অন্তত একবার সিলেবাস দুটো পাশাপাশি রেখে দেখুন।</p>
       </div>
     </div>
 
     <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>বাংলাদেশ কারিগরি শিক্ষা বোর্ড (BTEB)</a>
-      <a class="source-btn" href="https://reliefweb.int/report/bangladesh/national-education-policy-2010-enbn" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় শিক্ষানীতি ২০১০ — শিক্ষা মন্ত্রণালয়</a>
-      <a class="source-btn" href="https://www.ilo.org/sites/default/files/wcmsp5/groups/public/@asia/@ro-bangkok/@ilo-dhaka/documents/publication/wcms_113958.pdf" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় দক্ষতা উন্নয়ন নীতি ২০১১ — ILO</a>
+      <a class="source-btn" href="https://bteb.gov.bd/site/page/6723ed9b-94d5-41a9-80cf-54a3594a171e" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB সিলেবাস ও কোর্স স্ট্রাকচার ২০২২</a>
+      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা</a>
+      <a class="source-btn" href="https://cse.buet.ac.bd/home/ug" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET CSE Undergraduate Curriculum</a>
+      <a class="source-btn" href="https://eee.buet.ac.bd/academics/undergraduate" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET EEE Undergraduate Curriculum</a>
+      <a class="source-btn" href="https://www.nctb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (HSC সিলেবাস)</a>
     </div>
 
   </div>
 </section>
+
+
+<hr class="divider">
+
+<!-- COLLEGE MERIT LADDER -->
+<section id="slide11">
+  <div class="section-wrap">
+    <p class="section-label">কলেজ মেরিট</p>
+    <h2>ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে<span class="bn">The College Merit Ladder — And Where Polytechnic Fits</span></h2>
+
+    <div class="prose">
+      <p>একজন শিক্ষার্থী SSC পাসের পর দুটো পথে যেতে পারেন। এক — ভালো ফলাফল থাকলে দেশের সেরা কলেজগুলোয় ভর্তি হয়ে HSC করা। দুই — ফলাফল যথেষ্ট ভালো না হলে পলিটেকনিকে ভর্তি হওয়া। এটা কোনো ব্যক্তিগত আক্রমণ নয় — এটা বাংলাদেশের শিক্ষাব্যবস্থার বাস্তব চিত্র, এবং এই চিত্র সংখ্যায় প্রমাণিত।</p>
+    </div>
+
+    <div class="callout">
+      <strong>সেরা কলেজগুলোতে বিজ্ঞান বিভাগে ভর্তির ন্যূনতম যোগ্যতা</strong>
+      <p>নটর ডেম কলেজে বিজ্ঞান বিভাগে ভর্তির জন্য SSC-তে উচ্চতর গণিতসহ <strong>ন্যূনতম GPA ৫.০০</strong> থাকতে হবে। হলি ক্রস কলেজেও বিজ্ঞান বিভাগে ভর্তির জন্য <strong>GPA ৫.০০ সাথে উচ্চতর গণিত ও জীববিজ্ঞান</strong> বাধ্যতামূলক। ঢাকা কলেজ, আদমজী ক্যান্টনমেন্ট কলেজ, রাজউক উত্তরা মডেল কলেজের মতো শীর্ষ প্রতিষ্ঠানগুলোয়ও বিজ্ঞান বিভাগে <strong>GPA ৫.০০ এবং সংশ্লিষ্ট বিষয়ে উচ্চ নম্বর</strong> ছাড়া আবেদনের সুযোগই নেই।</p>
+      <p>এই তালিকায় আরও আছে — ঢাকা রেসিডেন্সিয়াল মডেল কলেজ, রাজশাহী কলেজ, চট্টগ্রাম সরকারি কলেজ, বিভিন্ন ক্যান্টনমেন্ট কলেজ। প্রতিটি প্রতিষ্ঠানেই বিজ্ঞান বিভাগে আসন সীমিত, প্রতিযোগিতা তীব্র, এবং GPA ৫.০০ ছাড়া দরজা বন্ধ।</p>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+        <a class="source-btn" href="https://ndc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>নটর ডেম কলেজ ভর্তি বিজ্ঞপ্তি</a>
+        <a class="source-btn" href="https://hcc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>হলি ক্রস কলেজ ভর্তি বিজ্ঞপ্তি</a>
+        <a class="source-btn" href="https://xiclassadmission.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>একাদশ শ্রেণি কেন্দ্রীয় ভর্তি সিস্টেম</a>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>এখন প্রশ্ন হলো — যাদের SSC-তে GPA ৫.০০ নেই, তারা কোথায় যান? তারা অপেক্ষাকৃত কম প্রতিযোগিতামূলক কলেজে ভর্তির চেষ্টা করেন — অথবা পলিটেকনিকে ভর্তি হন। পলিটেকনিকে ভর্তির জন্য SSC-তে শুধু <strong>ন্যূনতম GPA ৩.০০</strong> এবং গণিতে <strong>GPA ২.০০</strong> থাকলেই চলে। অর্থাৎ নটর ডেমে যে GPA দিয়ে আবেদনই করা যায় না, সেই GPA দিয়ে পলিটেকনিকে ভর্তি হওয়া যায়।</p>
+    </div>
+
+    <div class="accent-block">
+      <h3>সংখ্যায় পার্থক্যটা দেখুন</h3>
+      <div class="prose">
+        <div class="compare-wrap" style="margin:4px 0 0">
+        <table class="compare" style="margin-top:0">
+          <thead>
+            <tr>
+              <th></th>
+              <th style="color:#1a6b3a">সেরা কলেজে বিজ্ঞান (HSC)</th>
+              <th style="color:#c0392b">পলিটেকনিক (ডিপ্লোমা)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ন্যূনতম SSC GPA</td>
+              <td><span class="badge-yes">✓ ৫.০০</span></td>
+              <td><span class="badge-no">✗ ৩.০০</span></td>
+            </tr>
+            <tr>
+              <td>গণিতে ন্যূনতম GPA</td>
+              <td><span class="badge-yes">✓ ৫.০০</span></td>
+              <td><span class="badge-no">✗ ২.০০</span></td>
+            </tr>
+            <tr>
+              <td>ভর্তি পরীক্ষা</td>
+              <td>লিখিত পরীক্ষা ও ভাইভা</td>
+              <td>নেই — শুধু SSC ফলাফলের ভিত্তিতে</td>
+            </tr>
+            <tr>
+              <td>পরবর্তী ধাপ</td>
+              <td>HSC → ইঞ্জিনিয়ারিং ভর্তি পরীক্ষা</td>
+              <td>সরাসরি ডিপ্লোমা</td>
+            </tr>
+            <tr>
+              <td>HSC সিলেবাস পড়তে হয়?</td>
+              <td><span class="badge-yes">✓ হ্যাঁ — পুরো দুই বছর</span></td>
+              <td><span class="badge-no">✗ না — একদিনও না</span></td>
+            </tr>
+          </tbody>
+        </table>
+        </div><!-- /.compare-wrap -->
+        <p style="margin-top:14px">এই তুলনা করা হচ্ছে কাউকে ছোট করতে নয়। কিন্তু যখন কেউ বলেন — "আমিও ইঞ্জিনিয়ার" — তখন এই সংখ্যাগুলো মাথায় রাখা জরুরি।</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>পলিটেকনিক শিক্ষার্থীরা কঠোর পরিশ্রম করেন, দক্ষতা অর্জন করেন, এবং দেশের অর্থনীতিতে গুরুত্বপূর্ণ ভূমিকা রাখেন — এটা সত্য। কিন্তু যে শিক্ষার্থী নটর ডেম বা আদমজী ক্যান্টনমেন্টে পড়ার যোগ্যতা রেখে সেখানে পড়েছেন, তারপর BUET-এর ভর্তি পরীক্ষায় হাজারো প্রতিযোগীকে হারিয়ে ইঞ্জিনিয়ারিংয়ে সুযোগ পেয়েছেন এবং চার বছরের কঠিন প্রোগ্রাম সম্পন্ন করেছেন — তাঁর পরিচয়কে <strong>"আমিও একই"</strong> বলে দাবি করা কি ন্যায্য?</p>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://ndc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>নটর ডেম কলেজ ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://hcc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>হলি ক্রস কলেজ ভর্তি বিজ্ঞপ্তি</a>
+      <a class="source-btn" href="https://xiclassadmission.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>একাদশ শ্রেণি কেন্দ্রীয় ভর্তি সিস্টেম</a>
+      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা</a>
+      <a class="source-btn" href="https://www.adamjeecantonment.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Adamjee Cantonment College</a>
+      <a class="source-btn" href="https://rajukcollege.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>RAJUK Uttara Model College</a>
+    </div>
+
+  </div>
+</section>
+
+
 
 <hr class="divider">
 
 <!-- BSC ENGINEERING ADMISSION STRUGGLE -->
 <section id="slide7">
   <div class="section-wrap">
-    <p class="section-label">Section 06</p>
+    <p class="section-label">BSc যাত্রা</p>
     <h2>BSc ইঞ্জিনিয়ার হতে কী লাগে?<span class="bn">The Road to a BSc Engineering Degree in Bangladesh</span></h2>
 
     <div class="prose">
@@ -1848,12 +2366,13 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
+
 <hr class="divider">
 
 <!-- HSC STUDENT STRUGGLES -->
 <section id="slide8">
   <div class="section-wrap">
-    <p class="section-label">Section 07</p>
+    <p class="section-label">HSC সংগ্রাম</p>
     <h2>HSC শিক্ষার্থীদের সংগ্রাম<span class="bn">The Unseen Sacrifice Behind an Engineering Seat</span></h2>
 
     <div class="prose">
@@ -1935,12 +2454,13 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
+
 <hr class="divider">
 
 <!-- BSC 4-YEAR JOURNEY -->
 <section id="slide9">
   <div class="section-wrap">
-    <p class="section-label">Section 08</p>
+    <p class="section-label">BSc ৪ বছর</p>
     <h2>একজন BSc ইঞ্জিনিয়ারের চার বছর<span class="bn">The Four-Year Journey of a BSc Engineer</span></h2>
 
     <div class="prose">
@@ -1997,210 +2517,20 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- THREE SYLLABUSES COMPARISON -->
-<section id="slide10">
-  <div class="section-wrap">
-    <p class="section-label">Section 09</p>
-    <h2>তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ<span class="bn">Diploma vs HSC vs BSc Engineering — A Syllabus Comparison</span></h2>
-
-    <div class="prose">
-      <p>ডিপ্লোমাধারীদের পক্ষ থেকে প্রায়ই দাবি করা হয় — "আমরাও ৪ বছর পড়েছি, আমরাও ইঞ্জিনিয়ার।" এই দাবির মূল সমস্যা হলো, ৪ বছর পড়া আর ৪ বছরে কী পড়া হয়েছে — এই দুটো প্রশ্ন সম্পূর্ণ আলাদা। তিনটি শিক্ষাক্রমের সিলেবাস পাশাপাশি রাখলে পার্থক্যটা দিনের আলোর মতো স্পষ্ট হয়ে যায়।</p>
-    </div>
-
-    <div class="callout">
-      <strong>ডিপ্লোমায় প্রবেশের যোগ্যতা — শুধু SSC পাস</strong>
-      <p>ডিপ্লোমায় ভর্তির জন্য শুধু SSC পাস থাকলেই চলে — ন্যূনতম GPA মাত্র ৩.০০, গণিতে GPA ২.০০ হলেই আবেদন করা যায়। অর্থাৎ একজন ডিপ্লোমা শিক্ষার্থী HSC-র একটি দিনও পড়েননি — উচ্চতর গণিত, উচ্চতর পদার্থবিজ্ঞান, উচ্চতর রসায়নের একটি অধ্যায়ও স্পর্শ করেননি। অথচ BSc ইঞ্জিনিয়ারিংয়ে ভর্তির জন্য HSC-তে <strong>পদার্থ, রসায়ন ও গণিতে আলাদাভাবে GPA ৫.০০</strong> লাগে। একটি শিক্ষাক্রম শুরু হয় যেখানে HSC শেষ হয় — আর অন্যটি শুরু হয় HSC <strong>এড়িয়ে গিয়ে</strong>। <a class="source-btn-inline" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা ২০২৫-২৬</a></p>
-    </div>
-
-    <div class="accent-block">
-      <h3>গণিতের তুলনা — এখানেই সবচেয়ে বড় ফাঁক</h3>
-      <div class="prose">
-        <p>ডিপ্লোমার গণিত কোর্সের নাম — <strong>"Basic Mathematics"</strong>। এতে পড়ানো হয় লগারিদম, ম্যাট্রিক্স, ত্রিকোণমিতি, সরলরেখা, প্রাথমিক অবকল ক্যালকুলাস এবং পরিসংখ্যান। এগুলো বাংলাদেশের <strong>SSC সিলেবাসের বর্ধিত সংস্করণ</strong> মাত্র।</p>
-        <p>এদিকে HSC উচ্চতর গণিতে পড়ানো হয় — জটিল সংখ্যা, কনিক (উপবৃত্ত, পরাবৃত্ত, অধিবৃত্ত), ভেক্টর, সমাকল ক্যালকুলাস, বিন্যাস-সমাবেশ, সম্ভাবনা তত্ত্ব এবং ম্যাট্রিক্স-নির্ণায়ক। এগুলো ডিপ্লোমার গণিতের চেয়ে সম্পূর্ণ ভিন্ন এবং গভীর স্তরের।</p>
-        <p>আর BUET BSc-তে গণিতে রয়েছে — <strong>১২৬ ক্রেডিট ঘণ্টার থিওরি কোর্স</strong> এবং বিশ্ববিদ্যালয় পর্যায়ের গাণিতিক বিশ্লেষণ — মাল্টিভেরিয়েবল ক্যালকুলাস, ডিফারেন্সিয়াল ইকুয়েশন, লিনিয়ার অ্যালজেব্রা, নিউমেরিক্যাল অ্যানালাইসিস, কমপ্লেক্স অ্যানালাইসিস। এগুলো HSC গণিতকেও বহু স্তর পেছনে ফেলে দেয়।</p>
-        <p><strong>সংক্ষেপে —</strong><br>
-        ডিপ্লোমার গণিত = SSC-এর বর্ধিত সংস্করণ<br>
-        HSC-র গণিত = পূর্ণাঙ্গ উচ্চমাধ্যমিক বিশ্লেষণ<br>
-        BSc-র গণিত = সম্পূর্ণ ভিন্ন মহাবিশ্ব</p>
-      </div>
-    </div>
-
-    <div class="prose">
-      <p>পদার্থবিজ্ঞান ও রসায়নের ক্ষেত্রেও একই চিত্র। ডিপ্লোমায় পড়ানো হয় <strong>"Applied Physics"</strong> ও <strong>"Applied Chemistry"</strong> — যেগুলো হাতে-কলমে প্রয়োগমুখী, কিন্তু তাত্ত্বিক গভীরতায় HSC-র ধারেকাছেও নয়। HSC পদার্থবিজ্ঞানে রয়েছে তরঙ্গ, তড়িৎচুম্বকত্ব, আধুনিক পদার্থবিজ্ঞান, তেজস্ক্রিয়তা — এবং BSc-তে এর পরে শুরু হয় কোয়ান্টাম মেকানিক্স, থার্মোডায়নামিক্স, ইলেক্ট্রোম্যাগনেটিক থিওরি। ডিপ্লোমার পদার্থবিজ্ঞান এবং BSc-র পদার্থবিজ্ঞান — একই নামের দুটো সম্পূর্ণ ভিন্ন বিষয়।</p>
-    </div>
-
-    <div class="callout">
-      <strong>তিনটি সিলেবাসের পাশাপাশি তুলনা</strong>
-      <table class="compare" style="margin-top:10px">
-        <thead>
-          <tr>
-            <th>বিষয়</th>
-            <th>ডিপ্লোমা (BTEB)</th>
-            <th>HSC (বিজ্ঞান)</th>
-            <th style="color:#1a6b3a">BSc Engineering</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>প্রবেশ যোগ্যতা</td>
-            <td>SSC পাস, GPA ৩.০০</td>
-            <td>SSC পাস</td>
-            <td>HSC, GPA ৫.০০ + ভর্তি পরীক্ষা</td>
-          </tr>
-          <tr>
-            <td>গণিত</td>
-            <td>Basic Math — লগ, ত্রিকোণমিতি, প্রাথমিক ক্যালকুলাস</td>
-            <td>উচ্চতর গণিত — কনিক, ভেক্টর, সমাকল</td>
-            <td>ক্যালকুলাস, ডিফারেন্সিয়াল ইকুয়েশন, লিনিয়ার অ্যালজেব্রা, নিউমেরিক্যাল মেথড</td>
-          </tr>
-          <tr>
-            <td>পদার্থবিজ্ঞান</td>
-            <td>Applied Physics — প্রাথমিক প্রয়োগ</td>
-            <td>তরঙ্গ, তড়িৎ, আধুনিক পদার্থ</td>
-            <td>ইলেক্ট্রোম্যাগনেটিক থিওরি, কোয়ান্টাম মেকানিক্স</td>
-          </tr>
-          <tr>
-            <td>রসায়ন</td>
-            <td>Applied Chemistry — মৌলিক প্রয়োগ</td>
-            <td>জৈব-অজৈব-ভৌত রসায়ন</td>
-            <td>উন্নত জৈব রসায়ন, তড়িৎরসায়ন, থার্মোকেমিস্ট্রি</td>
-          </tr>
-          <tr>
-            <td>মোট ক্রেডিট</td>
-            <td>~১৪০ (প্রায়োগিক কেন্দ্রিক)</td>
-            <td>প্রযোজ্য নয়</td>
-            <td>১৫৭+ (বিশ্লেষণ ও গবেষণা কেন্দ্রিক)</td>
-          </tr>
-          <tr>
-            <td>থিসিস/গবেষণা</td>
-            <td><span class="badge-no">✗ নেই</span></td>
-            <td><span class="badge-no">✗ নেই</span></td>
-            <td><span class="badge-yes">✓ বাধ্যতামূলক</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="accent-block">
-      <h3>সবচেয়ে বড় সত্যটা —</h3>
-      <div class="prose">
-        <p>ডিপ্লোমা শিক্ষার্থীরা HSC-র পরীক্ষার হলে <strong>কখনো বসেননি</strong>। যে সিলেবাস একজন BSc ইঞ্জিনিয়ারের ভর্তি পরীক্ষার প্রশ্নপত্র তৈরি করে — সেই HSC সিলেবাস ডিপ্লোমা শিক্ষার্থীদের কাছে পরিচিতই নয়। তার মানে এই নয় যে ডিপ্লোমা শিক্ষার্থীরা কম মেধাবী — তারা ভিন্ন একটি পথে হেঁটেছেন, ভিন্ন একটি দক্ষতা অর্জন করেছেন। কিন্তু সেই পথটি <strong>"ইঞ্জিনিয়ার" তৈরির পথ নয়</strong> — এটা স্বয়ং সিলেবাসই বলে দিচ্ছে।</p>
-        <p>ডিপ্লোমার সিলেবাসকে ছোট করা হচ্ছে না। কারিগরি দক্ষতার জন্য এই সিলেবাস উপযুক্ত — এবং সেটাই এর উদ্দেশ্য ছিল। কিন্তু "আমিও ইঞ্জিনিয়ার" বলার আগে অন্তত একবার সিলেবাস দুটো পাশাপাশি রেখে দেখুন।</p>
-      </div>
-    </div>
-
-    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-      <a class="source-btn" href="https://bteb.gov.bd/site/page/6723ed9b-94d5-41a9-80cf-54a3594a171e" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB সিলেবাস ও কোর্স স্ট্রাকচার ২০২২</a>
-      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা</a>
-      <a class="source-btn" href="https://cse.buet.ac.bd/home/ug" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET CSE Undergraduate Curriculum</a>
-      <a class="source-btn" href="https://eee.buet.ac.bd/academics/undergraduate" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BUET EEE Undergraduate Curriculum</a>
-      <a class="source-btn" href="https://www.nctb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (HSC সিলেবাস)</a>
-    </div>
-
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- COLLEGE MERIT LADDER -->
-<section id="slide11">
-  <div class="section-wrap">
-    <p class="section-label">Section 10</p>
-    <h2>ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে<span class="bn">The College Merit Ladder — And Where Polytechnic Fits</span></h2>
-
-    <div class="prose">
-      <p>একজন শিক্ষার্থী SSC পাসের পর দুটো পথে যেতে পারেন। এক — ভালো ফলাফল থাকলে দেশের সেরা কলেজগুলোয় ভর্তি হয়ে HSC করা। দুই — ফলাফল যথেষ্ট ভালো না হলে পলিটেকনিকে ভর্তি হওয়া। এটা কোনো ব্যক্তিগত আক্রমণ নয় — এটা বাংলাদেশের শিক্ষাব্যবস্থার বাস্তব চিত্র, এবং এই চিত্র সংখ্যায় প্রমাণিত।</p>
-    </div>
-
-    <div class="callout">
-      <strong>সেরা কলেজগুলোতে বিজ্ঞান বিভাগে ভর্তির ন্যূনতম যোগ্যতা</strong>
-      <p>নটর ডেম কলেজে বিজ্ঞান বিভাগে ভর্তির জন্য SSC-তে উচ্চতর গণিতসহ <strong>ন্যূনতম GPA ৫.০০</strong> থাকতে হবে। হলি ক্রস কলেজেও বিজ্ঞান বিভাগে ভর্তির জন্য <strong>GPA ৫.০০ সাথে উচ্চতর গণিত ও জীববিজ্ঞান</strong> বাধ্যতামূলক। ঢাকা কলেজ, আদমজী ক্যান্টনমেন্ট কলেজ, রাজউক উত্তরা মডেল কলেজের মতো শীর্ষ প্রতিষ্ঠানগুলোয়ও বিজ্ঞান বিভাগে <strong>GPA ৫.০০ এবং সংশ্লিষ্ট বিষয়ে উচ্চ নম্বর</strong> ছাড়া আবেদনের সুযোগই নেই।</p>
-      <p>এই তালিকায় আরও আছে — ঢাকা রেসিডেন্সিয়াল মডেল কলেজ, রাজশাহী কলেজ, চট্টগ্রাম সরকারি কলেজ, বিভিন্ন ক্যান্টনমেন্ট কলেজ। প্রতিটি প্রতিষ্ঠানেই বিজ্ঞান বিভাগে আসন সীমিত, প্রতিযোগিতা তীব্র, এবং GPA ৫.০০ ছাড়া দরজা বন্ধ।</p>
-      <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
-        <a class="source-btn" href="https://ndc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>নটর ডেম কলেজ ভর্তি বিজ্ঞপ্তি</a>
-        <a class="source-btn" href="https://hcc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>হলি ক্রস কলেজ ভর্তি বিজ্ঞপ্তি</a>
-        <a class="source-btn" href="https://xiclassadmission.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>একাদশ শ্রেণি কেন্দ্রীয় ভর্তি সিস্টেম</a>
-      </div>
-    </div>
-
-    <div class="prose">
-      <p>এখন প্রশ্ন হলো — যাদের SSC-তে GPA ৫.০০ নেই, তারা কোথায় যান? তারা অপেক্ষাকৃত কম প্রতিযোগিতামূলক কলেজে ভর্তির চেষ্টা করেন — অথবা পলিটেকনিকে ভর্তি হন। পলিটেকনিকে ভর্তির জন্য SSC-তে শুধু <strong>ন্যূনতম GPA ৩.০০</strong> এবং গণিতে <strong>GPA ২.০০</strong> থাকলেই চলে। অর্থাৎ নটর ডেমে যে GPA দিয়ে আবেদনই করা যায় না, সেই GPA দিয়ে পলিটেকনিকে ভর্তি হওয়া যায়।</p>
-    </div>
-
-    <div class="accent-block">
-      <h3>সংখ্যায় পার্থক্যটা দেখুন</h3>
-      <div class="prose">
-        <div class="compare-wrap" style="margin:4px 0 0">
-        <table class="compare" style="margin-top:0">
-          <thead>
-            <tr>
-              <th></th>
-              <th style="color:#1a6b3a">সেরা কলেজে বিজ্ঞান (HSC)</th>
-              <th style="color:#c0392b">পলিটেকনিক (ডিপ্লোমা)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ন্যূনতম SSC GPA</td>
-              <td><span class="badge-yes">✓ ৫.০০</span></td>
-              <td><span class="badge-no">✗ ৩.০০</span></td>
-            </tr>
-            <tr>
-              <td>গণিতে ন্যূনতম GPA</td>
-              <td><span class="badge-yes">✓ ৫.০০</span></td>
-              <td><span class="badge-no">✗ ২.০০</span></td>
-            </tr>
-            <tr>
-              <td>ভর্তি পরীক্ষা</td>
-              <td>লিখিত পরীক্ষা ও ভাইভা</td>
-              <td>নেই — শুধু SSC ফলাফলের ভিত্তিতে</td>
-            </tr>
-            <tr>
-              <td>পরবর্তী ধাপ</td>
-              <td>HSC → ইঞ্জিনিয়ারিং ভর্তি পরীক্ষা</td>
-              <td>সরাসরি ডিপ্লোমা</td>
-            </tr>
-            <tr>
-              <td>HSC সিলেবাস পড়তে হয়?</td>
-              <td><span class="badge-yes">✓ হ্যাঁ — পুরো দুই বছর</span></td>
-              <td><span class="badge-no">✗ না — একদিনও না</span></td>
-            </tr>
-          </tbody>
-        </table>
-        </div><!-- /.compare-wrap -->
-        <p style="margin-top:14px">এই তুলনা করা হচ্ছে কাউকে ছোট করতে নয়। কিন্তু যখন কেউ বলেন — "আমিও ইঞ্জিনিয়ার" — তখন এই সংখ্যাগুলো মাথায় রাখা জরুরি।</p>
-      </div>
-    </div>
-
-    <div class="prose">
-      <p>পলিটেকনিক শিক্ষার্থীরা কঠোর পরিশ্রম করেন, দক্ষতা অর্জন করেন, এবং দেশের অর্থনীতিতে গুরুত্বপূর্ণ ভূমিকা রাখেন — এটা সত্য। কিন্তু যে শিক্ষার্থী নটর ডেম বা আদমজী ক্যান্টনমেন্টে পড়ার যোগ্যতা রেখে সেখানে পড়েছেন, তারপর BUET-এর ভর্তি পরীক্ষায় হাজারো প্রতিযোগীকে হারিয়ে ইঞ্জিনিয়ারিংয়ে সুযোগ পেয়েছেন এবং চার বছরের কঠিন প্রোগ্রাম সম্পন্ন করেছেন — তাঁর পরিচয়কে <strong>"আমিও একই"</strong> বলে দাবি করা কি ন্যায্য?</p>
-    </div>
-
-    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-      <a class="source-btn" href="https://ndc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>নটর ডেম কলেজ ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://hcc.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>হলি ক্রস কলেজ ভর্তি বিজ্ঞপ্তি</a>
-      <a class="source-btn" href="https://xiclassadmission.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>একাদশ শ্রেণি কেন্দ্রীয় ভর্তি সিস্টেম</a>
-      <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা</a>
-      <a class="source-btn" href="https://www.adamjeecantonment.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Adamjee Cantonment College</a>
-      <a class="source-btn" href="https://rajukcollege.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>RAJUK Uttara Model College</a>
-    </div>
-
-  </div>
-</section>
-
 
 <hr class="divider">
 
 <!-- TIMELINE — HOW DIPLOMA ENGINEERS CAPTURED GRADE 10 -->
 <section id="slide12">
   <div class="section-wrap">
-    <p class="section-label">Section 11</p>
+    <p class="section-label">আন্দোলনের ইতিহাস</p>
     <h2>ধাপে ধাপে দখল<span class="bn">How Diploma Engineers Captured the Grade 10 Post — A Timeline</span></h2>
 
     <div class="prose">
-      <p>বাংলাদেশের সরকারি প্রকৌশল খাতে ডিপ্লোমাধারীদের অবস্থান আজ যেখানে — এটা একদিনে হয়নি। দশকের পর দশক ধরে একের পর এক আন্দোলন, রাজনৈতিক লবিং এবং সরকারি প্রজ্ঞাপনের মাধ্যমে এই অবস্থান তৈরি হয়েছে। প্রতিটি ধাপে একটু একটু করে সুবিধা বাড়ানো হয়েছে — এবং প্রতিটি ধাপেই BSc ইঞ্জিনিয়ারদের সুযোগ একটু একটু করে সংকুচিত হয়েছে।</p>
+      <p>আন্দোলনের শুরুটা হয়েছিল একটাই কারণে — <strong>৯ম গ্রেডের সহকারী প্রকৌশলী পদে ডিপ্লোমাধারীদের অবৈধ প্রমোশন।</strong></p>
+      <p>নিয়ম ছিল ৩৩%। অর্থাৎ ডিপ্লোমাধারীরা কোটায় সর্বোচ্চ এক তৃতীয়াংশ পদে উঠতে পারবেন। বাকি ৬৭% BSc ইঞ্জিনিয়ারদের জন্য। কিন্তু বাস্তবে কী হচ্ছিল? প্রায় প্রতিটি প্রতিষ্ঠানে পেশাজীবী ডিপ্লোমারা BSc-দের ৬৭% পদে নিয়োগ দেওয়ার বিপরীতে সর্বোচ্চ বাধা দিত। নিয়োগ সার্কুলার আটকে দেওয়া, মামলা করা, প্রতিষ্ঠান ম্যানেজমেন্টে চাপ দেওয়া — একে একে BSc-দের নিয়োগের পথ বন্ধ করে দেওয়া হতো।</p>
+      <p>আর এদিকে? ফাঁকা পড়ে থাকা সেই BSc-দের পদগুলোতে ডিপ্লোমারা নিজেরাই "ভারপ্রাপ্ত দায়িত্ব", "চলতি দায়িত্ব" বা "অতিরিক্ত দায়িত্ব" হিসেবে প্রমোশন নিয়ে বসে যেত। একবার সহকারী প্রকৌশলীর চেয়ারে বসলে জীবনে আর উঠতে দেখা যায়নি — ইতিহাসে এমন নজির নেই।</p>
+      <p>এই বাস্তবতার বিরুদ্ধেই সারাদেশের মেধাবী BSc ইঞ্জিনিয়াররা <strong>প্রকৌশলী অধিকার আন্দোলনের</strong> ব্যানারে রাস্তায় নামেন।</p>
     </div>
 
     <div class="timeline">
@@ -2261,6 +2591,20 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
         <div class="timeline-desc">গাজীপুর চৌরাস্তায় একসাথে মহাসড়ক ও রেলপথ অবরোধের পর ১৭ সেপ্টেম্বর জনপ্রশাসন মন্ত্রণালয়ের সম্মেলন কক্ষে এক সভায় প্রকৌশল পেশাজীবীদের সমস্যা নিরসনে <strong>ছয় সদস্যের একটি কমিটি গঠন করে সরকার।</strong></div>
       </div>
 
+      <div class="timeline-item highlight">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">২০২৪–২০২৫</div>
+        <div class="timeline-title">প্রকৌশলী অধিকার আন্দোলন — BSc ইঞ্জিনিয়ারদের পাল্টা লড়াই</div>
+        <div class="timeline-desc">সারাদেশের BSc ইঞ্জিনিয়াররা <strong>প্রকৌশলী অধিকার আন্দোলনের</strong> ব্যানারে দুটি দাবিতে মাঠে নামেন — ১০ম গ্রেডে BSc-দের আবেদনের সুযোগ দেওয়া, এবং ৯ম গ্রেডে ডিপ্লোমাদের অবৈধ পদোন্নতি বন্ধ করা। এরপর আইন আদালতের পথে ডিপ্লোমাদের ১০ম গ্রেডের পরীক্ষাগুলোতে রিট দায়ের করা হয় — পরীক্ষা স্থগিত হয়ে যায়। ইনবক্সে এসে কান্নাকাটি আর অনুনয়-বিনয় হয় — কিন্তু নিজেদের পেশাজীবী বড়ভাইদের অবৈধ পদ দখল নিয়ে কোনো প্রশ্ন ওঠে না।</div>
+      </div>
+
+      <div class="timeline-item highlight">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">এখনো চলছে</div>
+        <div class="timeline-title">আন্দোলনের পরও — পিডিবিতে গতকালও হয়েছে</div>
+        <div class="timeline-desc">আন্দোলনের পরেও বাস্তবতা বদলায়নি। সরকারি ও স্বায়ত্তশাসিত প্রতিষ্ঠানগুলোতে ডিপ্লোমারা এখনো ৯ম গ্রেডে অবৈধ প্রমোশন নিয়ে চলেছেন। সহকারী প্রকৌশলী পদের নিয়োগ রিট করে আটকে রাখা হচ্ছে। ভাইভা হওয়ার পরও নিয়োগ ঠেকিয়ে রাখা হচ্ছে। গতকালও পিডিবিতে ডিপ্লোমারা ৩৩% প্রমোশন নেওয়ার পরেও BSc-দের জন্য বরাদ্দ ৬৭% পদে "ভারপ্রাপ্ত দায়িত্ব" হিসেবে বসে গেছেন।</div>
+      </div>
+
     </div><!-- /.timeline -->
 
     <div class="accent-block">
@@ -2278,11 +2622,19 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
             <tr><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:var(--brown-warm);font-weight:600;white-space:nowrap">১৯৭৮</td><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:rgba(245,240,232,0.82)">"Sub-Assistant Engineer" পদের আনুষ্ঠানিক স্বীকৃতি + ৩৩% পদোন্নতি কোটা</td></tr>
             <tr><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:var(--brown-warm);font-weight:600;white-space:nowrap">১৯৯৪</td><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:rgba(245,240,232,0.82)">১০ম গ্রেড + দ্বিতীয় শ্রেণির সরকারি কর্মকর্তার মর্যাদা</td></tr>
             <tr><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:var(--brown-warm);font-weight:600;white-space:nowrap">২০১৩+</td><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:rgba(245,240,232,0.82)">কোটায় ৯ম গ্রেডে পৌঁছানো শুরু</td></tr>
-            <tr><td style="padding:7px 10px;color:var(--brown-warm);font-weight:600;white-space:nowrap">২০২৫</td><td style="padding:7px 10px;color:rgba(245,240,232,0.82)">পদোন্নতির হার ৩৩% → ৫০% করার দাবিতে মহাসড়ক ও রেলপথ অবরোধ</td></tr>
+            <tr><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:var(--brown-warm);font-weight:600;white-space:nowrap">২০২৫</td><td style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:rgba(245,240,232,0.82)">পদোন্নতির হার ৩৩% → ৫০% করার দাবিতে মহাসড়ক ও রেলপথ অবরোধ</td></tr>
+            <tr><td style="padding:7px 10px;color:var(--brown-warm);font-weight:600;white-space:nowrap">এখনো</td><td style="padding:7px 10px;color:rgba(245,240,232,0.82)">BSc-দের পদ দখল চলছে, নিয়োগ রিটে আটকে আছে, পিডিবিতে গতকালও হয়েছে</td></tr>
           </tbody>
         </table>
         <p>এই যাত্রাটা লক্ষ্য করুন — প্রতিটি ধাপে একটু একটু করে উপরে ওঠা হয়েছে। এবং প্রতিটি ধাপে BSc ইঞ্জিনিয়ারদের জন্য চাকরির সুযোগ একটু একটু করে সংকুচিত হয়েছে। <strong>এটা ঘটনাচক্র নয় — এটা সুপরিকল্পিত ও ধারাবাহিক আন্দোলনের ফল।</strong></p>
       </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <strong>তারা কি মজলুম? আমরা কি জালেম?</strong>
+      <p style="margin-top:10px">ডিপ্লোমাধারীরা রিটের কারণে পরীক্ষা আটকে যাওয়ায় ইনবক্সে এসে হাজারো কান্নাকাটি করেছেন, বদদোয়া দিয়েছেন, অনুনয়-বিনয় করেছেন। কিন্তু তারা কখনো জিজ্ঞেস করেননি — <em>এই আন্দোলন কেন হলো?</em> তাদের পেশাজীবী বড়ভাইরা যে BSc-দের পদ বছরের পর বছর ধরে দখল করে বসে আছেন, তা নিয়ে কোনো আওয়াজ নেই।</p>
+      <p style="margin-top:10px">এখন প্রশ্ন হলো — তারা কি নিজেদের মজলুম বলতে পারেন? আমরা যদি প্রতিকারমূলক ব্যবস্থা নিই, তাহলে কি আমরা জালেম হয়ে যাব? আমরা কি নিজেদের অধিকার আদায়ে ন্যূনতম প্রতিরোধও গড়ে তুলতে পারব না? তখন কি আমাদের "অন্যের হক নষ্টকারী" বলা হবে?</p>
+      <p style="margin-top:10px"><strong>যে অন্যের পদ দখল করে বসে আছেন — সে মজলুম নন। যে নিজের পদ ফিরে পেতে লড়ছেন — সে জালেম নন।</strong></p>
     </div>
 
     <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
@@ -2300,83 +2652,18 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
 </section>
 
 
-<hr class="divider">
-
-<!-- VIDEO EVIDENCE — COACHING TEACHER MISINFORMATION -->
-<section id="slide13">
-  <div class="section-wrap">
-    <p class="section-label">Section 12</p>
-    <h2>কোচিং শিক্ষক যখন ভুল তথ্য ছড়াচ্ছেন<span class="bn">When the Coaching Teacher Spreads Misinformation</span></h2>
-
-    <div class="accent-block">
-      <h3>শিরোনাম: কোচিং শিক্ষক যখন ভুল তথ্য ছড়াচ্ছেন</h3>
-      <div class="prose">
-        <p>একটি Facebook ভিডিওতে একজন পলিটেকনিক কোচিং শিক্ষককে বলতে শোনা গেছে —</p>
-      </div>
-      <div class="policy-quote" style="margin:16px 0">
-        <blockquote>"রেখা দ্বারা আবদ্ধ ক্ষেত্রফল হল এরিয়া, আর যখন রেখাটা গোলাকার হয়ে যাবে তখন এটা হবে ক্রস সেকশন এরিয়া।"</blockquote>
-        <cite>পলিটেকনিক কোচিং শিক্ষক — Facebook ভিডিও</cite>
-      </div>
-      <div class="prose">
-        <p><strong>এই সংজ্ঞাটি সম্পূর্ণ ভুল।</strong></p>
-        <p><strong>সঠিক সংজ্ঞা কী?</strong><br>
-        Cross-Section Area হলো — কোনো একটি ত্রিমাত্রিক বস্তুকে (3D object) একটি সমতল দিয়ে কেটে ফেললে যে দ্বিমাত্রিক (2D) আকৃতি পাওয়া যায়, তার ক্ষেত্রফল। এই আকৃতি গোলাকার, আয়তাকার, ত্রিভুজাকার — যেকোনো কিছু হতে পারে। <strong>"রেখা গোলাকার হলে Cross Section হয়"</strong> — এটা প্রকৌশলের কোনো বইয়ে কোথাও লেখা নেই।</p>
-        <p><strong>উদাহরণ —</strong></p>
-        <ul>
-          <li>একটি বৃত্তাকার পাইপ কাটলে → Cross-Section = বৃত্ত</li>
-          <li>একটি আয়তাকার বিম কাটলে → Cross-Section = আয়তক্ষেত্র</li>
-          <li>একটি I-beam কাটলে → Cross-Section = I আকৃতি</li>
-        </ul>
-      </div>
-      <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
-        <a class="source-btn" href="https://www.facebook.com/share/v/18RFUD13LY/" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>ভিডিও প্রমাণ — Facebook</a>
-        <a class="source-btn" href="https://www.engineeringtoolbox.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Cross-Section Definition — Engineering Toolbox</a>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════════
-         VIDEO PLAYER
-         Update the src below once you upload dibbader_teacher.mp4
-         to GitHub. Replace YOUR_USERNAME and YOUR_REPO with your
-         actual GitHub username and repository name.
-         Example src:
-           https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/dibbader_teacher.mp4
-         ═══════════════════════════════════════════════════════════ -->
-    <div class="video-wrap">
-      <p class="video-label">ভিডিও প্রমাণ — সরাসরি দেখুন</p>
-      <div class="yt-short">
-        <iframe
-          src="https://www.youtube.com/embed/n5S0-EqMMTg"
-          title="ভিডিও প্রমাণ — পলিটেকনিক কোচিং শিক্ষক"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-      <p class="video-note">ভিডিও লোড না হলে সরাসরি <a href="https://www.youtube.com/shorts/n5S0-EqMMTg" target="_blank">YouTube-এ দেখুন →</a></p>
-    </div>
-
-    <div class="prose">
-      <p>বিষয়টি এখানেই শেষ নয়। এই ভিডিওটি কোনো ব্যক্তিগত আলাপ নয় — এটি সোশ্যাল মিডিয়ায় হাজারো শিক্ষার্থীর কাছে পৌঁছানো একটি শিক্ষামূলক কন্টেন্ট হিসেবে প্রচার করা হচ্ছে। অর্থাৎ এই ভুল সংজ্ঞাটি এখন অসংখ্য ডিপ্লোমা শিক্ষার্থীর মাথায় ঢুকছে — এবং তারা এটাকে সত্য বলে মনে করছেন।</p>
-      <p>যে শিক্ষাব্যবস্থায় কোচিং শিক্ষক নিজেই মৌলিক প্রকৌশল পরিভাষার সংজ্ঞা জানেন না, সেই শিক্ষাব্যবস্থার শিক্ষার্থীরা যখন নিজেদের "ইঞ্জিনিয়ার" দাবি করেন — তখন প্রশ্ন একটাই: কোন ইঞ্জিনিয়ারিং শিক্ষার ভিত্তিতে?</p>
-      <p>এটা কোনো ব্যক্তিকে আক্রমণ নয়। এটা একটি কাঠামোগত সমস্যার দলিল — যেখানে ভুল শিক্ষা, ভুল দাবি এবং ভুল পরিচয় একসাথে চলছে।</p>
-    </div>
-
-  </div>
-</section>
-
-
 
 <hr class="divider">
 
 <!-- DOUBLE CERTIFICATE TRAP -->
 <section id="slide14">
   <div class="section-wrap">
-    <p class="section-label">Section 13</p>
+    <p class="section-label">চাকরির ফাঁদ</p>
     <h2>দুই সার্টিফিকেটের ফাঁদ<span class="bn">The Double Certificate Trap — Enter with Diploma, Promote with BSc</span></h2>
 
     <div class="prose">
       <p>বাংলাদেশে একটি বিশেষ ঘটনা ঘটছে — এবং এটি BSc ইঞ্জিনিয়ারদের জন্য সবচেয়ে বড় অবিচারগুলোর একটি। DUET (Dhaka University of Engineering &amp; Technology) থেকে যারা BSc ডিগ্রি নিয়েছেন, তাদের একটি বড় অংশ আগে <strong>ডিপ্লোমা সার্টিফিকেট দিয়ে সরকারি চাকরিতে ১০ম গ্রেডে</strong> প্রবেশ করেছেন — এবং পরে সেই চাকরিতে থাকাকালীন DUET থেকে BSc ডিগ্রি নিয়ে <strong>৯ম গ্রেডে পদোন্নতি</strong> পাচ্ছেন। এই প্রক্রিয়াটি কার্যত HSC বিজ্ঞান বিভাগ থেকে আসা BSc ইঞ্জিনিয়ারদের জন্য সরকারি চাকরির দরজা <strong>দুদিক থেকেই বন্ধ</strong> করে দিচ্ছে।</p>
+      <p>এর বাইরে আরেকটি প্যাটার্ন আছে — BSc-দের ৯ম গ্রেডের পদে নিয়োগ সার্কুলার হলেই রিট করে আটকে দেওয়া, তারপর সেই শূন্য পদে "ভারপ্রাপ্ত দায়িত্ব" নিয়ে বসে যাওয়া। অনেকে বিশ্বাস করতে চান না যে এটা সত্যিই হচ্ছে। কিন্তু পিডিবি থেকে শুরু করে ডজনখানেক প্রতিষ্ঠানে এটাই বাস্তব চিত্র।</p>
     </div>
 
     <!-- ── INFOGRAPHIC ────────────────────────────────────── -->
@@ -2456,7 +2743,7 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
           <div class="grade-title">ডিপ্লোমাধারী</div>
           <div class="grade-row"><span class="gdot allow"></span>সরাসরি নিয়োগ — BCS ছাড়াই</div>
           <div class="grade-row"><span class="gdot quota"></span>৩৩% কোটায় Grade 9-এ পদোন্নতির সুযোগ</div>
-          <div class="grade-row"><span class="gdot quota"></span>বাস্তবে ১০০% পর্যন্ত পদোন্নতি হচ্ছে</div>
+          <div class="grade-row"><span class="gdot quota"></span>বাস্তবে ১০০% পর্যন্ত — "ভারপ্রাপ্ত দায়িত্ব" নিয়ে BSc-দের পদ দখল</div>
         </div>
       </div>
 
@@ -2503,8 +2790,10 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
     <div class="accent-block">
       <h3>BSc ইঞ্জিনিয়ার — দুদিক থেকেই আটকা</h3>
       <div class="prose">
-        <p>BSc ইঞ্জিনিয়াররা কার্যত দুদিক থেকে বন্ধ — নিচের পদে (১০ম গ্রেড) আবেদন করতে পারছেন না, আর উপরের পদে (৯ম গ্রেড) ডিপ্লোমাধারীদের কোটা পদোন্নতির কারণে সংকুচিত হয়ে যাচ্ছে। গত এক দশকে BCS পরীক্ষার (৩১তম থেকে ৪৫তম পর্যন্ত) মাধ্যমে মাত্র <strong>৪৬৮টি Assistant Engineer পদের</strong> বিজ্ঞপ্তি দেওয়া হয়েছে — অর্থাৎ বছরে গড়ে <strong>৫০টিরও কম পদ</strong> — অথচ প্রতি বছর <strong>১ লাখেরও বেশি</strong> শিক্ষার্থী BSc ইঞ্জিনিয়ারিং ডিগ্রি নিয়ে বের হচ্ছেন।</p>
-        <p>যখন ৯ম গ্রেডের Assistant Engineer পদে BSc ইঞ্জিনিয়ারদের জন্য নিয়োগ বিজ্ঞপ্তি দেওয়া হয়, তখন ডিপ্লোমাধারীরা আদালতে মামলা করেন — এবং নিয়োগ প্রক্রিয়া আটকে যায়। প্রতিষ্ঠানগুলো তখন ডিপ্লোমাধারীদেরকেই ভারপ্রাপ্ত বা অস্থায়ী ভিত্তিতে সেই পদে বসায়।</p>
+        <p>ছবিটা ভাবুন। একজন BSc ইঞ্জিনিয়ার পাস করে বের হয়েছেন। নিচে তাকালে — ১০ম গ্রেডে তার আবেদন করার অধিকার নেই, ওই পদ শুধু ডিপ্লোমাদের। উপরে তাকালে — ৯ম গ্রেডে BSc-দের জন্য নিয়োগ সার্কুলার হলে ডিপ্লোমারা মামলা করে সেটা আটকে দেন, তারপর সেই শূন্য পদে নিজেরাই "ভারপ্রাপ্ত দায়িত্ব" নিয়ে বসে যান।</p>
+        <p>আর একবার "ভারপ্রাপ্ত" হিসেবে সহকারী প্রকৌশলীর চেয়ারে বসে গেলে — সেটা জীবনভর ধরে রাখেন। এর ব্যত্যয় হয়নি কখনো।</p>
+        <p>গত এক দশকে BCS পরীক্ষার (৩১তম থেকে ৪৫তম পর্যন্ত) মাধ্যমে মাত্র <strong>৪৬৮টি Assistant Engineer পদের</strong> বিজ্ঞপ্তি দেওয়া হয়েছে — অর্থাৎ বছরে গড়ে <strong>৫০টিরও কম পদ</strong> — অথচ প্রতি বছর <strong>১ লাখেরও বেশি</strong> শিক্ষার্থী BSc ইঞ্জিনিয়ারিং ডিগ্রি নিয়ে বের হচ্ছেন।</p>
+        <p>অনেকে বিশ্বাসও করতে চান না এই বাস্তবতা। কিন্তু পিডিবি থেকে শুরু করে রাস্তাঘাট বিভাগ পর্যন্ত — প্রতিদিন এটাই ঘটছে।</p>
       </div>
       <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">
         <a class="source-btn" href="https://www.tbsnews.net/bangladesh/bsc-vs-diploma-engineers-why-conflict-and-what-they-demand-1222581" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>TBS News — BSc vs Diploma Engineers: The Conflict</a>
@@ -2530,10 +2819,257 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
 
 <hr class="divider">
 
+<!-- DUET STATE CAPTURE -->
+<section id="slide16">
+  <div class="section-wrap">
+    <p class="section-label">রাষ্ট্রীয় দখল</p>
+    <h2>DUET — সরকারি বিশ্ববিদ্যালয়, কিন্তু HSC পাসরা ঢুকতে পারবেন না<span class="bn">A Public University That Isn't Quite… Public</span></h2>
+
+    <div class="prose">
+      <p>ঢাকা প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়, গাজীপুর — সংক্ষেপে DUET। ১৯৮০ সালে ঢাকা বিশ্ববিদ্যালয়ের অধীনে <strong>"College of Engineering, Dhaka"</strong> নামে যাত্রা শুরু হয়েছিল। সে সময় এটি সাধারণ ইঞ্জিনিয়ারিং বিশ্ববিদ্যালয়ের মতোই ছিল — Civil, Electrical ও Mechanical ইঞ্জিনিয়ারিংয়ে স্নাতক ডিগ্রি দিত। ১৯৮৬ সালে BIT Dhaka হয়, আর ২০০৩ সালে পূর্ণ স্বায়ত্তশাসিত বিশ্ববিদ্যালয় হিসেবে DUET-এ রূপান্তরিত হয়।</p>
+      <p style="margin-top:10px">কিন্তু এই রূপান্তরের সাথে সাথে একটি চুপচাপ পরিবর্তনও হয়ে গেল — DUET-এর undergraduate ভর্তি হয়ে গেল <strong>শুধুমাত্র ডিপ্লোমাধারীদের জন্য</strong>।</p>
+    </div>
+
+    <div class="callout">
+      <strong>DUET নিজেই কী বলছে?</strong>
+      <p>DUET-এর নিজস্ব ওয়েবসাইটে লেখা আছে: <em>"DUET is unique in its scope and mission… it offers B.Sc. Engineering degree only to the eligible diploma engineers from around the country."</em> অর্থাৎ সরাসরি স্বীকারোক্তি — একটি সরকারি, করদাতার টাকায় পরিচালিত বিশ্ববিদ্যালয়, শুধুমাত্র একটি নির্দিষ্ট গোষ্ঠীর জন্য সংরক্ষিত।<br>— DUET Official Website, duet.ac.bd</p>
+    </div>
+
+    <div class="prose">
+      <p style="margin-top:18px">এখন একটু হিসাব করা যাক। একজন HSC শিক্ষার্থী — Physics, Chemistry, Mathematics নিয়ে পড়েছেন, SSC ও HSC দুটো পাবলিক পরীক্ষা দিয়েছেন, কঠিন ভর্তি যুদ্ধে নেমেছেন — <strong>তিনি DUET-এর ভর্তি পরীক্ষায় বসতে পারবেন না।</strong></p>
+      <p style="margin-top:10px">অন্যদিকে, একজন ডিপ্লোমাধারী যিনি SSC পাসের পরেই পলিটেকনিকে ভর্তি হয়েছেন, CGPA ৩.০০ থাকলেই DUET-এ আবেদন করতে পারবেন।</p>
+      <p style="margin-top:10px">দুজনের শিক্ষাগত পথ একটু তুলনা করা যাক — মনোযোগ দিয়ে দেখুন:</p>
+    </div>
+
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>যোগ্যতার মাপকাঠি</th>
+            <th>HSC শিক্ষার্থী</th>
+            <th>ডিপ্লোমাধারী</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ন্যূনতম প্রবেশ যোগ্যতা</td>
+            <td><span class="badge-no">SSC + HSC (বিজ্ঞান)</span></td>
+            <td><span class="badge-yes">SSC মাত্র</span></td>
+          </tr>
+          <tr>
+            <td>Physics, Chemistry, Math</td>
+            <td><span class="badge-no">বাধ্যতামূলক, গভীর সিলেবাস</span></td>
+            <td><span class="badge-yes">সীমিত ও ব্যবহারিককেন্দ্রিক</span></td>
+          </tr>
+          <tr>
+            <td>জাতীয় পাবলিক পরীক্ষা</td>
+            <td><span class="badge-no">২টি (SSC + HSC)</span></td>
+            <td><span class="badge-yes">১টি (SSC)</span></td>
+          </tr>
+          <tr>
+            <td>DUET-এ আবেদনের অধিকার</td>
+            <td><span class="badge-no">❌ দরজা বন্ধ</span></td>
+            <td><span class="badge-yes">✅ সরাসরি যোগ্য</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="accent-block">
+      <h3>তাহলে HSC কি SSC থেকেও ছোট?</h3>
+      <div class="prose">
+        <p>বাংলাদেশের শিক্ষা কাঠামোতে HSC, ডিপ্লোমার চেয়ে উঁচু স্তরের একাডেমিক যোগ্যতা হিসেবে স্বীকৃত। সরকারি চাকরির বিজ্ঞপ্তি থেকে শুরু করে বিশ্ববিদ্যালয় ভর্তির নিয়ম — সর্বত্র HSC-কে ডিপ্লোমার সমতুল্য বা ঊর্ধ্বে রাখা হয়। কিন্তু DUET বলছে — <strong>তুমি HSC দিয়েছ? তোমার জন্য দরজা বন্ধ।</strong></p>
+        <p style="margin-top:10px">এটা যুক্তির কথা নয়। এটা ব্যবস্থার কথা।</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p style="margin-top:22px">বিষয়টা আরও মজার হয় যখন দেখা যায় — ডিপ্লোমাধারীরা সবসময় বলে থাকেন যে তাদের সাথে "বৈষম্য" করা হচ্ছে, তাদের সুযোগ দেওয়া হচ্ছে না। অথচ একটি পুরো পাবলিক বিশ্ববিদ্যালয় <strong>শুধু তাদের জন্যই বরাদ্দ।</strong> BUET, RUET, CUET, KUET — এই বিশ্ববিদ্যালয়গুলো HSC শিক্ষার্থীদের জন্য। DUET সবার ট্যাক্সের টাকায় চলা একটি বিশ্ববিদ্যালয় — <strong>শুধুমাত্র ডিপ্লোমাধারীদের জন্য।</strong></p>
+      <p style="margin-top:10px">HSC শিক্ষার্থীরা কি এই বিশ্ববিদ্যালয়ের কর দেন না?</p>
+    </div>
+
+    <div class="point-grid" style="margin-top:22px">
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 22V12a9 9 0 0 1 18 0v10"/><rect x="1" y="16" width="4" height="6" rx="1"/><rect x="19" y="16" width="4" height="6" rx="1"/></svg>
+        </div>
+        <div>
+          <div class="point-title">পাবলিক সম্পদ, প্রাইভেট সুবিধা</div>
+          <div class="point-text">DUET পরিচালিত হয় সরকারি বরাদ্দে — মানে সব নাগরিকের করের টাকায়। কিন্তু সেই বিশ্ববিদ্যালয়ে ভর্তির সুযোগ কেবল একটি গোষ্ঠীর। ন্যায়বিচারের সংজ্ঞাটা কোথাও একটু গুলিয়ে গেছে মনে হচ্ছে।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="point-title">ভর্তি সার্কুলারেই লেখা বৈষম্য</div>
+          <div class="point-text">DUET-এর অফিসিয়াল ভর্তি বিজ্ঞপ্তিতে স্পষ্টভাবে লেখা — শুধুমাত্র BTEB-এর ডিপ্লোমাধারীরা আবেদন করতে পারবেন। HSC পাস বিজ্ঞানের শিক্ষার্থী হলেও নয়। অন্তত লুকিয়ে রাখার কষ্টটাও করা হয়নি।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </div>
+        <div>
+          <div class="point-title">একমুখী দরজা</div>
+          <div class="point-text">ডিপ্লোমাধারীরা DUET-এ পড়তে পারেন, চাইলে পরে MSc বা PhD-ও করতে পারেন। কিন্তু HSC শিক্ষার্থী DUET-এর দরজায় দাঁড়ালে সরাসরি ফিরিয়ে দেওয়া হয়। এই দরজা শুধু একদিকেই খোলে।</div>
+        </div>
+      </div>
+
+    </div><!-- /.point-grid -->
+
+    <div class="callout" style="margin-top:22px">
+      <strong>একটু থামুন। শুধু HSC বিজ্ঞান শাখার শিক্ষার্থীরাই বাদ নন।</strong>
+      <p>DUET ভর্তির নিয়ম বলছে — SSC যেকোনো বোর্ড থেকে, <strong>যেকোনো বিভাগ</strong> থেকে পাস করলেই ডিপ্লোমায় ভর্তি হওয়া যায়। আর ডিপ্লোমা হলেই DUET-এ আবেদন করা যায়।</p>
+      <p style="margin-top:8px">মানে? SSC-তে বাণিজ্য পড়েছেন? সমস্যা নেই। মানবিক পড়েছেন? কোনো আপত্তি নেই। Accounting, History, Civics — যাই পড়ুন, ডিপ্লোমা করলেই DUET-এর দরজা খোলা।<br><em>— DUET Admission Circular, admission.duetbd.org</em></p>
+    </div>
+
+    <div class="prose">
+      <p style="margin-top:22px">তাহলে পুরো ব্যাপারটা একটু সাজিয়ে নেওয়া যাক।</p>
+      <p style="margin-top:10px">ধরুন <strong>"রাকিব"</strong> SSC-তে মানবিক বিভাগ থেকে পাস করেছেন। Physics, Chemistry, Mathematics — কোনোটাই পড়েননি। SSC-র পর ডিপ্লোমায় ভর্তি হলেন, ৪ বছর পরে DUET-এ আবেদন করলেন, ভর্তিও হয়ে গেলেন। আরও ৪ বছর পরে হাতে BSc Engineering ডিগ্রি।</p>
+      <p style="margin-top:10px">এখন ধরুন <strong>"তানভীর"</strong> — HSC বিজ্ঞান বিভাগ থেকে Physics, Chemistry, Mathematics নিয়ে পড়েছেন। দুটো কঠিন পাবলিক পরীক্ষা দিয়েছেন। GPA ভালো। কিন্তু DUET-এ আবেদন করতে গেলেন — <em>"আপনার জন্য এই দরজা নেই।"</em></p>
+      <p style="margin-top:10px"><strong>এই দেশে এটাই নিয়ম।</strong></p>
+    </div>
+
+    <div class="accent-block">
+      <h3>HSC বিজ্ঞান &lt; SSC মানবিক + ডিপ্লোমা?</h3>
+      <div class="prose">
+        <p>DUET-এর ভর্তি নীতি কার্যত এটাই বলছে। যিনি জীবনে Physics পড়েননি, Chemistry ছোঁননি, একটি অঙ্কও কষেননি একাডেমিক লেভেলে — তিনি ডিপ্লোমার সিঁড়ি বেয়ে BSc Engineering পাচ্ছেন। আর যিনি এই তিনটি বিষয়ই পড়েছেন, পরীক্ষা দিয়েছেন — তার জন্য DUET-এর গেট বন্ধ।</p>
+        <p style="margin-top:10px">কাউকে সুযোগ দেওয়া ভালো। কিন্তু <strong>যোগ্যতর জনকে বাদ দিয়ে সুযোগ দেওয়া</strong> — এটা নীতি নয়, এটা পক্ষপাত।</p>
+      </div>
+    </div>
+
+    <div class="point-grid" style="margin-top:22px">
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div>
+          <div class="point-title">Physics না পড়েও Physics-এর ইঞ্জিনিয়ার</div>
+          <div class="point-text">SSC মানবিক বিভাগে Physics, Chemistry, Math বাধ্যতামূলক নয়। সেই শিক্ষার্থী ডিপ্লোমা করে DUET-এ Electrical বা Mechanical Engineering পড়তে পারছেন। ভিত্তিই নেই, তবু উপরতলা তৈরি হচ্ছে।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="point-title">Accounting থেকে Engineering</div>
+          <div class="point-text">SSC বাণিজ্য বিভাগের শিক্ষার্থী — যার পাঠ্যসূচিতে ছিল Accounting, Business Studies, Economics — তিনিও ডিপ্লোমার মাধ্যমে DUET-এ BSc Engineering করতে পারেন। এই নিয়মটি লেখার সময় কেউ কি একবারও ভেবেছিলেন?</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
+        <div>
+          <div class="point-title">তবু HSC বিজ্ঞান "অযোগ্য"</div>
+          <div class="point-text">Physics, Chemistry, Mathematics — তিনটিই পড়েছেন, পাবলিক পরীক্ষায় পাস করেছেন। তবু DUET বলছে আপনি এখানে আবেদন করার যোগ্য নন। এর চেয়ে বড় পরিহাস আর কী হতে পারে?</div>
+        </div>
+      </div>
+
+    </div><!-- /.point-grid -->
+
+    <div class="prose">
+      <p style="margin-top:22px">ডিপ্লোমা শিক্ষার্থীদের জন্য উচ্চশিক্ষার সুযোগ থাকা উচিত — এটা কেউ অস্বীকার করছে না। কিন্তু সেই সুযোগের নাম যদি হয় <em>"একটি পাবলিক বিশ্ববিদ্যালয় সম্পূর্ণ দখল করো, আর যারা বেশি পড়েছে তাদের ঢুকতে দিও না"</em> — তাহলে এটা সুযোগ নয়, এটা <strong>একচেটিয়া সুবিধা</strong>।</p>
+      <div class="policy-quote" style="margin-top:18px;font-size:14.5px;line-height:1.7">
+        <blockquote>SSC বাণিজ্য + ডিপ্লোমা = DUET BSc Engineering ✅<br>HSC বিজ্ঞান (Physics + Chemistry + Math) = DUET BSc Engineering ❌</blockquote>
+      </div>
+      <p style="margin-top:14px">এই সমীকরণটা যারা বানিয়েছেন, তাদের নিজেদেরই হয়তো Physics পড়া ছিল না।</p>
+    </div>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://admission.duetbd.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>DUET Admission Circular 2024 — admission.duetbd.org</a>
+      <a class="source-btn" href="https://duet.ac.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>DUET Official Website — duet.ac.bd</a>
+      <a class="source-btn" href="https://en.wikipedia.org/wiki/Dhaka_University_of_Engineering_%26_Technology" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Wikipedia — DUET, Gazipur</a>
+      <a class="source-btn" href="https://www.tbsnews.net/bangladesh/education/bsc-vs-diploma-engineers-why-conflict-364786" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>The Business Standard — BSc vs Diploma Engineers: Why the conflict</a>
+      <a class="source-btn" href="https://www.newagebd.net/article/188453/ending-diploma-engineers-marginalisation" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>New Age Bangladesh — Ending diploma engineers' marginalisation</a>
+    </div>
+
+  </div>
+
+
+<hr class="divider">
+
+<!-- VIDEO EVIDENCE — COACHING TEACHER MISINFORMATION -->
+<section id="slide13">
+  <div class="section-wrap">
+    <p class="section-label">ভুল তথ্য</p>
+    <h2>কোচিং শিক্ষক যখন ভুল তথ্য ছড়াচ্ছেন<span class="bn">When the Coaching Teacher Spreads Misinformation</span></h2>
+
+    <div class="accent-block">
+      <h3>শিরোনাম: কোচিং শিক্ষক যখন ভুল তথ্য ছড়াচ্ছেন</h3>
+      <div class="prose">
+        <p>একটি Facebook ভিডিওতে একজন পলিটেকনিক কোচিং শিক্ষককে বলতে শোনা গেছে —</p>
+      </div>
+      <div class="policy-quote" style="margin:16px 0">
+        <blockquote>"রেখা দ্বারা আবদ্ধ ক্ষেত্রফল হল এরিয়া, আর যখন বস্তুটা গোলাকার হয়ে যাবে তখন এটা হবে ক্রস সেকশন এরিয়া।"</blockquote>
+        <cite>পলিটেকনিক কোচিং শিক্ষক — Facebook ভিডিও</cite>
+      </div>
+      <div class="prose">
+        <p><strong>এই সংজ্ঞাটি সম্পূর্ণ ভুল।</strong></p>
+        <p><strong>সঠিক সংজ্ঞা কী?</strong><br>
+        Cross-Section Area হলো — কোনো একটি ত্রিমাত্রিক বস্তুকে (3D object) একটি সমতল দিয়ে কেটে ফেললে যে দ্বিমাত্রিক (2D) আকৃতি পাওয়া যায়, তার ক্ষেত্রফল। এই আকৃতি গোলাকার, আয়তাকার, ত্রিভুজাকার — যেকোনো কিছু হতে পারে। <strong>"বস্তু গোলাকার হলে Cross Section হয়"</strong> — এটা প্রকৌশলের কোনো বইয়ে কোথাও লেখা নেই।</p>
+        <p><strong>উদাহরণ —</strong></p>
+        <ul>
+          <li>একটি বৃত্তাকার পাইপ কাটলে → Cross-Section = বৃত্ত</li>
+          <li>একটি আয়তাকার বিম কাটলে → Cross-Section = আয়তক্ষেত্র</li>
+          <li>একটি I-beam কাটলে → Cross-Section = I আকৃতি</li>
+        </ul>
+      </div>
+      <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+        <a class="source-btn" href="https://www.facebook.com/share/v/18RFUD13LY/" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>ভিডিও প্রমাণ — Facebook</a>
+        <a class="source-btn" href="https://www.engineeringtoolbox.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Cross-Section Definition — Engineering Toolbox</a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VIDEO PLAYER
+         Update the src below once you upload dibbader_teacher.mp4
+         to GitHub. Replace YOUR_USERNAME and YOUR_REPO with your
+         actual GitHub username and repository name.
+         Example src:
+           https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/dibbader_teacher.mp4
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="video-wrap">
+      <p class="video-label">ভিডিও প্রমাণ — সরাসরি দেখুন</p>
+      <div class="yt-short">
+        <iframe
+          src="https://www.youtube.com/embed/n5S0-EqMMTg"
+          title="ভিডিও প্রমাণ — পলিটেকনিক কোচিং শিক্ষক"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <p class="video-note">ভিডিও লোড না হলে সরাসরি <a href="https://www.youtube.com/shorts/n5S0-EqMMTg" target="_blank">YouTube-এ দেখুন →</a></p>
+    </div>
+
+    <div class="prose">
+      <p>বিষয়টি এখানেই শেষ নয়। এই ভিডিওটি কোনো ব্যক্তিগত আলাপ নয় — এটি সোশ্যাল মিডিয়ায় হাজারো শিক্ষার্থীর কাছে পৌঁছানো একটি শিক্ষামূলক কন্টেন্ট হিসেবে প্রচার করা হচ্ছে। অর্থাৎ এই ভুল সংজ্ঞাটি এখন অসংখ্য ডিপ্লোমা শিক্ষার্থীর মাথায় ঢুকছে — এবং তারা এটাকে সত্য বলে মনে করছেন।</p>
+      <p>যে শিক্ষাব্যবস্থায় কোচিং শিক্ষক নিজেই মৌলিক প্রকৌশল পরিভাষার সংজ্ঞা জানেন না, সেই শিক্ষাব্যবস্থার শিক্ষার্থীরা যখন নিজেদের "ইঞ্জিনিয়ার" দাবি করেন — তখন প্রশ্ন একটাই: কোন ইঞ্জিনিয়ারিং শিক্ষার ভিত্তিতে?</p>
+      <p>এটা কোনো ব্যক্তিকে আক্রমণ নয়। এটা একটি কাঠামোগত সমস্যার দলিল — যেখানে ভুল শিক্ষা, ভুল দাবি এবং ভুল পরিচয় একসাথে চলছে।</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<hr class="divider">
+
 <!-- মুখোশ উন্মোচন — "Engr." TITLE MISUSE -->
 <section id="slide15">
   <div class="section-wrap">
-    <p class="section-label">মুখোশ উন্মোচন · Section 14</p>
+    <p class="section-label">মুখোশ উন্মোচন</p>
     <h2>SSC পাস করে "Engr." — সাহস আছে বটে!<span class="bn">নামের আগে তিনটি অক্ষর বসালেই কি ইঞ্জিনিয়ার হওয়া যায়?</span></h2>
 
     <!-- Screenshot mockup cards -->
@@ -2634,13 +3170,226 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
       <a class="source-btn" href="https://www.baete.org" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BAETE — Bangladesh Accreditation Council</a>
     </div>
 
+    <div class="share-strip">
+      <span class="share-label">শেয়ার করুন</span>
+      <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://raffinose007.github.io/The-Diploma-files/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Facebook
+      </a>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?url=https://raffinose007.github.io/The-Diploma-files/&text=The+Diploma+Files+%E2%80%94+Washington+Accord+%26+Bangladesh+Engineering" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+        Twitter / X
+      </a>
+      <button class="share-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href).then(function(){this.textContent='✓ Copied!';setTimeout(function(){},1500)}.bind(this))" style="font-family:inherit">
+        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        লিংক কপি করুন
+      </button>
+    </div>
+
+  </div>
+</section>
+</section>
+
+<hr class="divider">
+
+
+<hr class="divider">
+
+<!-- VERDICT SECTION -->
+<section id="slide17">
+  <div class="section-wrap">
+    <p class="section-label">রায়</p>
+    <h2>এটা কোনো আন্দোলন নয় — এটা একটি সুপরিকল্পিত দখল<span class="bn">ধাপে ধাপে কীভাবে একটি পুরো পেশাকে কব্জা করা হলো</span></h2>
+
+    <div class="prose">
+      <p>১৯৫৫ সাল। তৎকালীন পূর্ব পাকিস্তানে আমেরিকার Ford Foundation ও Oklahoma State University-র সহায়তায় ঢাকা পলিটেকনিক ইনস্টিটিউট প্রতিষ্ঠিত হলো। উদ্দেশ্য ছিল একেবারে সুস্পষ্ট — দেশে এমন একটি <strong>"মধ্যস্তরের কারিগরি জনবল"</strong> তৈরি করা যারা মাঠে কাজ করবেন, BSc ইঞ্জিনিয়ারদের নির্দেশনায় কাজ বাস্তবায়ন করবেন।</p>
+      <p>তাদের পরিচয় ছিল Sub-Assistant Engineer — সহকারীর সহকারী। সরকারি নথিতে, একাডেমিক গবেষণায়, সর্বত্র একটাই কথা: ডিপ্লোমার উদ্দেশ্য হলো <em>"mid-level technical supervisory workforce"</em> তৈরি করা।</p>
+      <p>এটাই ছিল পরিকল্পনা। কিন্তু পরিকল্পনা আর বাস্তবতা — দুটো এখন সম্পূর্ণ আলাদা জায়গায়।</p>
+    </div>
+
+    <div class="callout">
+      <strong>গবেষণা কী বলছে?</strong>
+      <p>MDPI জার্নালে প্রকাশিত গবেষণায় স্পষ্ট লেখা — <em>"The main objective of the Diploma Engineering programme is to produce a mid-level technical supervisory workforce."</em></p>
+      <p style="margin-top:8px">এই একটি বাক্যই যথেষ্ট। ডিপ্লোমার সনদ যার হাতে, তিনি তৈরি হয়েছিলেন মাঠের কাজ করতে — পেশা দখল করতে নয়।</p>
+      <p style="margin-top:8px;color:var(--text-muted);font-size:13px">— MDPI Sustainability Journal, 2022</p>
+    </div>
+
+    <div class="prose" style="margin-top:8px">
+      <p>কিন্তু ধীরে ধীরে ছবিটা বদলে গেল। কোনো বিপ্লব হয়নি, কোনো ঘোষণা হয়নি — চুপচাপ, একটু একটু করে, নিয়মের ফাঁকে ফাঁকে।</p>
+      <p>প্রথমে Grade 10-এর Sub-Assistant Engineer পদটা শুধু ডিপ্লোমাধারীদের জন্য বরাদ্দ হয়ে গেল — ১০০% কোটা। তারপর ২০১৩ সালের পর Grade 10 থেকে Grade 9-এ পদোন্নতিতে ৩৩% কোটা পেয়ে গেলেন। Grade 9 মানে Assistant Engineer — যে পদটা BSc ইঞ্জিনিয়ারদের BCS দিয়ে কষ্ট করে পাওয়ার কথা। তারপর এলো DUET — একটি পাবলিক বিশ্ববিদ্যালয়, সম্পূর্ণ দখল। আর এখন দাবি উঠেছে কোটা ৩৩% থেকে বাড়িয়ে ৫০% করতে হবে।</p>
+    </div>
+
+    <div class="accent-block">
+      <h3>সংখ্যাটা দেখুন, তারপর সিদ্ধান্ত নিন</h3>
+      <div class="prose">
+        <p>৩১তম থেকে ৪৫তম BCS পরীক্ষায় মোট Assistant Engineer পদ বিজ্ঞপ্তি হয়েছে মাত্র <strong>৪৬৮টি</strong>।</p>
+        <p style="margin-top:8px">অথচ প্রতি বছর BUET, RUET, CUET, KUET এবং অন্যান্য বিশ্ববিদ্যালয় থেকে প্রায় <strong>১,০০,০০০</strong> BSc ইঞ্জিনিয়ার বের হচ্ছেন।</p>
+        <p style="margin-top:8px">১৫ বছরে ৪৬৮টি পদ। বছরে ১ লক্ষ গ্র্যাজুয়েট। আর সেই সামান্য পদেও ৩৩% কোটা কেটে নেওয়া হচ্ছে।</p>
+        <p style="margin-top:14px"><strong>এটা কি নীতি? নাকি পরিকল্পিতভাবে একটি পেশাকে শ্বাসরোধ করা?</strong></p>
+        <p style="margin-top:10px;color:rgba(245,240,232,0.55);font-size:13px">— The Business Standard · Jago News 24, 2025</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p style="margin-top:8px">একজন BSc ইঞ্জিনিয়ারের পথটা মাথায় রাখুন।</p>
+      <p>SSC দিলেন। তারপর HSC — Physics, Chemistry, Math। তারপর ভর্তি পরীক্ষা — BUET, RUET, CUET, KUET-এর সেই অসম্ভব প্রতিযোগিতা, যেখানে হাজার হাজার শিক্ষার্থীর মধ্যে মাত্র গুটিকয়েক টিকে যান। তারপর ৪ থেকে ৫ বছরের কঠোর পড়াশোনা — ল্যাব, থিসিস, প্রজেক্ট, পরীক্ষা।</p>
+      <p>এতকিছুর পরে তিনি বের হলেন। সরকারি চাকরিতে ঢুকতে গেলেন। দেখলেন — Grade 10 পদ শুধু ডিপ্লোমাধারীদের। Grade 9-এ ৩৩% আগেই নেওয়া আছে। বাকি পদের সংখ্যা এত কম যে বছরে লক্ষ গ্র্যাজুয়েটের মধ্যে কয়েক ডজনের বেশি সুযোগ নেই। আর সেটুকুও নিয়োগ হওয়ার আগেই রিট করে আটকে দেওয়া হচ্ছে।</p>
+      <p>বছরের পর বছর পড়াশোনা করে অনেকে বেকার, অনেকে অন্য পেশায়, অনেকে দেশ ছেড়ে চলে যাচ্ছেন।</p>
+    </div>
+
+    <div class="point-grid" style="margin-top:18px">
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div class="point-title">DUET — সবার ট্যাক্সে চলা বিশ্ববিদ্যালয়, একচেটিয়া ব্যবহার</div>
+          <div class="point-text">একটি পাবলিক বিশ্ববিদ্যালয় যা সবার ট্যাক্সে চলে, সেটি সম্পূর্ণরূপে শুধু ডিপ্লোমাধারীদের জন্য বরাদ্দ। SSC বাণিজ্য বা মানবিক থেকে পাস করে ডিপ্লোমা করলেও সুযোগ আছে। HSC বিজ্ঞান পড়লে নেই। এই দখল কোনো আইনের মাধ্যমে হয়নি — নীতির নীরব পরিবর্তনে হয়েছে।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <div>
+          <div class="point-title">মেধা পালাচ্ছে দেশ থেকে</div>
+          <div class="point-text">বছরে ১ লক্ষ BSc ইঞ্জিনিয়ার বের হচ্ছেন, কিন্তু সরকারি পদ নেই বললেই চলে। ফলে মেধাবীরা বিদেশে পাড়ি দিচ্ছেন। দেশ হারাচ্ছে তার সেরা প্রকৌশলীদের — যাদের তৈরিতে কোটি কোটি টাকা ব্যয় হয়েছে। এই ক্ষতি অদৃশ্য, কিন্তু অপূরণীয়।</div>
+        </div>
+      </div>
+
+      <div class="point-block">
+        <div class="point-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <div class="point-title">নকশা বানাচ্ছেন টেকনিশিয়ান</div>
+          <div class="point-text">সরকারি প্রকল্পে যখন ডিজাইন, পরিকল্পনা ও তদারকির দায়িত্বে থাকেন সেই ব্যক্তি যাকে মূলত মাঠকর্মী হিসেবে তৈরি করা হয়েছিল — তখন কাজের মান নিয়ে প্রশ্ন আসবেই। ভবন ধসে, সেতু ফাটে, বিদ্যুৎ বিপর্যয় হয় — এই সংকটের শিকড় অনেক গভীরে।</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="prose" style="margin-top:20px">
+      <p>সরকার ডিপ্লোমা শিক্ষা চালু করেছিল দেশের কারিগরি খাতকে শক্তিশালী করতে — মাঠে কাজ করার জন্য দক্ষ জনবল তৈরি করতে। এটা ছিল একটি সম্পূরক ব্যবস্থা, প্রতিস্থাপনের পরিকল্পনা নয়।</p>
+      <p>কিন্তু আজ যা হচ্ছে তা হলো — যে কাঠামো তৈরি হয়েছিল সহযোগিতার জন্য, সেটাকে ব্যবহার করা হচ্ছে প্রতিযোগিতার অস্ত্র হিসেবে। একটি পূর্ণ বিশ্ববিদ্যালয় দখল হয়েছে। সরকারি চাকরির সিংহভাগ কোটা নিশ্চিত হয়েছে। আর এখন দাবি উঠছে আরও বেশির।</p>
+      <p><strong>এটা সরকারের পরিকল্পনার বিচ্যুতি নয় — এটা পরিকল্পনাকে সম্পূর্ণ উল্টে দেওয়া।</strong></p>
+    </div>
+
+    <div class="accent-block" style="margin-top:28px">
+      <h3>চূড়ান্ত রায়</h3>
+      <div class="prose">
+        <p>একটি দেশ তখনই এগোয় যখন সঠিক কাজে সঠিক মানুষ থাকেন। ডিপ্লোমাধারীরা দক্ষ — মাঠের কাজে, বাস্তবায়নে, হাতে-কলমে কাজে। সেটা তাদের শক্তি, সেটার মূল্য আছে।</p>
+        <p style="margin-top:10px">কিন্তু যখন সেই শক্তিকে ব্যবহার না করে কোটা, দখল আর উপাধির রাজনীতিতে পরিণত করা হয় — তখন দেশের ক্ষতি হয়।</p>
+        <p style="margin-top:10px">BSc ইঞ্জিনিয়াররা বিদেশে চলে যাচ্ছেন। সরকারি প্রকল্পে যোগ্য লোক কমছে। প্রকৌশল খাতে মানের অবনতি হচ্ছে। আর যে তরুণ HSC বিজ্ঞানে পড়ে স্বপ্ন দেখছেন — সে দেখছে তার চেয়ে কম পড়া একজন আগে চলে গেছেন।</p>
+        <p style="margin-top:16px;font-size:16px"><strong>এই দেশ তার মেধাবীদের ধরে রাখতে পারছে না — কারণ ব্যবস্থাটা মেধার জন্য তৈরিই নয়।</strong></p>
+      </div>
+    </div>
+
+    <div style="margin-top:22px;display:flex;flex-direction:column;gap:6px">
+      <a class="source-btn" href="https://www.tbsnews.net/bangladesh/bsc-vs-diploma-engineers-why-conflict-and-what-they-demand-1222581" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>The Business Standard — BSc vs Diploma Engineers: Why the conflict</a>
+      <a class="source-btn" href="https://www.mdpi.com/2071-1050/14/21/14270" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>MDPI Sustainability Journal 2022 — Polytechnic Diploma Purpose Study</a>
+      <a class="source-btn" href="https://www.jagonews24.com/en/education/news/85157" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Jago News 24 — Engineering on the streets</a>
+      <a class="source-btn" href="https://www.banglatribune.com/country/dhaka/912794" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Dhaka Tribune — Diploma engineers block Dhaka-Mymensingh highway</a>
+      <a class="source-btn" href="https://www.newagebd.net/article/188453/ending-diploma-engineers-marginalisation" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>New Age Bangladesh — Ending diploma engineers' marginalisation</a>
+    </div>
+
   </div>
 </section>
 
-<footer>
+<hr class="divider">
+
+
+<hr class="divider">
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-wrap">
+    <p class="section-label">সাধারণ প্রশ্ন</p>
+    <h2>প্রায়শই জিজ্ঞাসিত প্রশ্ন<span class="bn">Frequently Asked Questions</span></h2>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          বাংলাদেশের ডিপ্লোমাধারীরা কি আন্তর্জাতিকভাবে "ইঞ্জিনিয়ার" স্বীকৃত?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">না। ওয়াশিংটন অ্যাকর্ড অনুযায়ী শুধুমাত্র ৪ বছরের BAETE-অ্যাক্রেডিটেড BSc ইঞ্জিনিয়ারিং ডিগ্রিধারীরাই আন্তর্জাতিকভাবে "ইঞ্জিনিয়ার" হিসেবে স্বীকৃত। বাংলাদেশের ডিপ্লোমাধারীরা ডাবলিন অ্যাকর্ডের আওতায় <strong>টেকনিশিয়ান</strong> — ইঞ্জিনিয়ার নন।</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          ডিপ্লোমা কি ৪ বছরের? তাহলে পার্থক্য কোথায়?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">বাংলাদেশের ডিপ্লোমা ইঞ্জিনিয়ারিং ৪ বছরের হলেও এটি একটি <strong>টেকনিক্যাল/ভোকেশনাল সার্টিফিকেট প্রোগ্রাম</strong> — আন্ডারগ্র্যাজুয়েট ডিগ্রি নয়। ডিপ্লোমায় ভর্তি হতে শুধু SSC পাস লাগে (GPA ৩.০০), HSC লাগে না। BSc ইঞ্জিনিয়ারিংয়ে HSC-তে GPA ৫.০০ এবং আলাদা ভর্তি পরীক্ষা লাগে। মূল পার্থক্য সিলেবাসের গভীরতায়, ভর্তির মানদণ্ডে এবং BAETE অ্যাক্রেডিটেশনে।</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          BAETE অ্যাক্রেডিটেশন কী এবং কেন গুরুত্বপূর্ণ?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">BAETE (Bangladesh Accreditation Board for Engineering and Technical Education) হলো বাংলাদেশের জাতীয় ইঞ্জিনিয়ারিং অ্যাক্রেডিটেশন বোর্ড এবং ওয়াশিংটন অ্যাকর্ডের পূর্ণ সদস্য। BAETE-অ্যাক্রেডিটেড BSc প্রোগ্রামের স্নাতকরা ওয়াশিংটন অ্যাকর্ডের ২৫+ সদস্য দেশে আন্তর্জাতিকভাবে স্বীকৃত। ডিপ্লোমা প্রোগ্রাম BAETE অ্যাক্রেডিটেশনের আওতায় পড়ে না।</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          ডিপ্লোমা vs BSc — সরকারি চাকরিতে পার্থক্য কী?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">ডিপ্লোমাধারীরা সরাসরি <strong>১০ম গ্রেডে Sub-Assistant Engineer (SAE)</strong> পদে নিয়োগ পান এবং ৩৩% কোটায় ৯ম গ্রেডে পদোন্নতির সুযোগ পান। BSc ইঞ্জিনিয়াররা ৯ম গ্রেডে (Assistant Engineer) BCS পরীক্ষার মাধ্যমে নিয়োগ পান, কিন্তু ১০ম গ্রেডে আবেদন করতে পারেন না। গত ১০ বছরে BCS-এ মাত্র ৪৬৮টি Assistant Engineer পদ ছিল — অথচ প্রতি বছর ১ লাখের বেশি BSc গ্র্যাজুয়েট বের হচ্ছেন।</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          ডাবলিন, সিডনি ও ওয়াশিংটন অ্যাকর্ডের মধ্যে সম্পর্ক কী?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">এই তিনটি আন্তর্জাতিক চুক্তি একসাথে ইঞ্জিনিয়ারিং পেশার তিনটি স্তর তৈরি করে: <strong>ডাবলিন অ্যাকর্ড</strong> — ২ বছরের ডিপ্লোমা → টেকনিশিয়ান; <strong>সিডনি অ্যাকর্ড</strong> — ৩ বছরের টেকনোলজি ডিগ্রি → টেকনোলজিস্ট; <strong>ওয়াশিংটন অ্যাকর্ড</strong> — ৪ বছরের BSc ইঞ্জিনিয়ারিং → প্রফেশনাল ইঞ্জিনিয়ার। তিনটি স্তরেই আলাদা দায়িত্ব, কর্তৃত্ব ও স্বীকৃতি।</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          "Engr." উপাধি ব্যবহার করতে কী লাগে?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">IEB (Institution of Engineers, Bangladesh)-এর সদস্যতা পেতে এবং "Engr." উপাধি ব্যবহার করতে হলে প্রার্থীকে <strong>BAETE-অ্যাক্রেডিটেড ৪ বছরের BSc ইঞ্জিনিয়ারিং ডিগ্রি</strong> থাকতে হবে। বাংলাদেশে আইনগতভাবে ডিপ্লোমাধারীদের "Engr." ব্যবহার করার অনুমতি নেই — যদিও বর্তমানে এটি অননুমোদিতভাবে ব্যাপকভাবে ব্যবহৃত হচ্ছে।</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          BSc ইঞ্জিনিয়ারদের আন্দোলন আসলে শুরু হয়েছিল কেন?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">আন্দোলনের শুরুটা হয়েছিল ৯ম গ্রেডের সহকারী প্রকৌশলী পদে ডিপ্লোমাধারীদের অবৈধ প্রমোশনকে কেন্দ্র করে। নিয়ম অনুযায়ী ডিপ্লোমারা সর্বোচ্চ ৩৩% কোটায় ওই পদে উঠতে পারেন। কিন্তু বাস্তবে প্রায় প্রতিটি প্রতিষ্ঠানে BSc-দের ৬৭% পদে নিয়োগ দেওয়ার বিপরীতে সর্বোচ্চ বাধা দেওয়া হতো — এবং ফাঁকা থাকা সেই পদগুলোতে নিজেরাই "ভারপ্রাপ্ত দায়িত্ব" নিয়ে বসে যেত। একবার বসলে আর উঠত না। এই বাস্তবতার বিরুদ্ধেই আন্দোলন।</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          BSc ইঞ্জিনিয়াররা রিট করে ডিপ্লোমাদের পরীক্ষা আটকে দিয়েছেন — এটা কি ন্যায্য?
+          <span class="faq-icon"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="faq-a">এই প্রশ্নের উত্তরে আগে আরেকটি প্রশ্ন — যারা বছরের পর বছর BSc ইঞ্জিনিয়ারদের নিয়োগে রিট করে আটকে রেখেছেন, তারা কি ন্যায্য ছিলেন? পিডিবিসহ বিভিন্ন প্রতিষ্ঠানে ডিপ্লোমারা BSc-দের পদ দখল করে বসে আছেন — এটা কি ন্যায্য? যে নিজের অধিকার পদদলিত হতে দেখে আইনি পথে প্রতিকার খোঁজেন, সে অন্যায় করেন না। প্রতিকারমূলক ব্যবস্থা নেওয়া মানে জুলুম নয় — বরং জুলুম না মানাটাই ন্যায্যতার প্রথম শর্ত।</div>
+      </details>
+
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
   <div class="footer-inner">
     <strong>The Diploma Files</strong>
-    <p class="footer-copy">© প্রকৌশলী অধিকার আন্দোলন — সত্য প্রতিষ্ঠার লক্ষ্যে</p>
+    <div class="footer-accord-badges">
+      <span class="footer-accord-badge red">Dublin Accord · টেকনিশিয়ান</span>
+      <span class="footer-accord-badge amber">Sydney Accord · টেকনোলজিস্ট</span>
+      <span class="footer-accord-badge green">Washington Accord · ইঞ্জিনিয়ার</span>
+    </div>
+    <p class="footer-copy">© ২০২৬ প্রকৌশলী অধিকার আন্দোলন — সত্য প্রতিষ্ঠার লক্ষ্যে</p>
     <div class="footer-links">
       <a href="#home">Home</a>
       <span>·</span>
@@ -2649,8 +3398,10 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
       <a href="#slide4">অ্যাকর্ড</a>
       <span>·</span>
       <a href="#slide5">Diploma vs BSc</a>
+      <span>·</span>
+      <a href="#faq">FAQ</a>
     </div>
-    <div class="footer-tagline">Washington · Sydney · Dublin Accord</div>
+    <div class="footer-tagline">Washington · Sydney · Dublin Accord — BAETE · IEB · BTEB</div>
   </div>
 </footer>
 
