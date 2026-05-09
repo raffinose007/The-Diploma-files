@@ -5,7 +5,7 @@ FILE_META_START
   last_updated  : 2026-05-08
   meta_upgraded : 2026-05-08   ← line numbers, color values & new entries verified against source
   fonts         : Playfair Display (headings, serif), Source Sans 3 (body, sans)
-  next_slide_id : slide12  ← always increment this when adding a new section
+  next_slide_id : slide13  ← always increment this when adding a new section
 
   COLOR_VARS (:root block at line 135; ⚠ hero-bg & hero-bar are hardcoded in #home, NOT in :root):
     --brown-deep   #3b1a06   footer bg, accent-block bg, dark hover bg, policy-quote bg
@@ -36,6 +36,7 @@ FILE_META_START
     #slide9       BSc 4-Year Journey                     ~line 1666
     #slide10      Diploma vs HSC vs BSc Syllabus Comparison ~line 1727
     #slide11      College Merit Ladder & Polytechnic        ~line 1838
+    #slide12      Coaching Teacher Misinformation + Video   ~line 1929
 
   CSS_BLOCKS (style tag → actual line — verified 2026-05-08):
     reset + *          ~line 133
@@ -150,10 +151,10 @@ FILE_META_END
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 <!-- CANONICAL & LANGUAGE -->
-<link rel="canonical" href="https://thediplomafiles.org/">
-<link rel="alternate" hreflang="bn" href="https://thediplomafiles.org/">
-<link rel="alternate" hreflang="en" href="https://thediplomafiles.org/en/">
-<link rel="alternate" hreflang="x-default" href="https://thediplomafiles.org/">
+<link rel="canonical" href="https://raffinose007.github.io/The-Diploma-files/">
+<link rel="alternate" hreflang="bn" href="https://raffinose007.github.io/The-Diploma-files/">
+<link rel="alternate" hreflang="en" href="https://raffinose007.github.io/The-Diploma-files/">
+<link rel="alternate" hreflang="x-default" href="https://raffinose007.github.io/The-Diploma-files/">
 
 <!-- PRIMARY META -->
 <title>The Diploma Files — প্রকৌশলী অধিকার আন্দোলন | Washington Accord Bangladesh</title>
@@ -174,9 +175,9 @@ FILE_META_END
 <meta property="og:site_name" content="The Diploma Files">
 <meta property="og:title" content="The Diploma Files — ডিপ্লোমা বনাম BSc ইঞ্জিনিয়ারিং: আন্তর্জাতিক মানদণ্ড কী বলে?">
 <meta property="og:description" content="ওয়াশিংটন অ্যাকর্ড অনুযায়ী শুধুমাত্র ৪ বছরের অ্যাক্রেডিটেড BSc ডিগ্রিধারীরাই ইঞ্জিনিয়ার। ডাবলিন ও সিডনি অ্যাকর্ডের আলোকে বাংলাদেশের ডিপ্লোমাধারীদের প্রকৃত আন্তর্জাতিক স্বীকৃতি কী — জানুন সম্পূর্ণ বিশ্লেষণ।">
-<meta property="og:url" content="https://thediplomafiles.org/">
-<meta property="og:image" content="https://thediplomafiles.org/og-cover.png">
-<meta property="og:image:secure_url" content="https://thediplomafiles.org/og-cover.png">
+<meta property="og:url" content="https://raffinose007.github.io/The-Diploma-files/">
+<meta property="og:image" content="https://raffinose007.github.io/The-Diploma-files/og-cover.png">
+<meta property="og:image:secure_url" content="https://raffinose007.github.io/The-Diploma-files/og-cover.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -198,7 +199,7 @@ FILE_META_END
 <meta name="twitter:creator" content="@diplomafiles">
 <meta name="twitter:title" content="The Diploma Files — Washington Accord & Bangladesh Engineering">
 <meta name="twitter:description" content="International accreditation standards classify diploma holders as technicians — not engineers. Here's the full breakdown of the Washington, Sydney & Dublin Accords.">
-<meta name="twitter:image" content="https://thediplomafiles.org/og-cover.png">
+<meta name="twitter:image" content="https://raffinose007.github.io/The-Diploma-files/og-cover.png">
 <meta name="twitter:image:alt" content="The Diploma Files — Three-tier engineering accreditation framework">
 
 <!-- MOBILE & PWA -->
@@ -225,21 +226,21 @@ FILE_META_END
   "@type": "WebPage",
   "name": "The Diploma Files — প্রকৌশলী অধিকার আন্দোলন",
   "description": "আন্তর্জাতিক অ্যাকর্ড অনুযায়ী বাংলাদেশের ডিপ্লোমাধারীরা টেকনিশিয়ান — ইঞ্জিনিয়ার নন। Washington, Sydney ও Dublin Accord এর সম্পূর্ণ বিশ্লেষণ।",
-  "url": "https://thediplomafiles.org/",
+  "url": "https://raffinose007.github.io/The-Diploma-files/",
   "inLanguage": ["bn", "en"],
   "datePublished": "2026-05-08",
   "dateModified": "2026-05-08",
   "author": {
     "@type": "Organization",
     "name": "প্রকৌশলী অধিকার আন্দোলন",
-    "url": "https://thediplomafiles.org/"
+    "url": "https://raffinose007.github.io/The-Diploma-files/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "The Diploma Files",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://thediplomafiles.org/logo.png"
+      "url": "https://raffinose007.github.io/The-Diploma-files/logo.png"
     }
   },
   "about": [
@@ -320,7 +321,7 @@ FILE_META_END
   --radius:12px;
   --nav-h:54px;
 }
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 14px)}
 body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--text-body);line-height:1.58;overflow-x:hidden}
 
 /* === READING PROGRESS BAR === */
@@ -544,6 +545,12 @@ h2 .bn{
 .accent-block .prose{color:rgba(245,240,232,0.83)}
 .accent-block .prose strong{color:var(--cream);font-weight:600}
 .accent-block .prose em{color:rgba(245,240,232,0.7)}
+/* policy-quote nested inside accent-block — needs distinct bg so it doesn't vanish */
+.accent-block .policy-quote{
+  background:rgba(0,0,0,0.3);box-shadow:none;
+  border:1px solid rgba(192,144,90,0.14);
+}
+[data-theme="dark"] .accent-block .policy-quote{background:rgba(0,0,0,0.45)}
 
 /* Tags */
 .tag-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:0;margin-top:16px}
@@ -693,12 +700,16 @@ h2 .bn{
 }
 .dl-btn:hover .dl-btn-badge{background:rgba(255,255,255,0.1);border-color:rgba(192,144,90,0.3);color:var(--brown-warm)}
 
-/* Accord summary table */
+/* Accord summary */
+.accord-summary-wrap{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  margin:14px 0 0;
+}
 .accord-summary{
   width:100%;border-collapse:collapse;
-  margin:14px 0 0;font-size:14.5px;
+  font-size:14.5px;
   border-radius:var(--radius);overflow:hidden;border:1px solid var(--cream-dark);
-  box-shadow:var(--shadow-sm);
 }
 .accord-summary thead tr{background:var(--brown-deep)}
 .accord-summary thead th{
@@ -889,8 +900,9 @@ footer strong{
   .hero-stat:last-child{border-bottom:none}
   .back-top{bottom:20px;right:16px;width:40px;height:40px}
   .source-btn{font-size:12px}
-  .accord-summary{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:100%}
-  .accord-summary table{min-width:380px}
+  .video-wrap video{max-height:260px}
+  .accord-summary-wrap{margin:12px 0 0;border-radius:8px}
+  .accord-summary{min-width:380px;font-size:13.5px}
   .hero-deco-gear{right:20px;width:140px;height:140px}
 }
 
@@ -952,6 +964,11 @@ footer strong{
 }
 [data-theme="dark"] .hero-stat{border-right-color:rgba(192,144,90,0.08)}
 [data-theme="dark"] .hero-stat:last-child{border-right:none}
+/* Dark mode mobile: hero stats stacked — fix border colors */
+@media(max-width:640px){
+  [data-theme="dark"] .hero-stat{border-bottom-color:rgba(192,144,90,0.1)}
+  [data-theme="dark"] .hero-stat:last-child{border-bottom:none}
+}
 [data-theme="dark"] .hero-scroll{color:rgba(192,144,90,0.4)}
 [data-theme="dark"] #home h1{color:#f0e8d8}
 [data-theme="dark"] .hero-eyebrow{color:#8a6a48}
@@ -1006,6 +1023,7 @@ footer strong{
 [data-theme="dark"] .tier-wash .accord-badge{background:rgba(26,107,58,.14);color:#4aad7a;border-color:rgba(26,107,58,.28)}
 
 /* Dark: accord summary table */
+[data-theme="dark"] .accord-summary-wrap{box-shadow:none}
 [data-theme="dark"] .accord-summary{border-color:#2a1808}
 [data-theme="dark"] .accord-summary tbody tr:nth-child(odd){background:#1a0d04}
 [data-theme="dark"] .accord-summary tbody tr:nth-child(even){background:#160a03}
@@ -1125,6 +1143,37 @@ footer strong{
 [data-theme="dark"] .dl-btn:hover{background:#0a0401;border-color:#0a0401}
 [data-theme="dark"] .dl-btn-name{color:var(--text-dark)}
 
+/* === VIDEO PLAYER === */
+.video-wrap{
+  margin:20px 0;border-radius:var(--radius);overflow:hidden;
+  background:#1a0d04;border:1px solid rgba(192,144,90,0.22);
+  box-shadow:0 4px 22px rgba(59,26,6,0.18);
+}
+.video-label{
+  font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--brown-warm);padding:12px 18px 0;margin:0;
+}
+.video-wrap video{
+  display:block;width:100%;max-height:520px;
+  background:#000;
+  border-top:1px solid rgba(192,144,90,0.14);margin-top:10px;
+}
+.video-note{
+  font-size:12px;color:rgba(245,240,232,0.42);padding:8px 18px 12px;margin:0;
+  font-style:italic;
+}
+.video-note a{color:var(--brown-warm);text-decoration:none}
+.video-note a:hover{text-decoration:underline}
+[data-theme="dark"] .video-wrap{background:#0d0603;border-color:rgba(192,144,90,0.15)}
+
+/* === SLIDE12 accent-block list === */
+#slide12 .accent-block ul{
+  margin:8px 0 0 4px;padding-left:20px;
+  display:flex;flex-direction:column;gap:6px;
+  color:rgba(245,240,232,0.85);font-size:14.5px;line-height:1.55;
+}
+#slide12 .accent-block ul li::marker{color:var(--brown-warm)}
+
 /* Smooth theme transition */
 body,nav,.section-wrap,section,.point-block,.accord-tier,.callout,.accent-block,
 .compare td,.compare th,.accord-summary td,.intent-card,.source-btn,.tag,.divider,
@@ -1149,6 +1198,7 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   <a href="#slide9">BSc ৪ বছর</a>
   <a href="#slide10">সিলেবাস তুলনা</a>
   <a href="#slide11">কলেজ মেরিট</a>
+  <a href="#slide12">ভুল তথ্য</a>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
     <!-- moon icon (shown in light mode) -->
     <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1172,6 +1222,7 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
   <a href="#slide9" class="nav-mobile-link">Section 08 — একজন BSc ইঞ্জিনিয়ারের চার বছর</a>
   <a href="#slide10" class="nav-mobile-link">Section 09 — তিনটি সিলেবাস, তিনটি ভিন্ন জগৎ</a>
   <a href="#slide11" class="nav-mobile-link">Section 10 — ভালো কলেজে সুযোগ না পেলে যাওয়া হয় পলিটেকনিকে</a>
+  <a href="#slide12" class="nav-mobile-link">Section 11 — কোচিং শিক্ষকের ভুল তথ্য: Cross-Section এর সংজ্ঞা</a>
 </div>
 
 <!-- HERO -->
@@ -1336,6 +1387,7 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
 
     </div>
 
+    <div class="accord-summary-wrap">
     <table class="accord-summary">
       <thead>
         <tr>
@@ -1362,6 +1414,7 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
         </tr>
       </tbody>
     </table>
+    </div><!-- /.accord-summary-wrap -->
 
     <div class="accord-closing">
       তিনটি অ্যাকর্ড মিলে ইঞ্জিনিয়ারিং পেশার তিনটি আলাদা স্তর তৈরি করে — প্রতিটি স্তরে শিক্ষার মান, দায়িত্ব এবং কর্তৃত্ব আলাদা। তাই যেকোনো আন্তর্জাতিক মানদণ্ড অনুযায়ীই বাংলাদেশের ডিপ্লোমাধারীরা সর্বোচ্চ <strong>টেকনিশিয়ান বা টেকনোলজিস্ট</strong> — "ইঞ্জিনিয়ার" পদবি কেবল ওয়াশিংটন অ্যাকর্ডভুক্ত BSc ডিগ্রিধারীদের জন্য।
@@ -1871,7 +1924,8 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
     <div class="accent-block">
       <h3>সংখ্যায় পার্থক্যটা দেখুন</h3>
       <div class="prose">
-        <table class="compare" style="margin-top:4px">
+        <div class="compare-wrap" style="margin:4px 0 0">
+        <table class="compare" style="margin-top:0">
           <thead>
             <tr>
               <th></th>
@@ -1907,6 +1961,7 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
             </tr>
           </tbody>
         </table>
+        </div><!-- /.compare-wrap -->
         <p style="margin-top:14px">এই তুলনা করা হচ্ছে কাউকে ছোট করতে নয়। কিন্তু যখন কেউ বলেন — "আমিও ইঞ্জিনিয়ার" — তখন এই সংখ্যাগুলো মাথায় রাখা জরুরি।</p>
       </div>
     </div>
@@ -1922,6 +1977,67 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
       <a class="source-btn" href="https://bteb.gov.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>BTEB ভর্তি নীতিমালা</a>
       <a class="source-btn" href="https://www.adamjeecantonment.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Adamjee Cantonment College</a>
       <a class="source-btn" href="https://rajukcollege.edu.bd" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>RAJUK Uttara Model College</a>
+    </div>
+
+  </div>
+</section>
+
+
+<hr class="divider">
+
+<!-- VIDEO EVIDENCE — COACHING TEACHER MISINFORMATION -->
+<section id="slide12">
+  <div class="section-wrap">
+    <p class="section-label">Section 11</p>
+    <h2>কোচিং শিক্ষক যখন ভুল তথ্য ছড়াচ্ছেন<span class="bn">When the Coaching Teacher Spreads Misinformation</span></h2>
+
+    <div class="accent-block">
+      <h3>শিরোনাম: কোচিং শিক্ষক যখন ভুল তথ্য ছড়াচ্ছেন</h3>
+      <div class="prose">
+        <p>একটি Facebook ভিডিওতে একজন পলিটেকনিক কোচিং শিক্ষককে বলতে শোনা গেছে —</p>
+      </div>
+      <div class="policy-quote" style="margin:16px 0">
+        <blockquote>"রেখা দ্বারা আবদ্ধ ক্ষেত্রফল হল এরিয়া, আর যখন রেখাটা গোলাকার হয়ে যাবে তখন এটা হবে ক্রস সেকশন এরিয়া।"</blockquote>
+        <cite>পলিটেকনিক কোচিং শিক্ষক — Facebook ভিডিও</cite>
+      </div>
+      <div class="prose">
+        <p><strong>এই সংজ্ঞাটি সম্পূর্ণ ভুল।</strong></p>
+        <p><strong>সঠিক সংজ্ঞা কী?</strong><br>
+        Cross-Section Area হলো — কোনো একটি ত্রিমাত্রিক বস্তুকে (3D object) একটি সমতল দিয়ে কেটে ফেললে যে দ্বিমাত্রিক (2D) আকৃতি পাওয়া যায়, তার ক্ষেত্রফল। এই আকৃতি গোলাকার, আয়তাকার, ত্রিভুজাকার — যেকোনো কিছু হতে পারে। <strong>"রেখা গোলাকার হলে Cross Section হয়"</strong> — এটা প্রকৌশলের কোনো বইয়ে কোথাও লেখা নেই।</p>
+        <p><strong>উদাহরণ —</strong></p>
+        <ul>
+          <li>একটি বৃত্তাকার পাইপ কাটলে → Cross-Section = বৃত্ত</li>
+          <li>একটি আয়তাকার বিম কাটলে → Cross-Section = আয়তক্ষেত্র</li>
+          <li>একটি I-beam কাটলে → Cross-Section = I আকৃতি</li>
+        </ul>
+      </div>
+      <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+        <a class="source-btn" href="https://www.facebook.com/share/v/18RFUD13LY/" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>ভিডিও প্রমাণ — Facebook</a>
+        <a class="source-btn" href="https://www.engineeringtoolbox.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Cross-Section Definition — Engineering Toolbox</a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VIDEO PLAYER
+         Update the src below once you upload dibbader_teacher.mp4
+         to GitHub. Replace YOUR_USERNAME and YOUR_REPO with your
+         actual GitHub username and repository name.
+         Example src:
+           https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/dibbader_teacher.mp4
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="video-wrap">
+      <p class="video-label">ভিডিও প্রমাণ — সরাসরি দেখুন</p>
+      <video controls preload="metadata">
+        <source src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/dibbader_teacher.mp4" type="video/mp4">
+        আপনার ব্রাউজার ভিডিও প্লেব্যাক সমর্থন করে না।
+      </video>
+      <p class="video-note">ভিডিও লোড না হলে সরাসরি <a href="https://www.facebook.com/share/v/18RFUD13LY/" target="_blank">Facebook-এ দেখুন →</a></p>
+    </div>
+
+    <div class="prose">
+      <p>বিষয়টি এখানেই শেষ নয়। এই ভিডিওটি কোনো ব্যক্তিগত আলাপ নয় — এটি সোশ্যাল মিডিয়ায় হাজারো শিক্ষার্থীর কাছে পৌঁছানো একটি শিক্ষামূলক কন্টেন্ট হিসেবে প্রচার করা হচ্ছে। অর্থাৎ এই ভুল সংজ্ঞাটি এখন অসংখ্য ডিপ্লোমা শিক্ষার্থীর মাথায় ঢুকছে — এবং তারা এটাকে সত্য বলে মনে করছেন।</p>
+      <p>যে শিক্ষাব্যবস্থায় কোচিং শিক্ষক নিজেই মৌলিক প্রকৌশল পরিভাষার সংজ্ঞা জানেন না, সেই শিক্ষাব্যবস্থার শিক্ষার্থীরা যখন নিজেদের "ইঞ্জিনিয়ার" দাবি করেন — তখন প্রশ্ন একটাই: কোন ইঞ্জিনিয়ারিং শিক্ষার ভিত্তিতে?</p>
+      <p>এটা কোনো ব্যক্তিকে আক্রমণ নয়। এটা একটি কাঠামোগত সমস্যার দলিল — যেখানে ভুল শিক্ষা, ভুল দাবি এবং ভুল পরিচয় একসাথে চলছে।</p>
     </div>
 
   </div>
@@ -1950,6 +2066,7 @@ footer,.back-top,.policy-quote,.accord-closing,.accord-badge{
     <svg viewBox="0 0 24 24"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
     আপনি ডিব্বা হলে ক্লিক করুন
   </button>
+  <p class="dibba-punchline hidden" id="dibbaPunchline">ইংরেজি কঠিন লাগলে এটাই পড়ুন 😄</p>
 </div>
 
 <button class="back-top" id="backTop" aria-label="Back to top">
